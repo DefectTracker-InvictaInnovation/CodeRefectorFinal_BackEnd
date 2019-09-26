@@ -5,6 +5,6 @@ import com.sgic.internal.product.entities.Privilege;
 
 public interface PrivilegeRepo extends JpaRepository<Privilege, Long> {
 
-	Privilege findPrivilegeById(Long privilageId);
+//	Privilege findPrivilegeById(Long privilageId);
 
 }

@@ -14,27 +14,22 @@ public class SubModuleServiceImpl implements SubModuleService {
 	@Autowired
 	private SubModuleRepository subModuleRepository;
 
-	//create submodule
 	@Override
 	public SubModule createSubModule(SubModule subModule) {
 		SubModule responseSubModule = subModuleRepository.save(subModule);
 		return responseSubModule;
 	}
 
-	//check is SubModule Already Exists or not
 	@Override
 	public boolean isSubModuleAlreadyExists(String subModuleId) {
 		return subModuleRepository.existsById(subModuleId);
 	}
 
-	//get all module details
 	@Override
 	public List<SubModule> getallDetails() {
 		return subModuleRepository.findAll();
 	}
-	
 
-	//delete module
 	@Override
 	public void deleteSubModuleById(String subModuleId) {
 		subModuleRepository.deleteById(subModuleId);

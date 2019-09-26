@@ -38,9 +38,11 @@ public class ProjectConverter {
 		project.setProjectId(projectDto.getProjectId());
 		project.setProjectName(projectDto.getProjectName());
 		project.setType(projectDto.getType());
+		project.setStartDate(projectDto.getStartDate());
 		project.setEndDate(projectDto.getEndDate());
 		project.setDuration(projectDto.getDuration());
 		project.setStatus(projectDto.getStatus());
+	
 
 		return project;
 	}

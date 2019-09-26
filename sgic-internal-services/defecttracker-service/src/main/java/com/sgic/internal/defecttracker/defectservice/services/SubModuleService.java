@@ -21,9 +21,4 @@ public interface SubModuleService {
 	public List<SubModule> getByabbre(String abbre);
 
 	public List<SubModule> getBysubModuleName(String subModuleName);
-	
-	// service for get submodule id
-//		public List<SubModule> getByModuleId(String moduleId);
-		// service for get project id
-//		public List<Module> getByprojectId(String projectid);
 }

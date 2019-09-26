@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sgic.internal.defecttracker.defectservice.controller.dto.SubModuleData;
+import com.sgic.internal.defecttracker.defectservice.entities.Module;
 import com.sgic.internal.defecttracker.defectservice.entities.SubModule;
 
 public class SubModuleConverter {
@@ -19,16 +20,24 @@ public class SubModuleConverter {
 			
 			subModuleData.setSubModuleId(subModule.getSubModuleId());
 			subModuleData.setSubModuleName(subModule.getSubModuleName());
+			subModuleData.setModuleId(subModule.getModule().getModuleId());
 
 			return subModuleData;
 	}
 		return null;
 	}
+	
 		public static SubModule subModuleDataToSubModule(SubModuleData subModuleData) {
 			SubModule subModule = new SubModule();
 			
+			// module constructor
+			
 			subModule.setSubModuleId(subModuleData.getSubModuleId());;
 			subModule.setSubModuleName(subModuleData.getSubModuleName());
+			
+			Module module = new Module();
+			module.setModuleId(subModuleData.getModuleId());
+			subModule.setModule(module);
 			return subModule;
 		}
 		
@@ -41,6 +50,10 @@ public class SubModuleConverter {
 					
 					submoduleData.setSubModuleId(submodule.getSubModuleId());
 					submoduleData.setSubModuleName(submodule.getSubModuleName());
+//					submoduleData.setAbbre(submodule.getAbbre());
+					
+					
+					submoduleData.setModuleId(submodule.getModule().getModuleId());
 					lSubModuleData.add(submoduleData);
 				}
 
@@ -49,6 +62,7 @@ public class SubModuleConverter {
 			return null;
 
 		}
+
 
 	}
 
