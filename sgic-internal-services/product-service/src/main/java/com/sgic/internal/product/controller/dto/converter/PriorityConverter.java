@@ -21,11 +21,11 @@ public class PriorityConverter {
 			List<PriorityDto> listPriorityDto = new ArrayList<>();
 			for (DefectPriority defectPriority : defectPriorityList) {
 				PriorityDto priorityDto = new PriorityDto();
-				priorityDto.setPriorityId(defectPriority.getId());
-				priorityDto.setPriorityName(defectPriority.getName());
-				priorityDto.setPriorityValue(defectPriority.getValue());
-				priorityDto.setPriorityIcon(defectPriority.getIcon());
-				priorityDto.setPriorityColor(defectPriority.getColor());
+				priorityDto.setId(defectPriority.getId());
+				priorityDto.setName(defectPriority.getName());
+				priorityDto.setValue(defectPriority.getValue());
+				priorityDto.setIcon(defectPriority.getIcon());
+				priorityDto.setColor(defectPriority.getColor());
 				listPriorityDto.add(priorityDto);
 			}
 			return listPriorityDto;
@@ -38,11 +38,11 @@ public class PriorityConverter {
 				DefectPriority defectPriority = new DefectPriority();
 				if (priorityDto != null) {
 					logger.info("Defect Priority Converter -> Convert Object DTO to Entity");
-					defectPriority.setId(priorityDto.getPriorityId());
-					defectPriority.setName(priorityDto.getPriorityName());
-					defectPriority.setValue(priorityDto.getPriorityValue());
-					defectPriority.setIcon(priorityDto.getPriorityIcon());
-					defectPriority.setColor(priorityDto.getPriorityColor());
+					defectPriority.setId(priorityDto.getId());
+					defectPriority.setName(priorityDto.getName());
+					defectPriority.setValue(priorityDto.getValue());
+					defectPriority.setIcon(priorityDto.getIcon());
+					defectPriority.setColor(priorityDto.getColor());
 					
 					return defectPriority;
 				}
@@ -55,10 +55,10 @@ public class PriorityConverter {
 				if (priorityDto != null) {
 					logger.info("Defect Priority Converter -> Convert Object DTO to Entity");
 //					defectPriority.setId(priorityDto.getPriorityId());
-					defectPriority.setName(priorityDto.getPriorityName());
-					defectPriority.setValue(priorityDto.getPriorityValue());
-					defectPriority.setIcon(priorityDto.getPriorityIcon());
-					defectPriority.setColor(priorityDto.getPriorityColor());
+					defectPriority.setName(priorityDto.getName());
+					defectPriority.setValue(priorityDto.getValue());
+					defectPriority.setIcon(priorityDto.getIcon());
+					defectPriority.setColor(priorityDto.getColor());
 					
 					return defectPriority;
 				}
@@ -70,11 +70,11 @@ public class PriorityConverter {
 			PriorityDto priorityDto = new PriorityDto();
 			if (defectPriority != null) {
 				logger.info("Defect Priority Converter -> Convert Object Entity to DTO");
-				priorityDto.setPriorityId(defectPriority.getId());
-				priorityDto.setPriorityName(defectPriority.getName());
-				priorityDto.setPriorityValue(defectPriority.getValue());
-				priorityDto.setPriorityIcon(defectPriority.getIcon());
-				priorityDto.setPriorityColor(defectPriority.getColor());
+				priorityDto.setId(defectPriority.getId());
+				priorityDto.setName(defectPriority.getName());
+				priorityDto.setValue(defectPriority.getValue());
+				priorityDto.setIcon(defectPriority.getIcon());
+				priorityDto.setColor(defectPriority.getColor());
 				return priorityDto;
 			}
 			return null;

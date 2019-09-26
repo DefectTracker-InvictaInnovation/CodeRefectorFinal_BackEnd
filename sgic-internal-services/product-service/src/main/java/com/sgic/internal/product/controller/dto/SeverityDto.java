@@ -2,44 +2,51 @@ package com.sgic.internal.product.controller.dto;
 
 public class SeverityDto {
 	
-	private Long severityId;
-	private String severityName;
-	private String severityValue;
-	private String severityColor;
-	private String severityIcon;
-	
-	public Long getSeverityId() {
-		return severityId;
-	}
-	public void setSeverityId(Long severityId) {
-		this.severityId = severityId;
-	}
-	public String getSeverityName() {
-		return severityName;
-	}
-	public void setSeverityName(String severityName) {
-		this.severityName = severityName;
-	}
-	public String getSeverityValue() {
-		return severityValue;
-	}
-	public void setSeverityValue(String severityValue) {
-		this.severityValue = severityValue;
-	}
-	public String getSeverityColor() {
-		return severityColor;
-	}
-	public void setSeverityColor(String severityColor) {
-		this.severityColor = severityColor;
-	}
-	public String getSeverityIcon() {
-		return severityIcon;
-	}
-	public void setSeverityIcon(String severityIcon) {
-		this.severityIcon = severityIcon;
-	}
-	
+	private long id; // Defect severity id
+	private String name; // Defect severity name 
+	private String value; // Defect severity value
+	private String icon; // Defect severity icon
+	private String color; // Defect severity color
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 	
 
 }

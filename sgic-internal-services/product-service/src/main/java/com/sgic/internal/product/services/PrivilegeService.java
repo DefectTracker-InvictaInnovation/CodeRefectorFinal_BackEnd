@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.sgic.internal.product.entities.Privilege;
 
+
 public interface PrivilegeService {
 	
-	// Get Privilege By Id
+	 //Get Privilege By Id
 	public Privilege getPrivilegeById(Long privilageId);
 
 	// Save Privilege

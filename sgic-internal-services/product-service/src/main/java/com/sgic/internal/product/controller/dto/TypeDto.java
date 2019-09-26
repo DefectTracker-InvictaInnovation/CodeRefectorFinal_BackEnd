@@ -1,28 +1,32 @@
 package com.sgic.internal.product.controller.dto;
 
 public class TypeDto {
-	private long typeId;
-	private String typeName;
-	private String typeValue;
-	
-	public long getTypeId() {
-		return typeId;
+	private long id; // Defect type id
+	private String name; // Defect type name
+	private String value; // Defect type value
+
+	public long getId() {
+		return id;
 	}
-	public void setTypeId(long typeId) {
-		this.typeId = typeId;
+
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getTypeName() {
-		return typeName;
+
+	public String getName() {
+		return name;
 	}
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getTypeValue() {
-		return typeValue;
+
+	public String getValue() {
+		return value;
 	}
-	public void setTypeValue(String typeValue) {
-		this.typeValue = typeValue;
+
+	public void setValue(String value) {
+		this.value = value;
 	}
-	
 	
 }

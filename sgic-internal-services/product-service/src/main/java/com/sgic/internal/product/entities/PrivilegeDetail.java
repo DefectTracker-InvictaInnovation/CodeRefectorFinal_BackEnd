@@ -1,4 +1,3 @@
-package com.sgic.internal.product.entities;
 //package com.sgic.internal.product.privileges.entities;
 //
 //import java.io.Serializable;

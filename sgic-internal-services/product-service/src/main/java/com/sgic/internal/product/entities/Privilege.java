@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @SuppressWarnings("serial")
@@ -20,7 +19,6 @@ public class Privilege implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long privilegeId;
 	
-	@NotEmpty
 	@Size(min = 3 , max = 200)
 	@Column(nullable = false)
 	private String name;
@@ -37,5 +35,6 @@ public class Privilege implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	
 }

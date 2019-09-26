@@ -11,8 +11,6 @@ import com.sgic.internal.product.entities.ProductPrivilege;
 import com.sgic.internal.product.repositories.ProductPrivilegeRepo;
 import com.sgic.internal.product.services.ProductPrivilegeService;
 
-
-
 @Service
 public class ProductPrivilegeServiceImpl implements ProductPrivilegeService{
 	

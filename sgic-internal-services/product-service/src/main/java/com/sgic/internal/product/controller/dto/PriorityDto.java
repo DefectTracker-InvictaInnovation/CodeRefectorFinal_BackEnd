@@ -2,42 +2,40 @@ package com.sgic.internal.product.controller.dto;
 
 public class PriorityDto {
 
-	private Long priorityId;
-	private String priorityName;
-	private String priorityValue;
-	private String priorityColor;
-	private String priorityIcon;
-	
-	public Long getPriorityId() {
-		return priorityId;
+	private long id; // Defect priority id
+	private String name; // Defect priority name 
+	private String value; // Defect priority value
+	private String icon; // Defect priority icon
+	private String color; // Defect priority color
+	public long getId() {
+		return id;
 	}
-	public void setPriorityId(Long priorityId) {
-		this.priorityId = priorityId;
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getPriorityName() {
-		return priorityName;
+	public String getName() {
+		return name;
 	}
-	public void setPriorityName(String priorityName) {
-		this.priorityName = priorityName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public String getPriorityValue() {
-		return priorityValue;
+	public String getValue() {
+		return value;
 	}
-	public void setPriorityValue(String priorityValue) {
-		this.priorityValue = priorityValue;
+	public void setValue(String value) {
+		this.value = value;
 	}
-	public String getPriorityColor() {
-		return priorityColor;
+	public String getIcon() {
+		return icon;
 	}
-	public void setPriorityColor(String priorityColor) {
-		this.priorityColor = priorityColor;
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
-	public String getPriorityIcon() {
-		return priorityIcon;
+	public String getColor() {
+		return color;
 	}
-	public void setPriorityIcon(String priorityIcon) {
-		this.priorityIcon = priorityIcon;
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 	

@@ -55,7 +55,7 @@ public class TypeController {
 	}
 
 	// Update Type
-	@PutMapping("/Type")
+	@PutMapping("/Type/{typeId}")
 	public ResponseEntity<String> updateType(@RequestBody TypeDto typeDto) {
 		logger.info("Type Controller -> Type Updated Successful");
 		if (typeMapper.updateDefectType(typeDto) != null) {

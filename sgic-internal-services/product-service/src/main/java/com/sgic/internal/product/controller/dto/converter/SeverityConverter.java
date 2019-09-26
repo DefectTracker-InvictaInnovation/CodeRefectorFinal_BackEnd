@@ -21,11 +21,11 @@ public class SeverityConverter {
 			List<SeverityDto> listSeverityDto = new ArrayList<>();
 			for (DefectSeverity defectSeverity : defectSeverityList) {
 				SeverityDto severityDto = new SeverityDto();
-				severityDto.setSeverityId(defectSeverity.getId());
-				severityDto.setSeverityName(defectSeverity.getName());
-				severityDto.setSeverityValue(defectSeverity.getValue());
-				severityDto.setSeverityIcon(defectSeverity.getIcon());
-				severityDto.setSeverityColor(defectSeverity.getColor());
+				severityDto.setId(defectSeverity.getId());
+				severityDto.setName(defectSeverity.getName());
+				severityDto.setValue(defectSeverity.getValue());
+				severityDto.setIcon(defectSeverity.getIcon());
+				severityDto.setColor(defectSeverity.getColor());
 				listSeverityDto.add(severityDto);
 			}
 			return listSeverityDto;
@@ -38,10 +38,10 @@ public class SeverityConverter {
 				DefectSeverity defectSeverity = new DefectSeverity();
 				if (severityDto != null) {
 					logger.info("Defect Severity Converter -> Convert Object DTO to Entity");
-					defectSeverity.setName(severityDto.getSeverityName());
-					defectSeverity.setValue(severityDto.getSeverityValue());
-					defectSeverity.setIcon(severityDto.getSeverityIcon());
-					defectSeverity.setColor(severityDto.getSeverityColor());
+					defectSeverity.setName(severityDto.getName());
+					defectSeverity.setValue(severityDto.getValue());
+					defectSeverity.setIcon(severityDto.getIcon());
+					defectSeverity.setColor(severityDto.getColor());
 					
 					return defectSeverity;
 				}
@@ -53,11 +53,11 @@ public class SeverityConverter {
 				DefectSeverity defectSeverity = new DefectSeverity();
 				if (severityDto != null) {
 					logger.info("Defect Severity Converter -> Convert Object DTO to Entity");
-					defectSeverity.setId(severityDto.getSeverityId());
-					defectSeverity.setName(severityDto.getSeverityName());
-					defectSeverity.setValue(severityDto.getSeverityValue());
-					defectSeverity.setIcon(severityDto.getSeverityIcon());
-					defectSeverity.setColor(severityDto.getSeverityColor());
+					defectSeverity.setId(severityDto.getId());
+					defectSeverity.setName(severityDto.getName());
+					defectSeverity.setValue(severityDto.getValue());
+					defectSeverity.setIcon(severityDto.getIcon());
+					defectSeverity.setColor(severityDto.getColor());
 					
 					return defectSeverity;
 				}
@@ -69,11 +69,11 @@ public class SeverityConverter {
 			SeverityDto severityDto = new SeverityDto();
 			if (defectSeverity != null) {
 				logger.info("Defect Severity Converter -> Convert Object Entity to DTO");
-				severityDto.setSeverityId(defectSeverity.getId());
-				severityDto.setSeverityName(defectSeverity.getName());
-				severityDto.setSeverityValue(defectSeverity.getValue());
-				severityDto.setSeverityIcon(defectSeverity.getIcon());
-				severityDto.setSeverityColor(defectSeverity.getColor());
+				severityDto.setId(defectSeverity.getId());
+				severityDto.setName(defectSeverity.getName());
+				severityDto.setValue(defectSeverity.getValue());
+				severityDto.setIcon(defectSeverity.getIcon());
+				severityDto.setColor(defectSeverity.getColor());
 				return severityDto;
 			}
 			return null;

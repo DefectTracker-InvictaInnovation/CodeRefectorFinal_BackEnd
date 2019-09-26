@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.sgic.internal.product.entities.Role;
 
 
-public interface RoleRepository extends JpaRepository<Role, Long>{
+public interface RoleRepo extends JpaRepository<Role, Long>{
 
+	Role findRoleById(Long roleId);
+
+	Role findRoleByroleId(Long roleId);
 }

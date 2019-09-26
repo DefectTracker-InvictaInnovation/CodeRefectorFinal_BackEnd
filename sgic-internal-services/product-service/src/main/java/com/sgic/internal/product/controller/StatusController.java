@@ -54,7 +54,7 @@ public class StatusController {
 	}
 
 	// Update Status
-	@PutMapping("/Status")
+	@PutMapping("/Status/{statusId}")
 	public ResponseEntity<String> updateStatus(@RequestBody StatusDto statusDto) {
 		logger.info("Status Controller -> Status Updated Successful");
 		if (statusMapper.updateDefectStatus(statusDto) != null) {

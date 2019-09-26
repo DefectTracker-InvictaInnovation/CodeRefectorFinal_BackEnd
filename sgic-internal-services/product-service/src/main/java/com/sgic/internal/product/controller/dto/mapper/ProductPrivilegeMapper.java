@@ -12,8 +12,6 @@ import com.sgic.internal.product.controller.dto.converter.ProductPrivilegeConver
 import com.sgic.internal.product.entities.ProductPrivilege;
 import com.sgic.internal.product.services.ProductPrivilegeService;
 
-
-
 @Service
 public class ProductPrivilegeMapper {
 	@Autowired
@@ -33,16 +31,16 @@ public class ProductPrivilegeMapper {
 
 	// Save ProductPrivilege
 	@SuppressWarnings("static-access")
-	public ProductPrivilege saveProductPrivilege(ProductPrivilegeDto productPrivilegeDto) {
+	public ProductPrivilege saveProductPrivilege(ProductPrivilegeDto productPrivilegeDTO) {
 		logger.info("ProductPrivilege Mapper -> ProductPrivilege Saved");
-		return productPrivilegeService.saveProductPrivilege(productPrivilegeConverter.DtoToEntity(productPrivilegeDto));
+		return productPrivilegeService.saveProductPrivilege(productPrivilegeConverter.DtoToEntity(productPrivilegeDTO));
 	}
 
 	// Update ProductPrivilege
 	@SuppressWarnings("static-access")
-	public ProductPrivilege updateProductPrivilege(ProductPrivilegeDto productPrivilegeDto) {
-		logger.info("ProductPrivilege Mapper -> ProductPrivilege Updated ", productPrivilegeDto.getProductPrivilegeId());
-		return productPrivilegeService.updateProductPrivilege(productPrivilegeConverter.DtoToEntityUpdate(productPrivilegeDto));
+	public ProductPrivilege updateProductPrivilege(ProductPrivilegeDto productPrivilegeDTO) {
+		logger.info("ProductPrivilege Mapper -> ProductPrivilege Updated ", productPrivilegeDTO.getProductPrivilegeId());
+		return productPrivilegeService.updateProductPrivilege(productPrivilegeConverter.DtoToEntityUpdate(productPrivilegeDTO));
 	}
 
 	// Delete ProductPrivilege

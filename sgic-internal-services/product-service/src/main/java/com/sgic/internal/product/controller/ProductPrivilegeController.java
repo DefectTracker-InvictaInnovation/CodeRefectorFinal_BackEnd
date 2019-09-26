@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sgic.internal.product.controller.dto.ProductPrivilegeDto;
 import com.sgic.internal.product.controller.dto.mapper.ProductPrivilegeMapper;
 
-
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 public class ProductPrivilegeController {
@@ -30,7 +29,7 @@ public class ProductPrivilegeController {
 	private static Logger logger = LogManager.getLogger(ProductPrivilegeMapper.class);
 
 	// Get All ProductPrivilege
-	@GetMapping("/ProductPrivileges")
+	@GetMapping("")
 	public List<ProductPrivilegeDto> getAllProductPrivilege() {
 		logger.info("Controller -> Data Retrieved Successfull");
 		return productPrivilegeMapper.getAllProductPrivilege();
@@ -46,8 +45,8 @@ public class ProductPrivilegeController {
 
 	// Save ProductPrivilege
 	@PostMapping("/ProductPrivilege")
-	public ResponseEntity<String> saveProductPrivilege(@Valid @RequestBody ProductPrivilegeDto productPrivilegeDto) {
-		if (productPrivilegeMapper.saveProductPrivilege(productPrivilegeDto) != null) {
+	public ResponseEntity<String> saveProductPrivilege(@Valid @RequestBody ProductPrivilegeDto productPrivilegeDTO) {
+		if (productPrivilegeMapper.saveProductPrivilege(productPrivilegeDTO) != null) {
 			logger.info("ProductPrivilege Controller -> ProductPrivilege Created Successful");
 			return new ResponseEntity<>("ProductPrivilege added succesfully", HttpStatus.OK);
 		}
@@ -57,9 +56,9 @@ public class ProductPrivilegeController {
 
 	// Update ProductPrivilege
 	@PutMapping("/ProductPrivilege")
-	public ResponseEntity<String> updateProductPrivilege(@RequestBody ProductPrivilegeDto productPrivilegeDto) {
+	public ResponseEntity<String> updateProductPrivilege(@RequestBody ProductPrivilegeDto productPrivilegeDTO) {
 		logger.info("ProductPrivilege Controller -> ProductPrivilege Updated Successful");
-		if (productPrivilegeMapper.updateProductPrivilege(productPrivilegeDto) != null) {
+		if (productPrivilegeMapper.updateProductPrivilege(productPrivilegeDTO) != null) {
 			return new ResponseEntity<>("Sucessfully Updated ProductPrivilege", HttpStatus.OK);
 		}
 		logger.info("ProductPrivilege Controller -> ProductPrivilege Updated Failed!!!");

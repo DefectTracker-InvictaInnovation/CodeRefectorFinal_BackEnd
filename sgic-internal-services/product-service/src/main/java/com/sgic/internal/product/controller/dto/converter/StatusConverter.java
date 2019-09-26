@@ -21,9 +21,9 @@ public class StatusConverter {
 			List<StatusDto> listStatusDto = new ArrayList<>();
 			for (DefectStatus defectStatus : defectStatusList) {
 				StatusDto statusDto = new StatusDto();
-				statusDto.setStatusId(defectStatus.getId());
-				statusDto.setStatusName(defectStatus.getName());
-				statusDto.setStatusValue(defectStatus.getValue());
+				statusDto.setId(defectStatus.getId());
+				statusDto.setName(defectStatus.getName());
+				statusDto.setValue(defectStatus.getValue());
 				listStatusDto.add(statusDto);
 			}
 			return listStatusDto;
@@ -36,8 +36,8 @@ public class StatusConverter {
 				DefectStatus defectStatus = new DefectStatus();
 				if (statusDto != null) {
 					logger.info("Defect Status Converter -> Convert Object DTO to Entity");
-					defectStatus.setName(statusDto.getStatusName());
-					defectStatus.setValue(statusDto.getStatusValue());
+					defectStatus.setName(statusDto.getName());
+					defectStatus.setValue(statusDto.getValue());
 					return defectStatus;
 				}
 				return null;
@@ -48,9 +48,9 @@ public class StatusConverter {
 				DefectStatus defectStatus = new DefectStatus();
 				if (statusDto != null) {
 					logger.info("Defect Status Converter -> Convert Object DTO to Entity");
-					defectStatus.setId(statusDto.getStatusId());
-					defectStatus.setName(statusDto.getStatusName());
-					defectStatus.setValue(statusDto.getStatusValue());
+					defectStatus.setId(statusDto.getId());
+					defectStatus.setName(statusDto.getName());
+					defectStatus.setValue(statusDto.getValue());
 					return defectStatus;
 				}
 				return null;
@@ -61,9 +61,9 @@ public class StatusConverter {
 			StatusDto statusDto = new StatusDto();
 			if (defectStatus != null) {
 				logger.info("Defect Status Converter -> Convert Object Entity to DTO");
-				statusDto.setStatusId(defectStatus.getId());
-				statusDto.setStatusName(defectStatus.getName());
-				statusDto.setStatusValue(defectStatus.getValue());
+				statusDto.setId(defectStatus.getId());
+				statusDto.setName(defectStatus.getName());
+				statusDto.setValue(defectStatus.getValue());
 				return statusDto;
 			}
 			return null;

@@ -1,29 +1,33 @@
 package com.sgic.internal.product.controller.dto;
 
 public class StatusDto {
-	private long statusId;
-	private String statusName;
-	private String statusValue;
-	
-	public long getStatusId() {
-		return statusId;
+	private long id; // Defect status id
+	private String name; // Defect status name
+	private String value; // Defect status value
+
+	public long getId() {
+		return id;
 	}
-	public void setStatusId(long statusId) {
-		this.statusId = statusId;
+
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getStatusName() {
-		return statusName;
+
+	public String getName() {
+		return name;
 	}
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getStatusValue() {
-		return statusValue;
+
+	public String getValue() {
+		return value;
 	}
-	public void setStatusValue(String statusValue) {
-		this.statusValue = statusValue;
+
+	public void setValue(String value) {
+		this.value = value;
 	}
-	
 	
 	
 }

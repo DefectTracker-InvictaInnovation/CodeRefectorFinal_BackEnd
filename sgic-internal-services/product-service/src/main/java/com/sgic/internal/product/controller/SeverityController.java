@@ -54,7 +54,7 @@ public class SeverityController {
 	}
 
 	// Update Severity
-	@PutMapping("/Severity")
+	@PutMapping("/Severity/{severityId}")
 	public ResponseEntity<String> updateSeverity(@RequestBody SeverityDto severityDto) {
 		logger.info("Severity Controller -> Severity Updated Successful");
 		if (severityMapper.updateDefectSeverity(severityDto) != null) {
