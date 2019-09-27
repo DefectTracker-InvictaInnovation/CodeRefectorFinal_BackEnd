@@ -22,10 +22,12 @@ import com.sgic.common.api.enums.RestApiResponseStatus;
 import com.sgic.common.api.response.ApiResponse;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.ModuleData;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.mapper.ModuleDataMapper;
+import com.sgic.internal.defecttracker.defectservice.controller.dto.mapper.ProjectDtoMapper;
 import com.sgic.internal.defecttracker.defectservice.entities.Module;
+import com.sgic.internal.defecttracker.defectservice.entities.Project;
 import com.sgic.internal.defecttracker.defectservice.repositories.ModuleRepository;
 import com.sgic.internal.defecttracker.defectservice.services.ModuleService;
-
+import com.sgic.internal.defecttracker.defectservice.services.ProjectService;
 
 @CrossOrigin
 @RestController
@@ -35,6 +37,15 @@ public class ModuleController {
 
 	@Autowired
 	public ModuleDataMapper moduleDataMapper;
+
+	@Autowired
+	public ProjectDtoMapper projectDtoMapper;
+
+	@Autowired
+	public ProjectService projectService;
+
+	@Autowired
+	public ModuleRepository moduleRepository;
 
 	@Autowired
 	public ModuleService moduleService;
@@ -48,23 +59,37 @@ public class ModuleController {
 
 	// Get Mapping For Get All Module
 	@GetMapping(value = "/GetAllmodule")
-	public ResponseEntity<List<ModuleData>> listModuleInfo() {
+	public ResponseEntity<List<ModuleData>> listModuleInfo(String projectid) {
 		logger.info("Module are listed ");
-		return new ResponseEntity<>(moduleDataMapper.getAllModuleForMapper(), HttpStatus.OK);
+		return new ResponseEntity<>(moduleDataMapper.getAllModuleForMapper(projectid), HttpStatus.OK);
 	}
-	// Get All By Project Id  //
+
+	// Get All By Project Id //
 	@GetMapping(value = "/GetAllmodule/{projectid}")
 	public List<Module> getModuleByProjectId(@PathVariable String projectid) {
 		logger.info("Module are listed ");
 		return moduleService.getByprojectId(projectid);
 	}
+
 	// Get All Details in module Table
 	@GetMapping("/FindallMain")
 	public List<Module> FindallMain(Module module) {
-		List<Module> submodule  = (List<Module>) moduleService.getallDetails();
+		List<Module> submodule = (List<Module>) moduleService.getallDetails();
 		return submodule;
 	}
-	
+
+//	@GetMapping("/findProject")
+//	public  List<Project> findallmain(Project project) {
+//		 List<Project> moduless = (List<Project>) projectservice.findAll();
+//		 return moduless;
+//	        	
+//	}
+//	@GetMapping(value = "/GetAllmodulesubmodule/{projectid}")
+//	public ResponseEntity<List<Object>> getModuleBySubModuleId(@PathVariable String projectid) {
+//		logger.info("Module are listed ");
+//		return new ResponseEntity<>(moduleService.getSubmodule(projectid), HttpStatus.OK);
+//	}
+
 	// Get Mapping For Get Module By Id
 	@GetMapping("/GetmoduleById/{moduleId}")
 	public ResponseEntity<ModuleData> getModuleById(@PathVariable String moduleId) {
@@ -84,7 +109,7 @@ public class ModuleController {
 	public void deleteById(@PathVariable String moduleId) {
 		logger.info("Module are delete by id ");
 		moduleDataMapper.deleteById(moduleId);
-		
+
 	}
 
 	// Put Mapping For Module
@@ -99,8 +124,21 @@ public class ModuleController {
 		}
 	}
 
-	
+	// Abbrivation for module
+	@PutMapping("/module/project/{projectId}")
+	public Module createNewModule(@PathVariable(name = "projectId") String projectId,
+			@RequestBody ModuleData moduleData) {
+		Project project = projectService.getByprojectId(projectId);
+		List<Module> modules = moduleRepository.findModuleByProject(project);
+		int a = modules.size();
+		String moduleSerial = project.getProjectId() + "-" + moduleData.getModuleId() + "-" + a;
+
+		Module module = new Module();
+		module.setModuleId(moduleSerial);
+		module.setModuleName(moduleData.getModuleName());
+		module.setProject(project);
+
+		return moduleRepository.save(module);
 
 	}
-
-
+}

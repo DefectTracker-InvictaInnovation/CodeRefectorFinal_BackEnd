@@ -55,7 +55,7 @@ public class PriorityController {
 	}
 
 	// Update Priority
-	@PutMapping("/Priority")
+	@PutMapping("/Priority/{priorityId}")
 	public ResponseEntity<String> updatePriority(@RequestBody PriorityDto priorityDto) {
 		logger.info("Priority Controller -> Priority Updated Successful");
 		if (priorityMapper.updateDefectPriority(priorityDto) != null) {

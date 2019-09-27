@@ -16,10 +16,11 @@ public class ModuleDataMapper {
 	@Autowired
 	public  ModuleService moduleService;
 	
-	public List<ModuleData>getAllModuleForMapper(){
-		List<Module>moduleList =moduleService.getallDetails();
+	public List<ModuleData>getAllModuleForMapper(String projectid){
+		List<Module>moduleList =moduleService.getallModuleDetails(projectid);
 		return ModuleConverter.moduleToModuleData(moduleList);
 	}
+	
 	public Module saveModuleforMapper(ModuleData moduleData) {
 		Module module = ModuleConverter.moduleDataToModule(moduleData);
 		return moduleService.createModule(module);

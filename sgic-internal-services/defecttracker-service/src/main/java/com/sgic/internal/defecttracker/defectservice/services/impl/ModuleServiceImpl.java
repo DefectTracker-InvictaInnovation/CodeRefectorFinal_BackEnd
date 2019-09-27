@@ -15,34 +15,25 @@ public class ModuleServiceImpl implements ModuleService {
 	@Autowired
 	private ModuleRepository moduleRepository;
 
-	//create modules
 	@Override
 	public Module createModule(Module module) {
 		Module responseModule = moduleRepository.save(module);
 		return responseModule;
 	}
 
-	//delete module by defect id
 	@Override
 	public void deleteById(String moduleId) {
 		moduleRepository.deleteById(moduleId);
 
 	}
 
-	//get all modules by module id
 	@Override
 	public Module getByModuleId(String moduleId) {
 		return moduleRepository.getByModuleId(moduleId);
 	}
 
 
-	//get all module detail
-	@Override
-	public List<Module> getallDetails() {
-		return moduleRepository.findAll();
-	}
-
-	//update module details
+	
 	@Override
 	public Module updateModule(String moduleId, Module module) {
 		if (moduleRepository.findAll() != null) {
@@ -52,22 +43,37 @@ public class ModuleServiceImpl implements ModuleService {
 		return module;
 	}
 
-	//check module is already is exists
 	@Override
 	public boolean isModuleAlreadyExists(String moduleId) {
 		return moduleRepository.existsById(moduleId);
 	}
 
-	//get all modules by project id
 	@Override
 	public List<Module> getByprojectId(String projectid) {
 		return moduleRepository.getByProjectId(projectid);
 	}
 
-	//get all modules by module name
+//	@Override
+//	public List<Object> getSubmodule(String subModuleId) {
+//		return moduleRepository.getSubmodule(subModuleId);
+//	}
+
 	@Override
 	public List<Module> getBymoduleName(String moduleName) {
 		return moduleRepository.getBymoduleName(moduleName);
 	}
+
+	
+
+	@Override
+	public List<Module> getallDetails() {
+		return moduleRepository.findAll();
+	}
+
+	@Override
+	public List<Module> getallModuleDetails(String projectid) {
+		return moduleRepository.findAll();
+	}
+
 
 }
