@@ -4,5 +4,6 @@ public enum  RoleName {
     ROLE_QA,
     ROLE_PM,
     ROLE_ADMIN,
-    ROLE_DEVELOPER
+    ROLE_DEVELOPER,
+    ROLE_HR
 }

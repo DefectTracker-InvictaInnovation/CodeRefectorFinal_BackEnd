@@ -70,8 +70,9 @@ public class ExcelUtils {
 					}
 
 					cellIndex++;
+					lstCustomers.add(cust);
 				}
-				lstCustomers.add(cust);
+				
 			}
 
 			// Close WorkBook

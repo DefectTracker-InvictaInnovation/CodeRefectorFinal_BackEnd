@@ -1,14 +1,24 @@
 package com.sgic.internal.product.controller.dto;
 
-public class PrivilegeDTO {
-	
-	private String privilageName;
-	
-	public String getPrivilageName() {
-		return privilageName;
+public class PrivilegeDto {
+
+	private String privilegeId;
+	private String privilegeName;
+
+	public String getPrivilegeId() {
+		return privilegeId;
 	}
-	public void setPrivilageName(String privilageName) {
-		this.privilageName = privilageName;
+
+	public void setPrivilegeId(String privilegeId) {
+		this.privilegeId = privilegeId;
 	}
-	
+
+	public String getPrivilegeName() {
+		return privilegeName;
+	}
+
+	public void setPrivilegeName(String privilegeName) {
+		this.privilegeName = privilegeName;
+	}
+
 }

@@ -29,7 +29,7 @@ public class ProductPrivilegeController {
 	private static Logger logger = LogManager.getLogger(ProductPrivilegeMapper.class);
 
 	// Get All ProductPrivilege
-	@GetMapping("")
+	@GetMapping("/ProductPrivileges")
 	public List<ProductPrivilegeDto> getAllProductPrivilege() {
 		logger.info("Controller -> Data Retrieved Successfull");
 		return productPrivilegeMapper.getAllProductPrivilege();
@@ -45,8 +45,8 @@ public class ProductPrivilegeController {
 
 	// Save ProductPrivilege
 	@PostMapping("/ProductPrivilege")
-	public ResponseEntity<String> saveProductPrivilege(@Valid @RequestBody ProductPrivilegeDto productPrivilegeDTO) {
-		if (productPrivilegeMapper.saveProductPrivilege(productPrivilegeDTO) != null) {
+	public ResponseEntity<String> saveProductPrivilege(@Valid @RequestBody ProductPrivilegeDto productPrivilegeDto) {
+		if (productPrivilegeMapper.saveProductPrivilege(productPrivilegeDto) != null) {
 			logger.info("ProductPrivilege Controller -> ProductPrivilege Created Successful");
 			return new ResponseEntity<>("ProductPrivilege added succesfully", HttpStatus.OK);
 		}
@@ -55,10 +55,10 @@ public class ProductPrivilegeController {
 	}
 
 	// Update ProductPrivilege
-	@PutMapping("/ProductPrivilege")
-	public ResponseEntity<String> updateProductPrivilege(@RequestBody ProductPrivilegeDto productPrivilegeDTO) {
+	@PutMapping("/ProductPrivilege/{productPrivilegeId}")
+	public ResponseEntity<String> updateProductPrivilege(@RequestBody ProductPrivilegeDto productPrivilegeDto) {
 		logger.info("ProductPrivilege Controller -> ProductPrivilege Updated Successful");
-		if (productPrivilegeMapper.updateProductPrivilege(productPrivilegeDTO) != null) {
+		if (productPrivilegeMapper.updateProductPrivilege(productPrivilegeDto) != null) {
 			return new ResponseEntity<>("Sucessfully Updated ProductPrivilege", HttpStatus.OK);
 		}
 		logger.info("ProductPrivilege Controller -> ProductPrivilege Updated Failed!!!");
@@ -81,5 +81,4 @@ public class ProductPrivilegeController {
 		logger.info("ProductPrivilege Controller -> ProductPrivilege Deleted Failed!!!");
 		return new ResponseEntity<>("Delete FAILED!!!", HttpStatus.BAD_REQUEST);
 	}
-
 }

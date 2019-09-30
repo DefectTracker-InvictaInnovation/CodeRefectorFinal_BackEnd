@@ -11,31 +11,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.sgic.internal.product.controller.dto.RoleDTO;
-import com.sgic.internal.product.controller.dto.SeverityDto;
 import com.sgic.internal.product.entities.Role;
-import com.sgic.internal.product.services.RoleServices;
+import com.sgic.internal.product.services.RoleService;
 
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 public class RoleController {
 	
 	@Autowired
-	private RoleServices roleServices;
+	private RoleService roleService;
 
 	@PostMapping("/createRole")
 	public Role saveRole(@RequestBody Role role) {
-		return roleServices.saveRole(role);	
+		return roleService.saveRole(role);	
 	}
 	
 	@GetMapping("/getAllRoleInfo")
 	public List<Role> getAllroleInfo(){
-		return roleServices.getAllRoleInfo();	
+		return roleService.getAllRoleInfo();	
 	}
 	
 	@GetMapping("/getroleById/{roleId}") 
 	public ResponseEntity<Role> getRoleById(@PathVariable(name = "roleId") Long roleId) {
-			return new ResponseEntity<>(roleServices.getRoleById(roleId),HttpStatus.OK);
+			return new ResponseEntity<>(roleService.getRoleById(roleId),HttpStatus.OK);
 	}
 }

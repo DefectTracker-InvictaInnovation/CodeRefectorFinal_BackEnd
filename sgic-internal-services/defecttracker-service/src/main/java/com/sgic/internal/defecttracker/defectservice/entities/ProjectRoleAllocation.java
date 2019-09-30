@@ -24,7 +24,7 @@ public class ProjectRoleAllocation {
 
 	@ManyToOne
 	@JoinColumn(name="roleId", nullable=false)
-	private RoleAllocationList roleAllocationList;
+	private Role roleAllocationList;
 
 	
 	public Long getProjectroleId() {
@@ -47,11 +47,11 @@ public class ProjectRoleAllocation {
 		this.resourceAllocation = resourceAllocation;
 	}
 
-	public RoleAllocationList getRoleAllocationList() {
+	public Role getRoleAllocationList() {
 		return roleAllocationList;
 	}
 
-	public void setRoleAllocationList(RoleAllocationList roleAllocationList) {
+	public void setRoleAllocationList(Role roleAllocationList) {
 		this.roleAllocationList = roleAllocationList;
 	}
 

@@ -23,6 +23,7 @@ import com.sgic.common.api.response.ApiResponse;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.ProjectDto;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.mapper.ProjectDtoMapper;
 import com.sgic.internal.defecttracker.defectservice.repositories.ProjectRepository;
+import com.sgic.internal.defecttracker.defectservice.services.ProjectService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -33,6 +34,9 @@ public class ProjectController {
 
 	@Autowired
 	public ProjectDtoMapper projectDtoMapper;
+	
+	@Autowired 
+	private ProjectService projectService;
 	
 	// Post Mapping For Create a Project
 	@PostMapping(value = "/createproject")
@@ -109,5 +113,10 @@ public class ProjectController {
 	public List<ProjectDto> getBystatus(@PathVariable String status) {
 		logger.info("Projects are get by status");
 		return projectDtoMapper.getBystatusformapper(status);
+	}
+	
+	@GetMapping("/countproject")
+	public ResponseEntity<Long> getAllProjectCount(){
+		return new ResponseEntity<>(projectService.countProject(),HttpStatus.OK);
 	}
 }

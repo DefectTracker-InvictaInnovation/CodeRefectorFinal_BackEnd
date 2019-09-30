@@ -20,64 +20,68 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sgic.internal.product.controller.dto.StatusDto;
 import com.sgic.internal.product.controller.dto.mapper.StatusMapper;
+import com.sgic.internal.product.services.impl.StatusServiceImpl;
 
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 public class StatusController {
+	private static Logger logger = LogManager.getLogger(StatusServiceImpl.class);
+
 	@Autowired
-	private StatusMapper statusMapper;
-	private static Logger logger = LogManager.getLogger(StatusMapper.class);
+	private StatusMapper defectStatusMapper;
 
-	// Get All Status
-	@GetMapping("/Statuses")
-	public List<StatusDto> getAllStatus() {
-		logger.info("Controller -> Data Retrieved Successfull");
-		return statusMapper.getAllStatus();
-	}
-
-	 //Get Status By Id
-	@GetMapping("/Status/{statusId}")
-	public StatusDto getStatusById(@PathVariable(name = "statusId") Long statusId) {
-		logger.info("Controller -> Data Retrieved Successfull");
-		return statusMapper.getDefectStatusById(statusId);
-	}
-	
-	// Save All Status
-	@PostMapping("/Status")
-	public ResponseEntity<String> saveStatus(@Valid @RequestBody StatusDto statusDto) {
-		if (statusMapper.saveDefectStatus(statusDto) != null) {
-			logger.info("Status Controller -> Status Created Successful");
-			return new ResponseEntity<>("Priority added succesfully", HttpStatus.OK);
-		}
-		logger.info("Status Controller -> Status creation FAILED!!!");
-		return new ResponseEntity<>("SAVE FAILED!", HttpStatus.BAD_REQUEST);
-	}
-
-	// Update Status
-	@PutMapping("/Status/{statusId}")
-	public ResponseEntity<String> updateStatus(@RequestBody StatusDto statusDto) {
-		logger.info("Status Controller -> Status Updated Successful");
-		if (statusMapper.updateDefectStatus(statusDto) != null) {
-			return new ResponseEntity<>("Sucessfully Updateed Company", HttpStatus.OK);
-		}
-		logger.info("Status Controller -> Status Updated Failed!!!");
-		return new ResponseEntity<>("Update FAILED!!!", HttpStatus.BAD_REQUEST);
-	}
-
-	// Delete Status
-	@DeleteMapping("/Status/{statusId}")
-	public ResponseEntity<String> deleteStatus(@PathVariable(name = "statusId") Long statusId) {
-		System.out.print(statusId);
-		if (statusMapper.getDefectStatusById(statusId) != null) {
-			if (statusMapper.deleteDefectStatusById(statusId) == null) {
-				logger.info("Status Controller -> Status Deleted Successful");
-				return new ResponseEntity<>("Status Sucessfully deleted", HttpStatus.OK);
-			}
+	// Author : Shawmiya :: Create defect status
+	// Create defect status controller
+	@PostMapping(value = "/defectstatus")
+	public ResponseEntity<Object> createDefectStatus(@RequestBody StatusDto defectStatusDto) {
+		if (defectStatusMapper.createDefectStatus(defectStatusDto)) {
+			logger.info("Defect Status created");
+			return new ResponseEntity<>("Defect Status Added Succesfully", HttpStatus.OK);
 		} else {
-			logger.info("Status Controller -> Status Id Not Found");
-			return new ResponseEntity<>("Status Id Not FOUND!!!", HttpStatus.BAD_REQUEST);
+			logger.error("Defect Status Create Fail");
+			return new ResponseEntity<>("Defect Status Added Failure", HttpStatus.OK);
 		}
-		logger.info("Status Controller -> Status Deleted Failed!!!");
-		return new ResponseEntity<>("Delete FAILED!!!", HttpStatus.BAD_REQUEST);
+
+	}
+
+	// List all defect statuses controller
+	@GetMapping(value = "/defectstatuses")
+	public List<StatusDto> getAllDefectStatus() {
+		logger.info("Defect statuses Listed");
+		return defectStatusMapper.getAllDefectStatus();
+	}
+
+	// Author : Paheerathan :: Create defect status
+	// Get defect status by id controller
+	@GetMapping(value = "/defectstatus/{id}")
+	public StatusDto getDefectstatusById(@PathVariable Long id) {
+		logger.info("Defect Status Get By Id Listed");
+		return defectStatusMapper.getDefectstatusById(id);
+	}
+
+	// Author : Mathura :: Create defect status
+	// Delete defect status controller
+	@DeleteMapping("/defectstatus/{id}")
+	public ResponseEntity<Object> deleteDefectStatus(@PathVariable Long id,
+			@RequestBody StatusDto defectStatusDto) {
+		defectStatusMapper.deleteDefectStatus(id);
+		logger.info("Defect Status Deleted");
+		return new ResponseEntity<>("Defect Status Deleted Succesfully", HttpStatus.OK);
+	}
+
+	// Author : Varnitha :: Create defect status
+	// Update defect status controller
+	@PutMapping(value = "/defectstatus/{id}")
+	public ResponseEntity<Object> updateDefectStatus(@RequestBody StatusDto defectStatusDto,
+			@PathVariable Long id) {
+		defectStatusMapper.updateDefectStatus(id, defectStatusDto);
+		logger.info("Defect Status Updated");
+		return new ResponseEntity<>("Defect Status Updated Succesfully", HttpStatus.OK);
+	}
+	// Count defect status controller
+	@GetMapping(value = "/countdefectstatus")
+	public int getDefectStatucCount() {
+		logger.info("Defect Status Counted");
+		return defectStatusMapper.getStatusCount();
 	}
 }

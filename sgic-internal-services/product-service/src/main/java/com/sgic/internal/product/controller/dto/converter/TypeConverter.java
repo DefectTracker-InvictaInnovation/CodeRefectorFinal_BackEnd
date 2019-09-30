@@ -14,57 +14,41 @@ import com.sgic.internal.product.entities.DefectType;
 public class TypeConverter {
 	private static Logger logger = LogManager.getLogger(DefectType.class);
 
-	// Convert All List<Entity> to List<DTO>
-	public static List<TypeDto> EntityListTODtoList(List<DefectType> defectTypeList) {
-		if (defectTypeList != null) {
-			logger.info("Defect Type Converter -> Convert Lists Entity to DTO");
-			List<TypeDto> listTypeDto = new ArrayList<>();
-			for (DefectType defectType : defectTypeList) {
-				TypeDto typeDto = new TypeDto();
-				typeDto.setId(defectType.getId());
-				typeDto.setName(defectType.getName());
-				typeDto.setValue(defectType.getValue());
-				listTypeDto.add(typeDto);
+	// Convert entity to dto
+		public TypeDto defectTypeToDefectTypeDto(DefectType defectType) {
+			TypeDto defectTypeDto = new TypeDto();
+			
+			if(defectType != null) {
+				defectTypeDto.setId(defectType.getId());
+				defectTypeDto.setName(defectType.getName());
+				defectTypeDto.setValue(defectType.getValue());
+				return defectTypeDto;
 			}
-			return listTypeDto;
+			return null;
 		}
-		return null;
-	}
-
-	// Convert Data To Entity
-			public static DefectType DtoToEntity(TypeDto typeDto) {
-				DefectType defectType = new DefectType();
-				if (typeDto != null) {
-					logger.info("Defect Type Converter -> Convert Object DTO to Entity");
-					defectType.setName(typeDto.getName());
-					defectType.setValue(typeDto.getValue());
-					return defectType;
+		
+		// Convert dto to entity 
+		public DefectType defectTypeDtoToDefectType(TypeDto defectTypeDto) {
+			DefectType defectType = new DefectType();
+			defectType.setId(defectTypeDto.getId());
+			defectType.setName(defectTypeDto.getName());
+			defectType.setValue(defectTypeDto.getValue());
+			return defectType;
+		}
+		
+		// Convert entity to dto list
+		public List<TypeDto> defectTypeToDefectTypeDto(List<DefectType> defectTypeList){
+			if(defectTypeList != null) {
+				List<TypeDto> listDefectTypeDto = new ArrayList<>();
+				for (DefectType defectType: defectTypeList) {
+					TypeDto defectTypeDto = new TypeDto();
+					
+					defectTypeDto.setId(defectType.getId());
+					defectTypeDto.setName(defectType.getName());
+					defectTypeDto.setValue(defectType.getValue());
+					listDefectTypeDto.add(defectTypeDto);
 				}
-				return null;
-			}
-
-			// Convert Data To Entity
-			public static DefectType DtoToEntityUpdate(TypeDto typeDto) {
-				DefectType defectType = new DefectType();
-				if (typeDto != null) {
-					logger.info("Defect Type Converter -> Convert Object DTO to Entity");
-					defectType.setId(typeDto.getId());
-					defectType.setName(typeDto.getName());
-					defectType.setValue(typeDto.getValue());
-					return defectType;
-				}
-				return null;
-			}
-
-			// Convert Entity To Data
-		public static TypeDto EntityToDto(DefectType defectType) {
-			TypeDto typeDto = new TypeDto();
-			if (defectType != null) {
-				logger.info("Defect Type Converter -> Convert Object Entity to DTO");
-				typeDto.setId(defectType.getId());
-				typeDto.setName(defectType.getName());
-				typeDto.setValue(defectType.getValue());
-				return typeDto;
+				return listDefectTypeDto;
 			}
 			return null;
 		}

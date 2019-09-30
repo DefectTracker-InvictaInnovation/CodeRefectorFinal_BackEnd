@@ -1,14 +1,15 @@
 package com.sgic.internal.product.services.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import com.sgic.internal.product.entities.DefectStatus;
-import com.sgic.internal.product.repositories.CompanyRepository;
 import com.sgic.internal.product.repositories.StatusRepo;
 import com.sgic.internal.product.services.StatusService;
 
@@ -16,48 +17,64 @@ import com.sgic.internal.product.services.StatusService;
 public class StatusServiceImpl implements StatusService{
 
 	@Autowired
-	StatusRepo statusRepo;
+
+	private StatusRepo defectStatusRepository;
+
+	private static Logger logger = LogManager.getLogger(StatusServiceImpl.class);
+
+	public static<T> List<T> reverseList(List<T> list)
+	{
+	List<T> reverse = new ArrayList<>(list);
+	Collections.reverse(reverse);
+	return reverse;
+	}
 	
-	private static Logger logger = LogManager.getLogger(CompanyRepository.class);
-	
+	// Create defect status implementation
 	@Override
-	public DefectStatus createDefectStatus(DefectStatus defectStatus) {
-		logger.info("service started -> Save DefectStatus");
-		return statusRepo.save(defectStatus);
+	public Object createDefectStatus(DefectStatus defectStatus) {
+		logger.info("Create Defect Status Service Implementation");
+		return defectStatusRepository.save(defectStatus);
 	}
 
+	// Defect status exists implementation
 	@Override
-	public DefectStatus updateDefectStatus(DefectStatus defectStatus) {
-		logger.info("service started -> Update DefectStatus");
-		Long id = defectStatus.getId();
-		logger.info("service started -> getDefectStatusId");
-		boolean isExist = statusRepo.findDefectStatusById(id) != null;
-		if (isExist) {
-			logger.info("service started -> Updated By DefectStatusId");
-			return statusRepo.save(defectStatus);
-		} else {
-			logger.info("service started -> DefectStatus Id Not Found");
-		}
-		return null;
+	@Transactional(readOnly = true)
+	public boolean isDefectStatusAlreadyExists(Long id) {
+		logger.info("Defect Status Exists Service Implementation");
+		return defectStatusRepository.existsById(id);
 	}
 
+	// List all defect status implementation
 	@Override
-	public DefectStatus getDefectStatusById(Long severeId) {
-		logger.info("service started -> Get DefectStatus Id");
-		return statusRepo.findDefectStatusById(severeId);
+	public List<DefectStatus> findAllDefectStatus() {
+		List<DefectStatus> defectStatuses = defectStatusRepository.findAll();
+		logger.info("List All  Defect Status Service Implementation");
+		//return defectStatuses;
+		return reverseList(defectStatuses);
+
 	}
 
+	// Delete defect status implementation
 	@Override
-	public List<DefectStatus> getAllDefectStatus() {
-		logger.info("service started -> Get All DefectStatus");
-		return statusRepo.findAll();
+	public Boolean deleteDefectStatusById(long id) {
+		logger.info("Delete Defect Status Service Implementation");
+		defectStatusRepository.deleteById(id);
+		return true;
 	}
 
+	// Find defect status by implementation
 	@Override
-	public DefectStatus deleteDefectStatusById(Long severeId) {
-		logger.info("service started -> Delete DefectStatus");
-		statusRepo.deleteById(severeId);
-		return null;
+	public DefectStatus findDefectStatusById(long id) {
+		logger.info("Get Defect Status By Id Service Implementation");
+		return defectStatusRepository.findById(id).orElse(null);
 	}
+
+	//Count total defect statuses
+	@Override
+	public int getStatusCount() {
+		
+		return (int) defectStatusRepository.count();
+	}
+
 
 }

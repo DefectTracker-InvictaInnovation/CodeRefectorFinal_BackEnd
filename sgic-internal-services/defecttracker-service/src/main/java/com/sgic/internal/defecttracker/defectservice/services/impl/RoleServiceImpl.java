@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sgic.internal.defecttracker.defectservice.entities.RoleAllocationList;
+import com.sgic.internal.defecttracker.defectservice.entities.Role;
 import com.sgic.internal.defecttracker.defectservice.repositories.RoleRepository;
 import com.sgic.internal.defecttracker.defectservice.services.RoleService;
 
@@ -16,7 +16,7 @@ public class RoleServiceImpl implements RoleService{
 	private RoleRepository roleRepository;
 	
 	@Override
-	public List<RoleAllocationList> getAllRole() {
+	public List<Role> getAllRole() {
 		return roleRepository.findAll();
 	}
 

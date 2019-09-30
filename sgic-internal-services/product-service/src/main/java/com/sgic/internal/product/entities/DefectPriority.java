@@ -15,25 +15,25 @@ import javax.persistence.Table;
 public class DefectPriority implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; // Defect priority id
-
+	private long id; // Defect priority id
+	
 	@Column(nullable = false)
-	private String name; // Defect priority name
-
+	private String name; // Defect priority name 
+	
 	@Column(nullable = false)
 	private String value; // Defect priority value
-
+	
 	@Column(nullable = false)
 	private String icon; // Defect priority icon
-
+	
+	@Column(nullable = false)
 	private String color; // Defect priority color
 
-
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -42,7 +42,7 @@ public class DefectPriority implements Serializable {
 	}
 
 	public void setName(String name) {
-		this.name = "Priority";
+		this.name = name;
 	}
 
 	public String getValue() {
@@ -68,7 +68,5 @@ public class DefectPriority implements Serializable {
 	public void setColor(String color) {
 		this.color = color;
 	}
-
-	
 	
 }

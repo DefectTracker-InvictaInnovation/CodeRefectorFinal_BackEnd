@@ -31,16 +31,16 @@ public class ProductPrivilegeMapper {
 
 	// Save ProductPrivilege
 	@SuppressWarnings("static-access")
-	public ProductPrivilege saveProductPrivilege(ProductPrivilegeDto productPrivilegeDTO) {
+	public ProductPrivilege saveProductPrivilege(ProductPrivilegeDto productPrivilegeDto) {
 		logger.info("ProductPrivilege Mapper -> ProductPrivilege Saved");
-		return productPrivilegeService.saveProductPrivilege(productPrivilegeConverter.DtoToEntity(productPrivilegeDTO));
+		return productPrivilegeService.saveProductPrivilege(productPrivilegeConverter.DtoToEntity(productPrivilegeDto));
 	}
 
 	// Update ProductPrivilege
 	@SuppressWarnings("static-access")
-	public ProductPrivilege updateProductPrivilege(ProductPrivilegeDto productPrivilegeDTO) {
-		logger.info("ProductPrivilege Mapper -> ProductPrivilege Updated ", productPrivilegeDTO.getProductPrivilegeId());
-		return productPrivilegeService.updateProductPrivilege(productPrivilegeConverter.DtoToEntityUpdate(productPrivilegeDTO));
+	public ProductPrivilege updateProductPrivilege(ProductPrivilegeDto productPrivilegeDto) {
+		logger.info("ProductPrivilege Mapper -> ProductPrivilege Updated ", productPrivilegeDto.getId());
+		return productPrivilegeService.updateProductPrivilege(productPrivilegeConverter.DtoToEntityUpdate(productPrivilegeDto));
 	}
 
 	// Delete ProductPrivilege
@@ -57,5 +57,4 @@ public class ProductPrivilegeMapper {
 		ProductPrivilege productPrivilege = productPrivilegeService.getProductPrivilegeById(productPrivilegeId);
 		return productPrivilegeConverter.EntityToDto(productPrivilege);
 	}
-
 }

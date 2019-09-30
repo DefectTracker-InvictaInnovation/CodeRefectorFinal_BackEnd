@@ -1,38 +1,36 @@
 package com.sgic.internal.product.controller.dto;
 
+
 public class ProductPrivilegeDto {
-	private Long productPrivilegeId;
-	// Privilege Entity -> privilege ID
-	private Long productPrivilegeNameId;
-	// Privilege Entity -> privilege Name
-	private String productPrivilegeName;
-	// Product Privilege Entity -> privilege status
-	private boolean productPrivilegeStatus;
+	private Long id;
+	private String privilegeId;
+	private String privilegeName;
+	private boolean privilegeStatus;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
-	public Long getProductPrivilegeId() {
-		return productPrivilegeId;
+	public boolean isPrivilegeStatus() {
+		return privilegeStatus;
 	}
-	public void setProductPrivilegeId(Long productPrivilegeId) {
-		this.productPrivilegeId = productPrivilegeId;
+	public void setPrivilegeStatus(boolean privilegeStatus) {
+		this.privilegeStatus = privilegeStatus;
 	}
-	public Long getProductPrivilegeNameId() {
-		return productPrivilegeNameId;
+	public String getPrivilegeId() {
+		return privilegeId;
 	}
-	public void setProductPrivilegeNameId(Long productPrivilegeNameId) {
-		this.productPrivilegeNameId = productPrivilegeNameId;
+	public void setPrivilegeId(String privilegeId) {
+		this.privilegeId = privilegeId;
 	}
-	public String getProductPrivilegeName() {
-		return productPrivilegeName;
+	public String getPrivilegeName() {
+		return privilegeName;
 	}
-	public void setProductPrivilegeName(String productPrivilegeName) {
-		this.productPrivilegeName = productPrivilegeName;
-	}
-	public boolean isProductPrivilegeStatus() {
-		return productPrivilegeStatus;
-	}
-	public void setProductPrivilegeStatus(boolean productPrivilegeStatus) {
-		this.productPrivilegeStatus = productPrivilegeStatus;
+	public void setPrivilegeName(String privilegeName) {
+		this.privilegeName = privilegeName;
 	}
 	
 	

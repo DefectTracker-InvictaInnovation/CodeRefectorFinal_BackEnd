@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="role")
-public class RoleAllocationList {
+public class Role {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

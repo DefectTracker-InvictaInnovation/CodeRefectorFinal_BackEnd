@@ -16,16 +16,17 @@ public class DefectSeverity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id; // Defect severity id
-
+	
 	@Column(nullable = false)
-	private String name; // Defect severity name
-
+	private String name; // Defect severity name 
+	
 	@Column(nullable = false)
 	private String value; // Defect severity value
-
+	
 	@Column(nullable = false)
 	private String icon; // Defect severity icon
-
+	
+	@Column(nullable = false)
 	private String color; // Defect severity color
 
 	public long getId() {
@@ -41,7 +42,7 @@ public class DefectSeverity implements Serializable {
 	}
 
 	public void setName(String name) {
-		this.name = "Severity";
+		this.name = name;
 	}
 
 	public String getValue() {
@@ -67,7 +68,6 @@ public class DefectSeverity implements Serializable {
 	public void setColor(String color) {
 		this.color = color;
 	}
-
 	
 	
 }

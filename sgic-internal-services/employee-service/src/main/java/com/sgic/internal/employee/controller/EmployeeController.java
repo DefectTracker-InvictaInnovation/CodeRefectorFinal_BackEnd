@@ -30,6 +30,7 @@ import com.sgic.internal.employee.dto.EmployeeDTO;
 import com.sgic.internal.employee.dto.mapper.EmployeeDTOMapper;
 import com.sgic.internal.employee.entities.Designation;
 import com.sgic.internal.employee.entities.Employee;
+import com.sgic.internal.employee.repositories.EmployeeRepository;
 import com.sgic.internal.employee.services.EmployeeService;
 import com.sgic.internal.employee.services.impl.NotificationService;
 
@@ -43,6 +44,9 @@ public class EmployeeController {
 	@SuppressWarnings("unused")
 	@Autowired
 	private EmployeeService employeeservice;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	@Autowired
 	private NotificationService notificationService;
@@ -235,6 +239,52 @@ public class EmployeeController {
 			model.addAttribute("message", "Fail! -> uploaded filename: " + file.getOriginalFilename());
 		}
 		return "File uploaded successfully";
+	}
+	
+//	@GetMapping("/getdevelopercount")
+//	// <----	Employee DataBase Employee Table Row Count Method --->
+//		public long getTotalDeveloperCount() {
+//			try {
+//				logger.info("Employee Controller :-> getCount");
+//				long name=employeeRepository.findByDesignationName("developer");
+//				return employeeservice.countDeveloper(name);
+//			} catch (Exception ex) {
+//				logger.error("Employee Controller :-> Error" + ex.getMessage());
+//			}
+//			return (Long) null;
+//
+//		}
+	
+	@GetMapping("/getdevelopercount")
+	public Long getTotalDeveloperCount() {
+		try {
+			Long name = employeeRepository.findByDesignationName("Developer");
+			return employeeservice.countDeveloper(name);
+		} catch (Exception e) {
+		}
+		return (Long) null;
+		
+	}
+	@GetMapping("/getTotalQaCount")
+	public long getTotalQaCount() {
+		try {
+			Long name = employeeRepository.findByDesignationName("QA");
+			return employeeservice.countDeveloper(name);
+		} catch (Exception e) {
+		}
+		return (Long) null;
+
+	}
+	
+	@GetMapping("/getTotalPmCount")
+	public long getTotalPmCount() {
+		try {
+			Long name = employeeRepository.findByDesignationName("PM");
+			return employeeservice.countDeveloper(name);
+		} catch (Exception e) {
+		}
+		return (Long) null;
+
 	}
 
 

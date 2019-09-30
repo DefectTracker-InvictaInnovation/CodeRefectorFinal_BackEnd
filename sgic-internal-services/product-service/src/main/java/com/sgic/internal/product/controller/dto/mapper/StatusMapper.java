@@ -11,50 +11,80 @@ import com.sgic.internal.product.controller.dto.StatusDto;
 import com.sgic.internal.product.controller.dto.converter.StatusConverter;
 import com.sgic.internal.product.entities.DefectStatus;
 import com.sgic.internal.product.services.StatusService;
+import com.sgic.internal.product.services.impl.StatusServiceImpl;
 
 @Service
 public class StatusMapper {
 	@Autowired
-	private StatusConverter statusConverter;
+	private StatusService defectStatusService;
+
 	@Autowired
-	private StatusService statusService;
+	private StatusConverter defectStatusConverter;
 
-	private static Logger logger = LogManager.getLogger(StatusDto.class);
+	private static Logger logger = LogManager.getLogger(StatusServiceImpl.class);
 
-	// Get All Status
-	@SuppressWarnings("static-access")
-	public List<StatusDto> getAllStatus() {
-		logger.info("Status Mapper -> All Status Data Retrieved");
-		List<DefectStatus> defectStatusList = statusService.getAllDefectStatus();
-		return statusConverter.EntityListTODtoList(defectStatusList);
+	// Mapper for crating defect status
+	public Boolean createDefectStatus(StatusDto defectStatusDto) {
+		DefectStatus defectStatus = defectStatusConverter.defectStatusdtotodefectStatus(defectStatusDto);
+		defectStatusService.createDefectStatus(defectStatus);
+		logger.info("Defect Status Create Mapper");
+		return true;
 	}
 
-	// Save Status
-	@SuppressWarnings("static-access")
-	public DefectStatus saveDefectStatus(StatusDto statusDto) {
-		logger.info("Status Mapper -> Status Saved");
-		return statusService.createDefectStatus(statusConverter.DtoToEntity(statusDto));
+	// Mapper for listing all defect status
+	public List<StatusDto> getAllDefectStatus() {
+		List<DefectStatus> defectStatusList = defectStatusService.findAllDefectStatus();
+		if (defectStatusList != null) {
+			logger.info("Defect Status List Mapper");
+			return (defectStatusConverter.defectStatusTodefectStatusDto(defectStatusList));
+		} else {
+			logger.warn("No Defect Status");
+			return null;
+		}
+
 	}
 
-	// Update Status
-	@SuppressWarnings("static-access")
-	public DefectStatus updateDefectStatus(StatusDto statusDto) {
-		logger.info("Status Mapper -> Status Updated ");
-		return statusService.updateDefectStatus(statusConverter.DtoToEntityUpdate(statusDto));
+	// Mapper for getting defect status by id
+	public StatusDto getDefectstatusById(Long id) {
+		DefectStatus defectStatusList = defectStatusService.findDefectStatusById(id);
+		if (defectStatusList != null) {
+			logger.info("Defect Status Get By Id Mapper");
+			return defectStatusConverter.defectStatustoDefectStatusDto(defectStatusList);
+		} else {
+			logger.warn("No Defect Status By Id");
+			return null;
+		}
+
 	}
 
-	// Delete Status
-	public StatusDto deleteDefectStatusById(Long statusId) {
-		logger.info("Status Mapper -> Status Deleted");
-		statusService.deleteDefectStatusById(statusId);
-		return null;
+	// Mapper for delete defect status
+	public Boolean deleteDefectStatus(Long id) {
+		if (defectStatusService.deleteDefectStatusById(id)) {
+			logger.info("Defect Status Delete Mapper");
+			return true;
+		} else {
+			logger.warn("No Defect Status");
+			return false;
+		}
 	}
 
-	// Get Status By Id
-	@SuppressWarnings("static-access")
-	public StatusDto getDefectStatusById(Long statusId) {
-		logger.info("Status Mapper -> Status Id Found");
-		DefectStatus defectSeverity = statusService.getDefectStatusById(statusId);
-		return statusConverter.EntityToDto(defectSeverity);
+	// Mapper for update defect status
+	public Boolean updateDefectStatus(Long id, StatusDto defectStatusDto) {
+		DefectStatus defectStatus = defectStatusConverter.defectStatusdtotodefectStatus(defectStatusDto);
+		DefectStatus defectStatusList = defectStatusService.findDefectStatusById(id);
+		if (defectStatusList == null) {
+			logger.warn("No Defect Status By Id");
+			return false;
+		} else {
+			defectStatus.setId(id);
+			defectStatusService.createDefectStatus(defectStatus);
+			logger.info("Defect Status Update Mapper");
+			return true;
+		}
+	}
+	
+	//Mapper for count defect statuses
+	public int getStatusCount() {
+		return defectStatusService.getStatusCount();
 	}
 }

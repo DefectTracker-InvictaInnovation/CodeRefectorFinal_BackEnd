@@ -18,67 +18,68 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sgic.common.api.enums.RestApiResponseStatus;
+import com.sgic.common.api.response.ApiResponse;
 import com.sgic.internal.product.controller.dto.TypeDto;
 import com.sgic.internal.product.controller.dto.mapper.TypeMapper;
+import com.sgic.internal.product.services.impl.TypeServiceImpl;
 
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 public class TypeController {
-	@Autowired
-	private TypeMapper typeMapper;
-	private static Logger logger = LogManager.getLogger(TypeMapper.class);
+	private static Logger logger = LogManager.getLogger(TypeServiceImpl.class);
 
-	// Get All Type
-	@GetMapping("/Types")
-	public List<TypeDto> getAllTypes() {
-		logger.info("Controller -> Data Retrieved Successfull");
-		return typeMapper.getAllDefectType();
+	@Autowired
+	private TypeMapper defectTypeMapper;
+
+	// Create Defect Type
+	@PostMapping(value = "/defecttype")
+	public ResponseEntity<Object> createDefectType(@RequestBody TypeDto defectTypeDto) {
+		if (defectTypeMapper.createDefectType(defectTypeDto)) {
+			logger.info("Defect Type created");
+			return new ResponseEntity<>(new ApiResponse(RestApiResponseStatus.OK), HttpStatus.OK);
+		} else {
+			logger.error("Defect Type Create Fail");
+			return new ResponseEntity<>("Defect Type Added Failure", HttpStatus.BAD_REQUEST);
+		}
 	}
 
-	 //Get Type By Id
-	@GetMapping("/Type/{typeId}")
-	public TypeDto getTypeById(@PathVariable(name = "typeId") Long typeId) {
-		logger.info("Controller -> Data Retrieved Successfull");
-		return typeMapper.getDefectTypeById(typeId);
+	// Get All Defect Types
+	@GetMapping(value = "/defecttypes")
+	public List<TypeDto> getAllDefectType() {
+		logger.info("Defect Types Listed");
+		return defectTypeMapper.getAllDefectType();
+	}
+
+	// Get Defect Type By Id
+	
+	@GetMapping(value = "/defecttype/{id}")
+	public TypeDto getDefectById(@PathVariable Long id) {
+		logger.info("Defect Type Get By Id Listed");
+		return defectTypeMapper.getDefectTypeById(id);
+	}
+
+	// Delete Defect Type	
+	
+	@DeleteMapping("/defecttype/{id}")
+	public ResponseEntity<Object> deleteDefectType(@PathVariable Long id, @RequestBody TypeDto defectTypeDto) {
+		defectTypeMapper.deleteDefectType(id);
+		logger.info("Defect Type Deleted");
+		return new ResponseEntity<>("Defect Type Deleted Successfully", HttpStatus.OK);
+	}
+
+	// Defect Type Updated
+	@PutMapping(value = "/defecttype/{id}")
+	public ResponseEntity<Object> updateDefectType(@RequestBody TypeDto defectTypeDto, @PathVariable Long id) {
+		defectTypeMapper.updateDefectType(id, defectTypeDto);
+		logger.info("Defect Type Updated");
+		return new ResponseEntity<>(new ApiResponse(RestApiResponseStatus.OK), HttpStatus.OK);
 	}
 	
-
-	// Save All Type
-	@PostMapping("/Type")
-	public ResponseEntity<String> saveType(@Valid @RequestBody TypeDto typeDto) {
-		if (typeMapper.saveDefectType(typeDto) != null) {
-			logger.info("Type Controller -> Type Created Successful");
-			return new ResponseEntity<>("Priority added succesfully", HttpStatus.OK);
-		}
-		logger.info("Type Controller -> Type creation FAILED!!!");
-		return new ResponseEntity<>("SAVE FAILED!", HttpStatus.BAD_REQUEST);
-	}
-
-	// Update Type
-	@PutMapping("/Type/{typeId}")
-	public ResponseEntity<String> updateType(@RequestBody TypeDto typeDto) {
-		logger.info("Type Controller -> Type Updated Successful");
-		if (typeMapper.updateDefectType(typeDto) != null) {
-			return new ResponseEntity<>("Sucessfully Updateed Company", HttpStatus.OK);
-		}
-		logger.info("Type Controller -> Type Updated Failed!!!");
-		return new ResponseEntity<>("Update FAILED!!!", HttpStatus.BAD_REQUEST);
-	}
-
-	// Delete Type
-	@DeleteMapping("/Type/{typeId}")
-	public ResponseEntity<String> deleteType(@PathVariable(name = "typeId") Long typeId) {
-		System.out.print(typeId);
-		if (typeMapper.getDefectTypeById(typeId) != null) {
-			if (typeMapper.deleteDefectTypeById(typeId) == null) {
-				logger.info("Type Controller -> Type Deleted Successful");
-				return new ResponseEntity<>("Type Sucessfully deleted", HttpStatus.OK);
-			}
-		} else {
-			logger.info("Type Controller -> Type Id Not Found");
-			return new ResponseEntity<>("Type Id Not FOUND!!!", HttpStatus.BAD_REQUEST);
-		}
-		logger.info("Type Controller -> Type Deleted Failed!!!");
-		return new ResponseEntity<>("Delete FAILED!!!", HttpStatus.BAD_REQUEST);
+	// Count Defect Type 
+	@GetMapping("/countdefecttype")
+	public int getDefectTypeCount() {
+		logger.info("Defect Type Counted");
+		return defectTypeMapper.getDefectTypeCount();
 	}
 }

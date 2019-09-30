@@ -2,17 +2,16 @@ package com.sgic.internal.product.controller.dto.converter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-
 import com.sgic.internal.product.controller.dto.ProductPrivilegeDto;
 import com.sgic.internal.product.entities.Privilege;
 import com.sgic.internal.product.entities.ProductPrivilege;
 
 @Service
 public class ProductPrivilegeConverter {
+
 	private static Logger logger = LogManager.getLogger(ProductPrivilege.class);
 
 	// Convert All List<Entity> to List<DTO>
@@ -21,14 +20,14 @@ public class ProductPrivilegeConverter {
 			logger.info("Defect Priority Converter -> Convert Lists Entity to DTO");
 			List<ProductPrivilegeDto> listProductPrivilegeDto = new ArrayList<>();
 			for (ProductPrivilege productPrivilege : productPrivilegeList) {
-				ProductPrivilegeDto productPrivilegeDTO = new ProductPrivilegeDto();
+				ProductPrivilegeDto productPrivilegeDto = new ProductPrivilegeDto();
 
-				productPrivilegeDTO.setProductPrivilegeId(productPrivilege.getId());
-				productPrivilegeDTO.setProductPrivilegeNameId(productPrivilege.getPrivilege().getPrivilegeId());
-				productPrivilegeDTO.setProductPrivilegeName(productPrivilege.getPrivilege().getName());
-				productPrivilegeDTO.setProductPrivilegeStatus(productPrivilege.isPrivilegeStatus());
-
-				listProductPrivilegeDto.add(productPrivilegeDTO);
+				productPrivilegeDto.setId(productPrivilege.getId());
+				productPrivilegeDto.setPrivilegeId(productPrivilege.getPrivilege().getPrivilegeId());
+				productPrivilegeDto.setPrivilegeName(productPrivilege.getPrivilege().getPrivilegeName());
+				productPrivilegeDto.setPrivilegeStatus(productPrivilege.isPrivilegeStatus());
+		
+				listProductPrivilegeDto.add(productPrivilegeDto);
 			}
 			return listProductPrivilegeDto;
 		}
@@ -36,19 +35,17 @@ public class ProductPrivilegeConverter {
 	}
 
 	// Convert Data To Entity
-	public static ProductPrivilege DtoToEntity(ProductPrivilegeDto productPrivilegeDTO) {
+	public static ProductPrivilege DtoToEntity(ProductPrivilegeDto productPrivilegeDto) {
 		ProductPrivilege productPrivilege = new ProductPrivilege();
-		if (productPrivilegeDTO != null) {
+		if (productPrivilegeDto != null) {
 			logger.info("Defect Priority Converter -> Convert Object DTO to Entity");
-//					productPrivilege.setId(productPrivilegeDto.getProjectPrivilegeId());
+			productPrivilege.setId(productPrivilegeDto.getId());
+			productPrivilege.setPrivilegeStatus(productPrivilegeDto.isPrivilegeStatus());
 
 			Privilege privilege = new Privilege();
-			privilege.setPrivilegeId(productPrivilegeDTO.getProductPrivilegeNameId());
-//			privilege.setName(productPrivilegeDto.getProjectPrivilegeName());
-			
+			privilege.setPrivilegeId(productPrivilegeDto.getPrivilegeId());
+			privilege.setPrivilegeName(productPrivilegeDto.getPrivilegeName());
 			productPrivilege.setPrivilege(privilege);
-
-			productPrivilege.setPrivilegeStatus(productPrivilegeDTO.isProductPrivilegeStatus());
 
 			return productPrivilege;
 		}
@@ -56,18 +53,17 @@ public class ProductPrivilegeConverter {
 	}
 
 	// Convert Data To Entity
-	public static ProductPrivilege DtoToEntityUpdate(ProductPrivilegeDto productPrivilegeDTO) {
+	public static ProductPrivilege DtoToEntityUpdate(ProductPrivilegeDto productPrivilegeDto) {
 		ProductPrivilege productPrivilege = new ProductPrivilege();
-		if (productPrivilegeDTO != null) {
+		if (productPrivilegeDto != null) {
 			logger.info("Defect Priority Converter -> Convert Object DTO to Entity");
-			productPrivilege.setId(productPrivilegeDTO.getProductPrivilegeId());
+			productPrivilege.setId(productPrivilegeDto.getId());
+			productPrivilege.setPrivilegeStatus(productPrivilegeDto.isPrivilegeStatus());
 
 			Privilege privilege = new Privilege();
-			privilege.setPrivilegeId(productPrivilegeDTO.getProductPrivilegeNameId());
-			privilege.setName(productPrivilegeDTO.getProductPrivilegeName());
+			privilege.setPrivilegeId(productPrivilegeDto.getPrivilegeId());
+			privilege.setPrivilegeName(productPrivilegeDto.getPrivilegeName());
 			productPrivilege.setPrivilege(privilege);
-
-			productPrivilege.setPrivilegeStatus(productPrivilegeDTO.isProductPrivilegeStatus());
 
 			return productPrivilege;
 		}
@@ -76,15 +72,16 @@ public class ProductPrivilegeConverter {
 
 	// Convert Entity To Data
 	public static ProductPrivilegeDto EntityToDto(ProductPrivilege productPrivilege) {
-		ProductPrivilegeDto productPrivilegeDTO = new ProductPrivilegeDto();
+		ProductPrivilegeDto productPrivilegeDto = new ProductPrivilegeDto();
 		if (productPrivilege != null) {
 			logger.info("Defect Priority Converter -> Convert Object Entity to DTO");
-			productPrivilegeDTO.setProductPrivilegeId(productPrivilege.getId());
-			productPrivilegeDTO.setProductPrivilegeNameId(productPrivilege.getPrivilege().getPrivilegeId());
-			productPrivilegeDTO.setProductPrivilegeName(productPrivilege.getPrivilege().getName());
-			productPrivilegeDTO.setProductPrivilegeStatus(productPrivilege.isPrivilegeStatus());
 
-			return productPrivilegeDTO;
+			productPrivilegeDto.setId(productPrivilege.getId());
+			productPrivilegeDto.setPrivilegeId(productPrivilege.getPrivilege().getPrivilegeId());
+			productPrivilegeDto.setPrivilegeId(productPrivilege.getPrivilege().getPrivilegeName());
+			productPrivilegeDto.setPrivilegeStatus(productPrivilege.isPrivilegeStatus());
+
+			return productPrivilegeDto;
 		}
 		return null;
 	}

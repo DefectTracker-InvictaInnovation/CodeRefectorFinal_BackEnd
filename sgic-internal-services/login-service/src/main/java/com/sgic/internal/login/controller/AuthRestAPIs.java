@@ -134,6 +134,12 @@ public class AuthRestAPIs {
 				roles.add(qaRole);
 
 				break;
+			case "hr":
+				Role hrRole = roleRepository.findByName(RoleName.ROLE_HR)
+						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: qa Role not find."));
+				roles.add(hrRole);
+
+				break;
 			case "developer":
 				Role devrole = roleRepository.findByName(RoleName.ROLE_DEVELOPER)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: developer Role not find."));

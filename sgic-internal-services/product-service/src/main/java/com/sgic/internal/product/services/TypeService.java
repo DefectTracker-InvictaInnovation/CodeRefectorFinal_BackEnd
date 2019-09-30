@@ -5,14 +5,10 @@ import java.util.List;
 import com.sgic.internal.product.entities.DefectType;
 
 public interface TypeService {
-	// Create DefectType
-	public DefectType createDefectType(DefectType defectType);
-	// Update DefectType
-	public DefectType updateDefectType(DefectType defectType);
-	// Get DefectType By Id
-	public DefectType getDefectTypeById(Long typeId);
-	// Get All DefectType 
-	public List<DefectType> getAllDefectType();
-	// Delete DefectType Id
-	public DefectType deleteDefectTypeById(Long typeId);
+	public Object createDefectType(DefectType defectType); // Create defect type
+	public boolean isDefectTypeAlreadyExists(Long id); // Check defect type is already exists
+	DefectType findDefectTypeById(long id); // Get defect type by id
+	List<DefectType> findAllDefectType(); // List all defect types
+	Boolean deleteDefectTypeById(long id); // Delete defect type
+	public int getDefectTypeCount(); // Count defect type
 }

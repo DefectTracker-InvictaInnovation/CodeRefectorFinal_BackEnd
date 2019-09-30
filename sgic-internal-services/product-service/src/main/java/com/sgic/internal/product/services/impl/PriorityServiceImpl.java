@@ -6,58 +6,55 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sgic.internal.product.entities.DefectPriority;
 import com.sgic.internal.product.repositories.CompanyRepository;
-import com.sgic.internal.product.repositories.PriorityRepo;
+import com.sgic.internal.product.repositories.DefectPriorityRepository;
 import com.sgic.internal.product.services.PriorityService;
 
 @Service
 public class PriorityServiceImpl implements PriorityService{
 
 	@Autowired
-	PriorityRepo priorityRepo;
+	private DefectPriorityRepository defectPriorityRepository;
 	
-	private static Logger logger = LogManager.getLogger(CompanyRepository.class);
-	
+	private static Logger logger = LogManager.getLogger(PriorityServiceImpl.class);
+
+	// Create defect priority service implementation
 	@Override
-	public DefectPriority createDefectPriority(DefectPriority defectPriority) {
-		logger.info("service started -> Save DefectPriority");
-		return priorityRepo.save(defectPriority);
+	public Object createDefectPriority(DefectPriority defectPriority) {
+		logger.info("Create Defect Priority Service Implementation");
+		return defectPriorityRepository.save(defectPriority);
 	}
 
+	// Defect priority exists implementation
 	@Override
-	public DefectPriority updateDefectPriority(DefectPriority defectPriority) {
-		logger.info("service started -> Update DefectPriority");
-		Long id = defectPriority.getId();
-		logger.info("service started -> getDefectPriorityId");
-		boolean isExist = priorityRepo.findDefectPriorityById(id) != null;
-		if (isExist) {
-			logger.info("service started -> Updated By DefectPriorityId");
-			return priorityRepo.save(defectPriority);
-		} else {
-			logger.info("service started -> DefectPriority Id Not Found");
-		}
-		return null;
+	@Transactional(readOnly = true)
+	public boolean isDefectPriorityAlreadyExists(Long id) {
+		logger.info("Defect Priority Exists Service Implementation");
+		return defectPriorityRepository.existsById(id);
 	}
 
+	// List all defect priorities implementation
 	@Override
-	public DefectPriority getDefectPriorityById(Long priorityId) {
-		logger.info("service started -> Get DefectPriority Id");
-		return priorityRepo.findDefectPriorityById(priorityId);
+	public List<DefectPriority> findAllDefectPriority() {
+		logger.info("List All Defect Priority Service Implementation");
+		return defectPriorityRepository.findAll();
 	}
 
+	// Find defect priority by id implementation
 	@Override
-	public List<DefectPriority> getAllDefectPriority() {
-		logger.info("service started -> Get All DefectPriority");
-		return priorityRepo.findAll();
+	public DefectPriority findDefecPriorityById(long id) {
+		logger.info("Get Defect Priority By Id Service Implementation");
+		return defectPriorityRepository.findById(id).orElse(null);
 	}
 
+	// Delete defect priority implementation
 	@Override
-	public DefectPriority deleteDefectPriorityById(Long priorityId) {
-		logger.info("service started -> Delete DefectPriority");
-		priorityRepo.deleteById(priorityId);
-		return null;
+	public Boolean deleteDefectPriorityById(long id) {
+		defectPriorityRepository.deleteById(id);
+		logger.info("Delete Defect Priority Service Implementation");
+		return true;
 	}
-
 }

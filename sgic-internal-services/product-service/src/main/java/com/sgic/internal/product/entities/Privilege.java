@@ -4,11 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 @SuppressWarnings("serial")
 @Entity
@@ -16,24 +13,25 @@ import javax.validation.constraints.Size;
 public class Privilege implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long privilegeId;
+	private String privilegeId;
 	
-	@Size(min = 3 , max = 200)
 	@Column(nullable = false)
-	private String name;
-	
-	public Long getPrivilegeId() {
+	private String privilegeName;
+
+	public String getPrivilegeId() {
 		return privilegeId;
 	}
-	public void setPrivilegeId(Long privilegeId) {
+
+	public void setPrivilegeId(String privilegeId) {
 		this.privilegeId = privilegeId;
 	}
-	public String getName() {
-		return name;
+
+	public String getPrivilegeName() {
+		return privilegeName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setPrivilegeName(String privilegeName) {
+		this.privilegeName = privilegeName;
 	}
 	
 	

@@ -22,5 +22,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	// Find Employee By Name
 	@Query(value = "from Employee where name = :name")
 	List<Employee> findByName(String name);
+	
+	@Query("SELECT COUNT(designationid) FROM Employee WHERE designationid=:designationid")
+	Long getDeveloperCount(Long designationid);
+	
+	@Query("SELECT designationid FROM Designation WHERE designationname=:designationName")
+	Long findByDesignationName(String designationName);
 
 }

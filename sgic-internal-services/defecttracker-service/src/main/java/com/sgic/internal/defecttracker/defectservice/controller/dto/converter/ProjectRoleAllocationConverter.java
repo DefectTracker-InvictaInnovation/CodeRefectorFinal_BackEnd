@@ -16,7 +16,7 @@ import com.sgic.internal.defecttracker.defectservice.controller.dto.ProjectRoleA
 import com.sgic.internal.defecttracker.defectservice.entities.Employee;
 import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocation;
 import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocation;
-import com.sgic.internal.defecttracker.defectservice.entities.RoleAllocationList;
+import com.sgic.internal.defecttracker.defectservice.entities.Role;
 
 
 @Service
@@ -52,7 +52,7 @@ public class ProjectRoleAllocationConverter {
 			resourceAllocation.setResourceId(projectRoleAllocationDto.getResourceId());
 			projectRoleAllocation.setResourceAllocation(resourceAllocation);
 			
-			RoleAllocationList role = new RoleAllocationList();
+			Role role = new Role();
 			role.setRoleId(projectRoleAllocationDto.getRoleId());
 			projectRoleAllocation.setRoleAllocationList(role);
 			

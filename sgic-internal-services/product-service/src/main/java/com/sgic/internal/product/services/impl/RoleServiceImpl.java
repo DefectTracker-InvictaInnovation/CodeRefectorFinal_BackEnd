@@ -8,32 +8,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sgic.internal.product.entities.Role;
-import com.sgic.internal.product.repositories.RoleRepo;
-import com.sgic.internal.product.services.RoleServices;
+import com.sgic.internal.product.repositories.RoleRepository;
+import com.sgic.internal.product.services.RoleService;
 
 @Service
-public class RoleServiceImpl implements RoleServices{
+public class RoleServiceImpl implements RoleService {
 
 	@Autowired
-	private RoleRepo roleRepo;
+	private RoleRepository roleRepository;
 	
-	private static Logger logger = LogManager.getLogger(RoleRepo.class);
+	private static Logger logger = LogManager.getLogger(RoleRepository.class);
 	@Override
 	public Role saveRole(Role role) {
 		logger.info("service started -> SavePrivilege");
-		return roleRepo.save(role);
+		return roleRepository.save(role);
 	}
 	
 	@Override
 	public Role getRoleById(Long roleId) {
 		logger.info("service started -> getPrivilegeById");
-		return roleRepo.findRoleByroleId(roleId);
+		return roleRepository.findRoleByroleId(roleId);
 	}
 
 	@Override
 	public Role deleteRoleById(Long roleId) {
 		logger.info("service started -> deleteRoleById");
-		roleRepo.deleteById(roleId);
+		roleRepository.deleteById(roleId);
 		return null;
 	}
 
@@ -42,10 +42,10 @@ public class RoleServiceImpl implements RoleServices{
 		logger.info("service started -> UpdateRole");
 		Long roleId = role.getRoleId();
 		logger.info("service started -> getRoleId");
-		boolean isExist = ((RoleRepo) roleRepo).findById(roleId) != null;
+		boolean isExist = ((RoleRepository) roleRepository).findById(roleId) != null;
 		if (isExist) {
 			logger.info("service started -> Updated By roleId");
-			return roleRepo.save(role);
+			return roleRepository.save(role);
 		} else {
 			logger.info("service started -> roleId Not Found");
 		}
@@ -54,8 +54,6 @@ public class RoleServiceImpl implements RoleServices{
 
 	@Override
 	public List<Role> getAllRoleInfo() {
-		return roleRepo.findAll();
+		return roleRepository.findAll();
 	}
-
-
 }

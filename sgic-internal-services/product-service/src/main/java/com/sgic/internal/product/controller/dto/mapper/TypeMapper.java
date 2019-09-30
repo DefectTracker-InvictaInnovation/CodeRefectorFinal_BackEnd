@@ -11,52 +11,90 @@ import com.sgic.internal.product.controller.dto.TypeDto;
 import com.sgic.internal.product.controller.dto.converter.TypeConverter;
 import com.sgic.internal.product.entities.DefectType;
 import com.sgic.internal.product.services.TypeService;
+import com.sgic.internal.product.services.impl.TypeServiceImpl;
 
 
 
 @Service
 public class TypeMapper {
 	@Autowired
-	private TypeConverter typeConverter;
+	private TypeService defectTypeService;
+	
 	@Autowired
-	private TypeService typeService;
-
-	private static Logger logger = LogManager.getLogger(TypeDto.class);
-
-	// Get All Status
-	@SuppressWarnings("static-access")
-	public List<TypeDto> getAllDefectType() {
-		logger.info("Priority Mapper -> All Priority Data Retrieved");
-		List<DefectType> defectTypeList = typeService.getAllDefectType();
-		return typeConverter.EntityListTODtoList(defectTypeList);
+	private TypeConverter defectTypeConverter;
+	
+	@SuppressWarnings("unused")
+	private static Logger logger = LogManager.getLogger(TypeServiceImpl.class);
+	
+	// Mapper for creating defect type
+	public Boolean createDefectType (TypeDto defectTypeDto){
+		//BasicConfigurator.configure();
+		DefectType defectType = defectTypeConverter.defectTypeDtoToDefectType(defectTypeDto);
+		defectTypeService.createDefectType(defectType);
+		//logger.info("Defect Type Create Mapper");
+		return true;
 	}
-
-	// Save Status
-	@SuppressWarnings("static-access")
-	public DefectType saveDefectType(TypeDto typeDto) {
-		logger.info("Priority Mapper -> Priority Saved");
-		return typeService.createDefectType(typeConverter.DtoToEntity(typeDto));
+	
+	// Mapper for listing all defect types
+	public List<TypeDto> getAllDefectType(){
+		//BasicConfigurator.configure();
+		List<DefectType> defectTypeList = defectTypeService.findAllDefectType();
+		if(defectTypeList != null) {
+			//logger.info("Defect Types List Mapper");
+			return (defectTypeConverter.defectTypeToDefectTypeDto(defectTypeList));
+		}
+		else {
+			//logger.warn("No Defect Types");
+			return null;
+		}			
 	}
-
-	// Update Status
-	@SuppressWarnings("static-access")
-	public DefectType updateDefectType(TypeDto typeDto) {
-		logger.info("Priority Mapper -> Priority Updated ");
-		return typeService.updateDefectType(typeConverter.DtoToEntityUpdate(typeDto));
+	
+	//Mapper for getting defect type by id
+	public TypeDto getDefectTypeById(Long id) {
+		//BasicConfigurator.configure();		
+	    DefectType defectTypeList =defectTypeService.findDefectTypeById(id);
+	    if (defectTypeList != null) {
+	    	//logger.info("Defect Type Get By Id Mapper");
+	    	return defectTypeConverter.defectTypeToDefectTypeDto(defectTypeList);
+	    }
+	    else {
+	    	//logger.warn("No Defect Type By Id");
+	    	return null;
+	    }	    
 	}
-
-	// Delete Status
-	public TypeDto deleteDefectTypeById(Long typeId) {
-		logger.info("Priority Mapper -> Priority Deleted");
-		typeService.deleteDefectTypeById(typeId);
-		return null;
+	
+	// Mapper for delete defect type
+	public Boolean deleteDefectType(Long id) {
+		//BasicConfigurator.configure();
+		if(defectTypeService.deleteDefectTypeById(id)) {
+			//logger.info("Defect Type Delete Mapper");
+			return true;
+		}
+		else {
+			//logger.warn("No Defect Type");
+			return false;
+		}		
 	}
-
-	// Get Status By Id
-	@SuppressWarnings("static-access")
-	public TypeDto getDefectTypeById(Long typeId) {
-		logger.info("Priority Mapper -> Priority Id Found");
-		DefectType defectType = typeService.getDefectTypeById(typeId);
-		return typeConverter.EntityToDto(defectType);
+	
+	// Mapper for update defect type
+	public Boolean updateDefectType(Long id, TypeDto defectTypeDto) {
+		//BasicConfigurator.configure();
+		DefectType defectType = defectTypeConverter.defectTypeDtoToDefectType(defectTypeDto);
+		DefectType defectTypeList =defectTypeService.findDefectTypeById(id);
+		if(defectTypeList == null) {
+			//logger.warn("No Defect Type By Id");
+			return false;
+		}
+		else {
+			defectType.setId(id);
+			defectTypeService.createDefectType(defectType);
+			//logger.info("Defect Type Update Mapper");
+			return true;
+		}		
+	}
+	
+	// Mapper for count defect type
+	public int getDefectTypeCount() {
+		return defectTypeService.getDefectTypeCount();
 	}
 }

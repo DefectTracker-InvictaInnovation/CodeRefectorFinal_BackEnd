@@ -1,6 +1,7 @@
 package com.sgic.internal.product.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,9 +35,6 @@ public class Role implements Serializable{
   public void setName(String name) {
 	this.name = name;
   }
-  
-  
-  
   
   
 }

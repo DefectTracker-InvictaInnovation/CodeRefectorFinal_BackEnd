@@ -149,4 +149,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 			throw new RuntimeException("FAIL! -> message = " + e.getMessage());
 		}
 	}
+	
+	@Override
+	public long countDeveloper(Long designationid) {
+		return employeeRepository.getDeveloperCount(designationid);
+	}
+
+	@Override
+	public long countDeveloperby(String designationName) {
+		return employeeRepository.findByDesignationName(designationName);
+	}
 }

@@ -30,10 +30,14 @@ public interface EmployeeService {
 	// Method for Update Employee
 	public Employee updateEmployee(Employee employee);
 
-    // Count method for counting database Employee 
+	// Count method for counting database Employee
 	public long count();
 
-    // Excel import method
+	// Excel import method
 	public void store(MultipartFile file);
+
+	public long countDeveloper(Long designationid);
+
+	public long countDeveloperby(String designationName);
 
 }
