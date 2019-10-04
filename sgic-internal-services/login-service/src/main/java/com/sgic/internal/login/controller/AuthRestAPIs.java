@@ -1,5 +1,8 @@
 package com.sgic.internal.login.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sgic.internal.login.entities.Role;
+import com.sgic.internal.login.entities.RoleName;
 import com.sgic.internal.login.entities.User;
 import com.sgic.internal.login.payload.UserProfile;
 import com.sgic.internal.login.repositories.RoleRepository;
