@@ -10,6 +10,10 @@ public class SignUpForm {
 
     @NotBlank
     @Size(min = 3, max = 50)
+    private String lastname;
+    
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String username;
 
     @NotBlank
@@ -61,6 +65,14 @@ public class SignUpForm {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
     
     

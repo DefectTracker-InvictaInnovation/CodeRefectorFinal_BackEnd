@@ -41,10 +41,10 @@ public class Project implements Serializable {
 	private String type;
 
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date startDate = currentDay;
+	private Date startDate;
 
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date endDate = currentDay;
+	private Date endDate;
 
 	@Column(name = "duration")
 	private Long duration;
@@ -87,7 +87,7 @@ public class Project implements Serializable {
 	}
 
 	public void setStartDate(Date startDate) {
-		this.startDate = currentDay;
+		this.startDate = startDate;
 	}
 
 	public Date getEndDate() {
@@ -95,7 +95,7 @@ public class Project implements Serializable {
 	}
 
 	public void setEndDate(Date endDate) {
-		this.endDate = currentDay;
+		this.endDate = endDate;
 	}
 
 	public Long getDuration() {

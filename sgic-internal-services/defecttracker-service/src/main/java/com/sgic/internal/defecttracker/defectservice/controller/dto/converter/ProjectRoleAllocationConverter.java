@@ -83,6 +83,7 @@ public class ProjectRoleAllocationConverter {
 						});
 				Employee employee = response.getBody();
 				System.out.println();
+				projectRoleAllocationDto.setEmployeeid(employee.getEmployeeid());
 				projectRoleAllocationDto.setName(employee.getName());
 				projectRoleAllocationDto.setEmail(employee.getEmail());
 				projectRoleAllocationDto.setFirstname(employee.getFirstname());
