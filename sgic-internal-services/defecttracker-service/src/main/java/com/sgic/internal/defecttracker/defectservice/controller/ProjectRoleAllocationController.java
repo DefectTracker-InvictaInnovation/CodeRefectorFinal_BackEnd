@@ -28,7 +28,7 @@ import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocat
 @RestController
 public class ProjectRoleAllocationController {
 	
-	@Autowired
+	
 	private RestTemplate restTemplate;
 	
 	@Autowired
@@ -109,6 +109,7 @@ public class ProjectRoleAllocationController {
 	@GetMapping(value = "/saveuser")
 	public ResponseEntity<List> getAllRoleEmail() {
 		try {
+			
 			String url = "http://localhost:8081/defectservices/getAllRole";
 			String resp = restTemplate.getForObject(url, String.class);
 
