@@ -8,8 +8,8 @@ public class ModuleData {
 	private String moduleId;
 	private String moduleName;
 	private String projectid;
-//	private String subModuleId;
-//	private String subModuleName;
+	private String subModuleId;
+	private String subModuleName;
 
 	public ModuleData(String moduleId, String moduleName) {
 		super();
@@ -39,22 +39,22 @@ public class ModuleData {
 	}
 
 	// getter setter for submodule id
-//	public String getSubModuleId() {
-//		return subModuleId;
-//	}
-//
-//	public void setSubModuleId(String subModuleId) {
-//		this.subModuleId = subModuleId;
-//	}
-//
-//	public String getSubModuleName() {
-//		return subModuleName;
-//	}
-//
-//	public void setSubModuleName(String subModuleName) {
-//		this.subModuleName = subModuleName;
-//	}
-//
+	public String getSubModuleId() {
+		return subModuleId;
+	}
+
+	public void setSubModuleId(String subModuleId) {
+		this.subModuleId = subModuleId;
+	}
+
+	public String getSubModuleName() {
+		return subModuleName;
+	}
+
+	public void setSubModuleName(String subModuleName) {
+		this.subModuleName = subModuleName;
+	}
+
 //	// getters setters for project id
 	public String getProjectid() {
 		return projectid;

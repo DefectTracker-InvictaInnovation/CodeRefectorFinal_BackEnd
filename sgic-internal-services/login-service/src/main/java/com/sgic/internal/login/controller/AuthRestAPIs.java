@@ -108,7 +108,7 @@ public class AuthRestAPIs {
 		}
 
 		// Creating user's account
-		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
+		User user = new User(signUpRequest.getName(),signUpRequest.getLastname(), signUpRequest.getUsername(), signUpRequest.getEmail(),
 				encoder.encode(signUpRequest.getPassword()));
 
 	String strRoles = signUpRequest.getRole();
@@ -116,31 +116,31 @@ public class AuthRestAPIs {
 
 		
 			switch (strRoles) {
-			case "admin":
+			case "ADMIN":
 				Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: admin Role not find."));
 				roles.add(adminRole);
 
 				break;
-			case "pm":
+			case "PM":
 				Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: pm Role not find."));
 				roles.add(pmRole);
 
 				break;
-			case "qa":
+			case "QA":
 				Role qaRole = roleRepository.findByName(RoleName.ROLE_QA)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: qa Role not find."));
 				roles.add(qaRole);
 
 				break;
-			case "hr":
+			case "HR":
 				Role hrRole = roleRepository.findByName(RoleName.ROLE_HR)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: qa Role not find."));
 				roles.add(hrRole);
 
 				break;
-			case "developer":
+			case "Developer":
 				Role devrole = roleRepository.findByName(RoleName.ROLE_DEVELOPER)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: developer Role not find."));
 				roles.add(devrole);
@@ -159,7 +159,6 @@ public class AuthRestAPIs {
 	}
 	
 	@GetMapping("/user/me")
-    @PreAuthorize("hasRole('ROLE_QA')")
     public UserSummary getCurrentUser(@CurrentUser UserPrinciple currentUser) {
         UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
         return userSummary;
@@ -178,7 +177,7 @@ public class AuthRestAPIs {
 	    User user = userRepository.findByUsername(username);
 	                
 
-	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getEmail());
+	        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(), user.getName(),user.getLastname(), user.getEmail());
 
 	        return userProfile;
 	    }

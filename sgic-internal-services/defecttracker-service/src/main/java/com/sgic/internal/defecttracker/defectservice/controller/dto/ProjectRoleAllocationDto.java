@@ -9,8 +9,14 @@ public class ProjectRoleAllocationDto {
 	private String firstname;
 	private String email;
 	private String roleName;
+	private String employeeid;
 
-	
+	public String getEmployeeid() {
+		return employeeid;
+	}
+	public void setEmployeeid(String employeeid) {
+		this.employeeid = employeeid;
+	}
 	public String getName() {
 		return name;
 	}

@@ -5,9 +5,10 @@ import java.time.Instant;
 public class UserProfile {
 	
 	
-	 private Long id;
+	    private Long id;
 	    private String username;
 	    private String name;
+	    private String lastname;
 	    private Instant joinedAt;
 	    private String role ;
 	    
@@ -20,16 +21,24 @@ public class UserProfile {
 			this.role = role;
 		}
 
-		public UserProfile(Long id, String username, String name, String role ) {
+		public UserProfile(Long id, String username, String name,String lastname, String role ) {
 	        this.id = id;
 	        this.username = username;
 	        this.name = name;
-	       
+	        this.lastname=lastname;
 	        this.role = role;
 	       
 	    }
 
-	    public Long getId() {
+	    public String getLastname() {
+			return lastname;
+		}
+
+		public void setLastname(String lastname) {
+			this.lastname = lastname;
+		}
+
+		public Long getId() {
 	        return id;
 	    }
 

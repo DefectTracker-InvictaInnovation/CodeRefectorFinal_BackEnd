@@ -35,6 +35,10 @@ public class User{
     @NotBlank
     @Size(min=3, max = 50)
     private String name;
+    
+    @NotBlank
+    @Size(min=3, max = 50)
+    private String lastname;
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -57,15 +61,24 @@ public class User{
     private Set<Role> roles = new HashSet<>();
 
     public User() {}
-
-    public User(String name, String username, String email, String password) {
+    
+	public User(String name,String lastname, String username, String email, String password) {
         this.name = name;
+        this.lastname=lastname;
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public Long getId() {
+    public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Long getId() {
         return id;
     }
 

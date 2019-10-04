@@ -34,6 +34,10 @@ public interface ModuleService {
 
 	// service for submodule id
 //	public List<Module> getBySubModuleId(String subModuleId);
+	
+	Module getallModuleInfo(String moduleId);
 
 
+	
+	
 }
