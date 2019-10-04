@@ -71,6 +71,7 @@ public class RoleAllocationConverter {
 		
 	
 		
+	@SuppressWarnings("unused")
 	public static List<RoleAllocationDto> roleAllocationToRoleAllocationDto(List<RoleAllocation>roleAllocationList){
 		if(roleAllocationList!=null) {
 			List<RoleAllocationDto>lRoleAllocationDto =new ArrayList<>();

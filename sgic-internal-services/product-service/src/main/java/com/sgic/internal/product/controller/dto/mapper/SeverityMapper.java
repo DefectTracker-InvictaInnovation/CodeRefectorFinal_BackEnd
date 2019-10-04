@@ -23,7 +23,7 @@ public class SeverityMapper {
 
 	private static Logger logger = LogManager.getLogger(SeverityDto.class);
 
-	// Get All Priority
+	// Get All Severity
 	@SuppressWarnings("static-access")
 	public List<SeverityDto> getAllSeverity() {
 		logger.info("Severity Mapper -> All Severity Data Retrieved");
