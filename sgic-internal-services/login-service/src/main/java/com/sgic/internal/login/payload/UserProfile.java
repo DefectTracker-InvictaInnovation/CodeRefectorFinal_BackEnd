@@ -21,16 +21,16 @@ public class UserProfile {
 			this.role = role;
 		}
 
-		public UserProfile(Long id, String username, String name,String lastname, String role ) {
+		public UserProfile(Long id, String username, String name,String lastname,String role ) {
 	        this.id = id;
 	        this.username = username;
 	        this.name = name;
 	        this.lastname=lastname;
-	        this.role = role;
+	        this.role=role;
 	       
 	    }
 
-	    public String getLastname() {
+		public String getLastname() {
 			return lastname;
 		}
 

@@ -62,12 +62,12 @@ public class User{
 
     public User() {}
     
-	public User(String name,String lastname, String username, String email, String password) {
+	public User(String name,String lastname, String username, String password,String email) {
         this.name = name;
         this.lastname=lastname;
         this.username = username;
-        this.email = email;
         this.password = password;
+        this.email = email;
     }
 
     public String getLastname() {
