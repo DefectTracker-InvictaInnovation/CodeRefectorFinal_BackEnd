@@ -23,4 +23,25 @@ public class DashboardConfigServiceImpl implements DashboardConfigService{
 		return dashboardConfigRepository.findAll();
 	}
 
+	@Override
+	public List<DashboardConfig> getByRoleName(String roleName) {
+		return dashboardConfigRepository.findDashboardConfigByroleName(roleName);
+	}
+
+	@Override
+	public List<DashboardConfig> getByUserName(String userName) {
+		return dashboardConfigRepository.findDashboardConfigByuserName(userName);
+	}
+
+	@Override
+	public DashboardConfig updateDashboardConfig(DashboardConfig dashboardConfig) {
+		Long configId = dashboardConfig.getConfigId();
+		boolean isExist = dashboardConfigRepository.findDashboardConfigByconfigId(configId) != null;
+		if (isExist) {
+			return dashboardConfigRepository.save(dashboardConfig);
+		} else {
+		}
+		return null;
+	}
+
 }

@@ -75,9 +75,4 @@ public class ModuleServiceImpl implements ModuleService {
 		return moduleRepository.findAll();
 	}
 
-	@Override
-	public Module getallModuleInfo(String moduleId) {
-		return moduleRepository.findModuleBymoduleId(moduleId);
-	}
-
 }

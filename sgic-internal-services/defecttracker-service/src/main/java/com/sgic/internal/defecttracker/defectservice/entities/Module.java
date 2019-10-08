@@ -19,7 +19,7 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(schema = "defectservices", name = "module")
 public class Module {
-
+	
 	@Id
 	private String moduleId;
 	private String moduleName;
@@ -65,5 +65,4 @@ public class Module {
 	public void setSubModule(List<SubModule> subModule) {
 		this.subModule = subModule;
 	}
-
 }

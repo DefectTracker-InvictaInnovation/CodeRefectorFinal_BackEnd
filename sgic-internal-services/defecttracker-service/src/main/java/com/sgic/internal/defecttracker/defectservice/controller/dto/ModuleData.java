@@ -4,17 +4,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ModuleData {
-
 	private String moduleId;
 	private String moduleName;
-	private String projectId;
+	private String projectid;
 //	private String subModuleId;
 //	private String subModuleName;
 
-	public ModuleData(String moduleId, String moduleName) {
+	public ModuleData(String moduleId, String moduleName, String projectid) {
 		super();
 		this.moduleId = moduleId;
 		this.moduleName = moduleName;
+		this.projectid = projectid;
 	}
 
 	public ModuleData() {
@@ -54,14 +54,13 @@ public class ModuleData {
 //	public void setSubModuleName(String subModuleName) {
 //		this.subModuleName = subModuleName;
 //	}
-
-	public String getProjectId() {
-		return projectId;
+//
+//	// getters setters for project id
+	public String getProjectid() {
+		return projectid;
 	}
 
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
+	public void setProjectid(String projectid) {
+		this.projectid = projectid;
 	}
-	
-
 }

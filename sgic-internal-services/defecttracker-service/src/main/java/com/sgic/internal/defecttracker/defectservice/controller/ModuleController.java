@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
@@ -32,7 +33,6 @@ import com.sgic.internal.defecttracker.defectservice.services.ProjectService;
 @CrossOrigin
 @RestController
 public class ModuleController {
-
 	private static Logger logger = LogManager.getLogger(ModuleRepository.class);
 
 	@Autowired
@@ -63,22 +63,19 @@ public class ModuleController {
 		logger.info("Module are listed ");
 		return new ResponseEntity<>(moduleDataMapper.getAllModuleForMapper(projectid), HttpStatus.OK);
 	}
-
-	// Get All By Project Id //
+	// Get All By Project Id  //
 	@GetMapping(value = "/GetAllmodule/{projectid}")
 	public List<Module> getModuleByProjectId(@PathVariable String projectid) {
 		logger.info("Module are listed ");
 		return moduleService.getByprojectId(projectid);
 	}
-
 	// Get All Details in module Table
 	@GetMapping("/FindallMain")
 	public List<Module> FindallMain(Module module) {
-		List<Module> submodule = (List<Module>) moduleService.getallDetails();
+		List<Module> submodule  = (List<Module>) moduleService.getallDetails();
 		return submodule;
 	}
 	
-
 //	@GetMapping("/findProject")
 //	public  List<Project> findallmain(Project project) {
 //		 List<Project> moduless = (List<Project>) projectservice.findAll();
@@ -110,7 +107,7 @@ public class ModuleController {
 	public void deleteById(@PathVariable String moduleId) {
 		logger.info("Module are delete by id ");
 		moduleDataMapper.deleteById(moduleId);
-
+		
 	}
 
 	// Put Mapping For Module
@@ -141,10 +138,5 @@ public class ModuleController {
 
 		return moduleRepository.save(module);
 
-	}
-	
-	@GetMapping("/getall/{moduleId}")
-	public ResponseEntity<Module> getByModuleInfo(@PathVariable (name = "moduleId") String moduleId){
-		return new ResponseEntity<Module>(moduleService.getallModuleInfo(moduleId),HttpStatus.OK);	
 	}
 }
