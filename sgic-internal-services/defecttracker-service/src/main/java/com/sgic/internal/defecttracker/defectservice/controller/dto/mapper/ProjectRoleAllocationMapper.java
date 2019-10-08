@@ -40,4 +40,10 @@ public class ProjectRoleAllocationMapper {
 		return projectRoleAllocationConverter.ProjectRoleAllocationToProjectRoleAllocationDtoList(roleList);
 	}
 
+	@SuppressWarnings("static-access")
+	public ProjectRoleAllocationDto getByprojectroleId(Long projectroleId) {
+		ProjectRoleAllocation projectRoleAllocation = projectRoleAllocationService.getByprojectRoleId(projectroleId);
+		return projectRoleAllocationConverter.ProjectRoleAllocationToProjectRoleAllocationDto(projectRoleAllocation);
+
+	}
 }

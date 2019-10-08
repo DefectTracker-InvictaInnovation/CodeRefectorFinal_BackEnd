@@ -33,8 +33,23 @@ public class ProjectRoleAllocationConverter {
 			logger.info("Project Role Allocation Converter--- successfully Converte Project Role Allocation Entity To DTO");
             projectRoleAllocationDto.setProjectroleId(projectRoleAllocation.getProjectroleId());
             projectRoleAllocationDto.setRoleId(projectRoleAllocation.getRoleAllocationList().getRoleId());
+            projectRoleAllocationDto.setRoleName(projectRoleAllocation.getRoleAllocationList().getRoleName());
 			projectRoleAllocationDto.setResourceId(projectRoleAllocation.getResourceAllocation().getResourceId());
-
+            projectRoleAllocationDto.setProjectId(projectRoleAllocation.getResourceAllocation().getProject().getProjectId());
+			projectRoleAllocationDto.setProjectName(projectRoleAllocation.getResourceAllocation().getProject().getProjectName());
+            
+			RestTemplate restTemplate = new RestTemplate();
+			ResponseEntity<Employee> response = restTemplate.exchange(
+					"http://localhost:8084/employeeservice/getempolyeebyid/"+projectRoleAllocation.getResourceAllocation().getEmpId(), HttpMethod.GET, null,
+					new ParameterizedTypeReference<Employee>() {
+					});
+			Employee employee = response.getBody();
+			System.out.println();
+			projectRoleAllocationDto.setEmployeeid(employee.getEmployeeid());
+			projectRoleAllocationDto.setName(employee.getName());
+			projectRoleAllocationDto.setEmail(employee.getEmail());
+			projectRoleAllocationDto.setFirstname(employee.getFirstname());
+			
 			return projectRoleAllocationDto;
 		}
 		return projectRoleAllocationDto;
@@ -75,6 +90,8 @@ public class ProjectRoleAllocationConverter {
 				projectRoleAllocationDto.setRoleId(projectRoleAllocation.getRoleAllocationList().getRoleId());
 				projectRoleAllocationDto.setRoleName(projectRoleAllocation.getRoleAllocationList().getRoleName());
 				projectRoleAllocationDto.setResourceId(projectRoleAllocation.getResourceAllocation().getResourceId());
+				projectRoleAllocationDto.setProjectId(projectRoleAllocation.getResourceAllocation().getProject().getProjectId());
+				projectRoleAllocationDto.setProjectName(projectRoleAllocation.getResourceAllocation().getProject().getProjectName());
 				
 				RestTemplate restTemplate = new RestTemplate();
 				ResponseEntity<Employee> response = restTemplate.exchange(

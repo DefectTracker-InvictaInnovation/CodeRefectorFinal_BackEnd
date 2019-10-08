@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.ProjectRoleAllocationDto;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.mapper.ProjectRoleAllocationMapper;
 import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocation;
+
 
 @CrossOrigin
 @RestController
@@ -136,5 +138,17 @@ public class ProjectRoleAllocationController {
 			System.out.println("Something went Wrong" + ex.getCause());
 		}
 		return null;
+	}
+	
+	@GetMapping("/getprojectrolebyid/{projectroleId}") 
+	public ResponseEntity<ProjectRoleAllocationDto> getProjectRoleAllocationById(@PathVariable(name = "projectroleId") Long projectroleId) {
+		try {
+			return new ResponseEntity<>(projectRoleAllocationMapper.getByprojectroleId(projectroleId), HttpStatus.OK);
+
+		} catch (Exception ex) {
+
+		}
+		return null;
+
 	}
 }
