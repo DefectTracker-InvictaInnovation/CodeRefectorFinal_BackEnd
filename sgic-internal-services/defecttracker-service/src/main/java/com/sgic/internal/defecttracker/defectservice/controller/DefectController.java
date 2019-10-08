@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.sgic.internal.defecttracker.defectservice.controller.dto.DefectData;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.mapper.DefectDataMapper;
+import com.sgic.internal.defecttracker.defectservice.entities.Defect;
 import com.sgic.internal.defecttracker.defectservice.services.DefectService;
 
 @CrossOrigin
@@ -50,13 +51,14 @@ public class DefectController {
 
 	// create defects
 	@PostMapping("/saveDefect")
-	public ResponseEntity<String> saveDefect(@Valid @RequestBody DefectData defectData) {
+	public Defect saveDefect(@Valid @RequestBody DefectData defectData) {
+//		return defectDataMapper.createDefect(defectData);
 		if (defectDataMapper.createDefect(defectData) != null) {
 			logger.info("Defect Controller -> Defects Created Successful");
-			return new ResponseEntity<>("Defect added succesfully", HttpStatus.OK);
+			return defectDataMapper.createDefect(defectData);
 		}
 		logger.info("Defect Controller -> Defects creation FAILED!!!");
-		return new ResponseEntity<>("SAVE FAILED!", HttpStatus.BAD_REQUEST);
+		return null;
 	}
 
 	// update defects
