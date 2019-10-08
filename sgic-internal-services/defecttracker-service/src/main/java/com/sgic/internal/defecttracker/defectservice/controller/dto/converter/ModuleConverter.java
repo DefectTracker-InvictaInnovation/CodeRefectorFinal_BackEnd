@@ -15,7 +15,7 @@ public class ModuleConverter {
 		if (module != null) {
 			moduleData.setModuleId(module.getModuleId());
 			moduleData.setModuleName(module.getModuleName());
-            moduleData.setProjectId(module.getProject().getProjectId());
+            moduleData.setProjectid(module.getProject().getProjectId());
 			return moduleData;
 		}
 		return null;
@@ -28,7 +28,7 @@ public class ModuleConverter {
 		
 		// project constructor
 		Project project = new Project();
-		project.setProjectId(moduleData.getProjectId());
+		project.setProjectId(moduleData.getProjectid());
 		module.setProject(project);
 		
 		return module;
@@ -44,7 +44,7 @@ public class ModuleConverter {
 				moduleData.setModuleId(module.getModuleId());
 				moduleData.setModuleName(module.getModuleName());
 				
-				moduleData.setProjectId(module.getProject().getProjectId());
+				moduleData.setProjectid(module.getProject().getProjectId());
 				
 				lModuleData.add(moduleData);
 			}
