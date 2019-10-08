@@ -77,6 +77,7 @@ public class ModuleController {
 		List<Module> submodule = (List<Module>) moduleService.getallDetails();
 		return submodule;
 	}
+	
 
 //	@GetMapping("/findProject")
 //	public  List<Project> findallmain(Project project) {
@@ -140,5 +141,10 @@ public class ModuleController {
 
 		return moduleRepository.save(module);
 
+	}
+	
+	@GetMapping("/getall/{moduleId}")
+	public ResponseEntity<Module> getByModuleInfo(@PathVariable (name = "moduleId") String moduleId){
+		return new ResponseEntity<Module>(moduleService.getallModuleInfo(moduleId),HttpStatus.OK);	
 	}
 }

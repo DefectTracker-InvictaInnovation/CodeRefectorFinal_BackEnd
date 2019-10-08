@@ -38,4 +38,6 @@ public interface ModuleRepository extends JpaRepository<Module, String> {
 //	List<Object> getModuleBySubModuleId(@Param("moduleId") String moduleId);
 
 //	List<Module> getBySubModuleId(String subModuleId);
+	
+	Module findModuleBymoduleId(String moduleId);
 }

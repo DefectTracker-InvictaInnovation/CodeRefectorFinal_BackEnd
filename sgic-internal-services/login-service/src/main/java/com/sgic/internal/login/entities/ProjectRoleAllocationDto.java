@@ -1,4 +1,4 @@
-package com.sgic.internal.defecttracker.defectservice.controller.dto;
+package com.sgic.internal.login.entities;
 
 public class ProjectRoleAllocationDto {
 
@@ -9,14 +9,8 @@ public class ProjectRoleAllocationDto {
 	private String firstname;
 	private String email;
 	private String roleName;
-	private String employeeid;
 
-	public String getEmployeeid() {
-		return employeeid;
-	}
-	public void setEmployeeid(String employeeid) {
-		this.employeeid = employeeid;
-	}
+	
 	public String getName() {
 		return name;
 	}
