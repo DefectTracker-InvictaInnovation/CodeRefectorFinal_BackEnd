@@ -45,5 +45,4 @@ public class SubModule {
 	public void setModule(Module module) {
 		this.module = module;
 	}
-
 }

@@ -1,40 +1,64 @@
 package com.sgic.internal.defecttracker.defectservice.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "module_allocation")
 public class ModuleAllocation {
+	
 	@Id
-	private Long moduleAllocationId;
-	private String moduleAllocationName;
-	private String name;
-	private String role;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long moduleallocationId;
+	
+	@ManyToOne
+	@JoinColumn(name = "projectroleId",nullable = false)
+	private ProjectRoleAllocation projectRoleAllocation;
+	
+	@ManyToOne
+	@JoinColumn(name = "moduleId",nullable = false)
+	private Module module;
+	
+	@ManyToOne
+	@JoinColumn(name = "subModuleId", nullable = false)
+	private SubModule subModule;
 
-	
-	
-	public Long getModuleAllocationId() {
-		return moduleAllocationId;
-	}
-	public void setModuleAllocationId(Long moduleAllocationId) {
-		this.moduleAllocationId = moduleAllocationId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	public String getModuleAllocationName() {
-		return moduleAllocationName;
-	}
-	public void setModuleAllocationName(String moduleAllocationName) {
-		this.moduleAllocationName = moduleAllocationName;
+	public Long getModuleallocationId() {
+		return moduleallocationId;
 	}
 
+	public void setModuleallocationId(Long moduleallocationId) {
+		this.moduleallocationId = moduleallocationId;
+	}
+
+	public ProjectRoleAllocation getProjectRoleAllocation() {
+		return projectRoleAllocation;
+	}
+
+	public void setProjectRoleAllocation(ProjectRoleAllocation projectRoleAllocation) {
+		this.projectRoleAllocation = projectRoleAllocation;
+	}
+
+	public Module getModule() {
+		return module;
+	}
+
+	public void setModule(Module module) {
+		this.module = module;
+	}
+
+	public SubModule getSubModule() {
+		return subModule;
+	}
+
+	public void setSubModule(SubModule subModule) {
+		this.subModule = subModule;
+	}
+	
 	
 }

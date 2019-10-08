@@ -22,14 +22,16 @@ public class PrivilegeDetail implements Serializable{
 	@JoinColumn(name="privilegeId", nullable=false)
 	private Privilege privillage;
 	
-	private Long roleId;
+	@ManyToOne
+	@JoinColumn(name ="roleId",nullable = false)
+	private Role role;
 
-	public Long getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public Long getId() {
@@ -47,8 +49,6 @@ public class PrivilegeDetail implements Serializable{
 	public void setPrivillage(Privilege privillage) {
 		this.privillage = privillage;
 	}
-
-	
 	
 	
 }
