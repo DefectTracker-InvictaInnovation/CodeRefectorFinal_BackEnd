@@ -36,9 +36,9 @@ public class User{
     @Size(min=3, max = 50)
     private String name;
     
-    @NotBlank
-    @Size(min=3, max = 50)
-    private String lastname;
+//    @NotBlank
+//    @Size(min=3, max = 50)
+//    private String lastname;
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -62,21 +62,21 @@ public class User{
 
     public User() {}
     
-	public User(String name,String lastname, String username, String password,String email) {
+	public User(String name, String username, String password,String email) {
         this.name = name;
-        this.lastname=lastname;
+//        this.lastname=lastname;
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
-    public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+//    public String getLastname() {
+//		return lastname;
+//	}
+//
+//	public void setLastname(String lastname) {
+//		this.lastname = lastname;
+//	}
 
 	public Long getId() {
         return id;

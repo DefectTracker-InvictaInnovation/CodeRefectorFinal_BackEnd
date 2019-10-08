@@ -7,6 +7,7 @@ import com.sgic.internal.defecttracker.defectservice.controller.dto.ModuleData;
 import com.sgic.internal.defecttracker.defectservice.entities.Module;
 import com.sgic.internal.defecttracker.defectservice.entities.Project;
 
+
 public class ModuleConverter {
 	public static ModuleData moduleToModuleData(Module module) {
 		ModuleData moduleData = new ModuleData();
@@ -29,7 +30,6 @@ public class ModuleConverter {
 		Project project = new Project();
 		project.setProjectId(moduleData.getProjectid());
 		module.setProject(project);
-		
 		
 		return module;
 	}
@@ -54,5 +54,4 @@ public class ModuleConverter {
 		return null;
 
 	}
-
 }

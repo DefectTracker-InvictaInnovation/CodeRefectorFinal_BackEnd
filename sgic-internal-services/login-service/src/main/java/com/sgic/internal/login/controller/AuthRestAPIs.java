@@ -88,7 +88,7 @@ public class AuthRestAPIs {
 		}
 
 		// Creating user's account
-		User user = new User(signUpRequest.getName(),signUpRequest.getLastname(), signUpRequest.getUsername(), signUpRequest.getEmail(),
+		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
 				encoder.encode(signUpRequest.getPassword()));
 
 	String strRoles = signUpRequest.getRole();
@@ -157,7 +157,7 @@ public class AuthRestAPIs {
 	    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
 	    User user = userRepository.findByUsername(username);
 	                
-	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getLastname(),user.getEmail());
+	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getEmail());
 
 	        return userProfile;
 	    }

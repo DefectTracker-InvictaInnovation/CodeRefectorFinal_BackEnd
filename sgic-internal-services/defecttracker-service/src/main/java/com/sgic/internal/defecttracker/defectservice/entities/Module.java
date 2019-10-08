@@ -19,13 +19,9 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(schema = "defectservices", name = "module")
 public class Module {
-
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	
 	private String moduleId;
-	
 	private String moduleName;
 
 //getters and setters for module
@@ -46,8 +42,7 @@ public class Module {
 	}
 
 	// create relationship with project //
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "projectid", nullable = false)
 	private Project project;
 
@@ -70,5 +65,4 @@ public class Module {
 	public void setSubModule(List<SubModule> subModule) {
 		this.subModule = subModule;
 	}
-
 }
