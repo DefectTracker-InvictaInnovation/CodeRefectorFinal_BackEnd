@@ -111,4 +111,9 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 
 	}
 
+	@Override
+	public List<ResourceAllocation> getByEmployee(Long empId) {
+		return resourceAllocationRepository.findResourceAllocationByempId(empId);
+	}
+
 }

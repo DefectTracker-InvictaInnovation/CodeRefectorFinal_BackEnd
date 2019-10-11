@@ -72,5 +72,12 @@ public class ResourceAllocationDtoMapper {
 		logger.info("Resource Allaction Mapper --- Successfully Resource Deleted --- ");
 		resourceAllocationService.deleteResourceById(resourceId);
 	}
+	
+	@SuppressWarnings("static-access")
+	public List<ResourceAllocationDto> getResourceAllocationByEmployee(Long empId) {
+		List<ResourceAllocation> resourceAllocation = resourceAllocationService.getByEmployee(empId);
+		return resourceAllocationConverter.ResourceAllocationToResourceAllocationDtoList(resourceAllocation);
+
+	}
 
 }
