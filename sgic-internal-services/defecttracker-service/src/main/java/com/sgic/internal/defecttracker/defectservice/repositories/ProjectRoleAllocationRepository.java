@@ -6,4 +6,5 @@ import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocat
 
 public interface ProjectRoleAllocationRepository extends JpaRepository<ProjectRoleAllocation, Long> {
 
+	ProjectRoleAllocation findProjectRoleAllocationByprojectroleId(Long projectroleId);
 }

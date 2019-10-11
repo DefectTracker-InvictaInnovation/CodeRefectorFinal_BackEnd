@@ -25,4 +25,9 @@ public class ProjectRoleAllocationServiceImpl implements ProjectRoleAllocationSe
 	public List<ProjectRoleAllocation> getAllRoleAllocation() {
 		return projectRoleAllocationRepository.findAll();
 	}
+
+	@Override
+	public ProjectRoleAllocation getByprojectRoleId(Long projectroleId) {
+		return projectRoleAllocationRepository.findProjectRoleAllocationByprojectroleId(projectroleId);
+	}
 }

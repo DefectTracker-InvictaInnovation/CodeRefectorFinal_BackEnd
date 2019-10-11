@@ -10,6 +10,9 @@ public class ProjectRoleAllocationDto {
 	private String email;
 	private String roleName;
 	private String employeeid;
+	private String projectId;
+	private String projectName;
+	
 
 	public String getEmployeeid() {
 		return employeeid;
@@ -59,5 +62,18 @@ public class ProjectRoleAllocationDto {
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
+	public String getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+	public String getProjectName() {
+		return projectName;
+	}
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
+	
 }
