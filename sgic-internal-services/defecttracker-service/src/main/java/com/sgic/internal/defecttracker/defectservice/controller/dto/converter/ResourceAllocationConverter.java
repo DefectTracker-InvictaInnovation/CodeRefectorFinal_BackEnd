@@ -6,10 +6,17 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import com.sgic.internal.defecttracker.defectservice.controller.dto.ResourceAllocationDto;
+import com.sgic.internal.defecttracker.defectservice.entities.Employee;
 import com.sgic.internal.defecttracker.defectservice.entities.Project;
 import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocation;
+import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocationList;
 
 @Service
 public class ResourceAllocationConverter {
@@ -21,17 +28,48 @@ public class ResourceAllocationConverter {
 //	<----Convert Variable Entity To DTO --- For Send DTO In To DataBase ---->
 	public static ResourceAllocationDto ResourceAllocationToResourceAllocationDto(
 			ResourceAllocation resourceAllocation) {
+		List<ResourceAllocationDto> resourceallocationlist = new ArrayList<ResourceAllocationDto>();
 		ResourceAllocationDto resourceAllocationDto = new ResourceAllocationDto();
 		if (resourceAllocation != null) {
 			logger.info("Resource Allocation Converter--- successfully Converte Resource Allocation Entity To DTO");
 			resourceAllocationDto.setResourceId(resourceAllocation.getResourceId());
 			resourceAllocationDto.setProjectId(resourceAllocation.getProject().getProjectId());
 			resourceAllocationDto.setProjectName(resourceAllocation.getProject().getProjectName());
+			resourceAllocationDto.setEmpId(resourceAllocation.getEmpId());
+			
+//			Employee employee = new Employee();
+//			employee.setEmployeeid(resourceAllocationDto.getEmployeeid());
+//			employee.setName(resourceAllocationDto.getName());
+//			employee.setFirstname(resourceAllocationDto.getFirstname());
+//			employee.setEmail(resourceAllocationDto.getEmail());
+//			employee.setAvailability(resourceAllocationDto.getAvailability());
+//			employee.setBench(resourceAllocationDto.isBench());
+//			employee.setDesignationid(resourceAllocationDto.getDesignationid());
+//			employee.setDesignationname(resourceAllocationDto.getDesignationname());
+			
+			RestTemplate restTemplate = new RestTemplate();
+			
+			ResponseEntity<Employee> response = restTemplate.exchange(
+                    //<--Get EMPLOYEE SERVICE EMPLOYEE LIST BY EMPLOYEE ID-->
+					"http://localhost:8084/employeeservice/getempolyeebyid/" + resourceAllocation.getEmpId(),
+					HttpMethod.GET, null, new ParameterizedTypeReference<Employee>() {
+					});
+			Employee employee = response.getBody();
+			resourceAllocationDto.setEmployeeid(employee.getEmployeeid());
+			resourceAllocationDto.setName(employee.getName());
+			resourceAllocationDto.setFirstname(employee.getFirstname());
+			resourceAllocationDto.setEmail(employee.getEmail());
+			resourceAllocationDto.setAvailability(employee.getAvailability());
+			resourceAllocationDto.setBench(employee.isBench());
+			resourceAllocationDto.setDesignationid(employee.getDesignationid());
+			resourceAllocationDto.setDesignationname(employee.getDesignationname());
+			resourceallocationlist.add(resourceAllocationDto);
 
 			return resourceAllocationDto;
 		}
 		return resourceAllocationDto;
 	}
+	
 
 //	<----Convert Variable DTO To Entity  --- For Get  Data Form  DataBase  ---->
 	public static ResourceAllocation ResourceAllocationDtoToResourceAllocation(
@@ -66,6 +104,24 @@ public class ResourceAllocationConverter {
 				resourceAllocationDto.setEmpId(resourceAllocation.getEmpId());
 				resourceAllocationDto.setProjectId(resourceAllocation.getProject().getProjectId());
 				resourceAllocationDto.setProjectName(resourceAllocation.getProject().getProjectName());
+				
+				
+				RestTemplate restTemplate = new RestTemplate();
+				
+				ResponseEntity<Employee> response = restTemplate.exchange(
+	                    //<--Get EMPLOYEE SERVICE EMPLOYEE LIST BY EMPLOYEE ID-->
+						"http://localhost:8084/employeeservice/getempolyeebyid/" + resourceAllocation.getEmpId(),
+						HttpMethod.GET, null, new ParameterizedTypeReference<Employee>() {
+						});
+				Employee employee = response.getBody();
+				resourceAllocationDto.setEmployeeid(employee.getEmployeeid());
+				resourceAllocationDto.setName(employee.getName());
+				resourceAllocationDto.setFirstname(employee.getFirstname());
+				resourceAllocationDto.setEmail(employee.getEmail());
+				resourceAllocationDto.setAvailability(employee.getAvailability());
+				resourceAllocationDto.setBench(employee.isBench());
+				resourceAllocationDto.setDesignationid(employee.getDesignationid());
+				resourceAllocationDto.setDesignationname(employee.getDesignationname());
 				
 				ListresourceAllocationDto.add(resourceAllocationDto);
 

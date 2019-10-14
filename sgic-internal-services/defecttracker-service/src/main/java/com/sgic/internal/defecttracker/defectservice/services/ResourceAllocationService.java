@@ -23,5 +23,7 @@ public interface ResourceAllocationService {
 	
 //  <--- Resource Allocation Delete  Method--->
 	public ResourceAllocation deleteResourceById(Long resourceId);
+	
+	public List<ResourceAllocation> getByEmployee(Long empId);
 
 }

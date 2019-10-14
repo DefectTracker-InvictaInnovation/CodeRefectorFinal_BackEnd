@@ -28,6 +28,7 @@ import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocation
 import com.sgic.internal.defecttracker.defectservice.repositories.ResourceAllocationRepository;
 import com.sgic.internal.defecttracker.defectservice.services.ResourceAllocationService;
 
+
 @SuppressWarnings("unused")
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*") // <-- Integration With FrondEnd (React)-->
@@ -183,6 +184,16 @@ public class ResourceAllocationController {
 		}
 		return null;
 		
+	}
+	
+	@GetMapping("/getemployee/{empId}") 
+	public List<ResourceAllocationDto> getByEmployee(@PathVariable(name = "empId") Long empId) {
+		try {
+			return resourceAllocationDtoMapper.getResourceAllocationByEmployee(empId);
+		} catch (Exception ex) {
+		}
+		return null;
+
 	}
 
 }

@@ -28,6 +28,7 @@ public class EmployeeConverter {
 			employeeDto.setBench(employee.isBench());
 			employeeDto.setDesignationid(employee.getDesignation().getDesignationid());
 			employeeDto.setDesignationname(employee.getDesignation().getDesignationname());
+			employeeDto.setProfilePicPath(employee.getProfilePicPath());
 			return employeeDto;
 		}
 		return null;
@@ -45,6 +46,7 @@ public class EmployeeConverter {
 			employee.setFirstname(employeeDTO.getFirstname());
 			employee.setAvailability(employeeDTO.getAvailability());
 			employee.setBench(employeeDTO.isBench());
+			employee.setProfilePicPath(employeeDTO.getProfilePicPath());
 
 //			Designation object converting 
 			Designation desi = new Designation();
@@ -74,6 +76,7 @@ public class EmployeeConverter {
 				employeeDto.setBench(employee.isBench());
 				employeeDto.setDesignationid(employee.getDesignation().getDesignationid());
 				employeeDto.setDesignationname(employee.getDesignation().getDesignationname());
+				employeeDto.setProfilePicPath(employee.getProfilePicPath());
 				listemployeeDto.add(employeeDto);
 			}
 
