@@ -96,31 +96,31 @@ public class AuthRestAPIs {
 
 		
 			switch (strRoles) {
-			case "admin":
+			case "Admin":
 				Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: admin Role not find."));
 				roles.add(adminRole);
 
 				break;
-			case "pm":
+			case "PM":
 				Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: pm Role not find."));
 				roles.add(pmRole);
 
 				break;
-			case "qa":
+			case "QA":
 				Role qaRole = roleRepository.findByName(RoleName.ROLE_QA)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: qa Role not find."));
 				roles.add(qaRole);
 
 				break;
-			case "developer":
+			case "Developer":
 				Role devrole = roleRepository.findByName(RoleName.ROLE_DEVELOPER)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: developer Role not find."));
 				roles.add(devrole);
 
 				break;
-			case "hr":
+			case "HR":
 				Role hrrole = roleRepository.findByName(RoleName.ROLE_HR)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: hr Role not find."));
 				roles.add(hrrole);

@@ -67,7 +67,12 @@ public class ExcelUtils {
 						System.out.print(cell + "\t");
 						desi.setDesignationid((long) cell.getNumericCellValue());
 						cust.setDesignation(desi);
+					} else if (cellIndex == 5) { // ProfilePic
+						System.out.print(cell + "\t");
+						cust.setProfilePicPath(cell.getStringCellValue());
 					}
+					
+					
 
 					cellIndex++;
 					lstCustomers.add(cust);

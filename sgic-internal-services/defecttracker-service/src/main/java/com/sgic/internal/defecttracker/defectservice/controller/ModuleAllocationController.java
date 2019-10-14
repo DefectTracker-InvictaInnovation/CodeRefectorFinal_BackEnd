@@ -1,6 +1,5 @@
 package com.sgic.internal.defecttracker.defectservice.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,28 +24,21 @@ public class ModuleAllocationController<ResultObject> {
     private ModuleAllocationService moduleAllocationService;
 	
 //	<----This APIs Is -- Save Single Object--->
-//	@PostMapping(value = "/savemoduleallocation")
-//	public ModuleAllocation createModuleAllocation(@RequestBody ModuleAllocationDto moduleAllocationDto) {
-//		try {
-//			moduleAllocationMapper.saveModuleAllocation(moduleAllocationDto);
-//		} catch (Exception ex) {
-//		}
-//		return null;
-//
-//	}
-	
-	@GetMapping(value = "/getAllModuleallocation")
-	public ResponseEntity<List<ModuleAllocationDto>> getAllModuleAllocation() {
-		return new ResponseEntity<>(moduleAllocationMapper.getAllModuleAllocation(), HttpStatus.OK);
-	}
-	
 	@PostMapping(value = "/savemoduleallocation")
-	public ModuleAllocation createModuleAllocation(@RequestBody ModuleAllocation moduleAllocation) {
-		return moduleAllocationService.createModuleAllocation(moduleAllocation);
+	public ModuleAllocation createModuleAllocation(@RequestBody ModuleAllocationDto moduleAllocationDto) {
+		try {
+			moduleAllocationMapper.saveModuleAllocation(moduleAllocationDto);
+		} catch (Exception ex) {
+			
+		}
+		return null;
+
 	}
+	
 	
 	 @GetMapping("/list")
-	    public Iterable<ModuleAllocation> list() {
-	        return moduleAllocationService.list();
-	    }
+	 public ResponseEntity<Iterable<ModuleAllocationDto>> getAllModuleAllocation() {
+			return new ResponseEntity<>(moduleAllocationMapper.getAllModuleAllocation(), HttpStatus.OK);
+		}
+
 }
