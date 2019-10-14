@@ -30,7 +30,7 @@ import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocat
 @RestController
 public class ProjectRoleAllocationController {
 	
-	
+	@Autowired
 	private RestTemplate restTemplate;
 	
 	@Autowired
