@@ -1,6 +1,9 @@
 package com.sgic.internal.login.payload;
 
 import java.time.Instant;
+import java.util.Set;
+
+import com.sgic.internal.login.entities.Role;
 
 public class UserProfile {
 	
@@ -10,23 +13,25 @@ public class UserProfile {
 	    private String name;
 //	    private String lastname;
 	    private Instant joinedAt;
-	    private String role ;
+	    private Set<Role> role ;
 	    
 
-	    public String getRole() {
+	
+
+		public Set<Role> getRole() {
 			return role;
 		}
 
-		public void setRole(String role) {
+		public void setRole(Set<Role> role) {
 			this.role = role;
 		}
 
-		public UserProfile(Long id, String username, String name,String role ) {
+		public UserProfile(Long id, String username, String name,Set<Role> set ) {
 	        this.id = id;
 	        this.username = username;
 	        this.name = name;
 //	        this.lastname=lastname;
-	        this.role=role;
+	        this.role=set;
 	       
 	    }
 

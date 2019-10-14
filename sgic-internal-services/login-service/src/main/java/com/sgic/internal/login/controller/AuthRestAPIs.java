@@ -139,7 +139,6 @@ public class AuthRestAPIs {
 	}
 	
 	@GetMapping("/user/me")
-    @PreAuthorize("hasRole('ROLE_QA')")
     public UserSummary getCurrentUser(@CurrentUser UserPrinciple currentUser) {
         UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
         return userSummary;
@@ -157,7 +156,7 @@ public class AuthRestAPIs {
 	    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
 	    User user = userRepository.findByUsername(username);
 	                
-	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getEmail());
+	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getRoles());
 
 	        return userProfile;
 	    }
