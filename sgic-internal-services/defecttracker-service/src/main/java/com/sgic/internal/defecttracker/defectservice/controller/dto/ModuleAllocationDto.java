@@ -1,5 +1,7 @@
 package com.sgic.internal.defecttracker.defectservice.controller.dto;
 
+import java.util.ArrayList;
+
 public class ModuleAllocationDto {
 
 	private Long moduleallocationId;
@@ -8,10 +10,7 @@ public class ModuleAllocationDto {
 	private String name;
 	private String firstname;
 	private String email;
-	private String moduleId;
-	private String moduleName;
-	private String subModuleId;
-	private String subModuleName;
+	private ArrayList<String> moduleList;
 	
 	public Long getModuleallocationId() {
 		return moduleallocationId;
@@ -49,29 +48,11 @@ public class ModuleAllocationDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getModuleId() {
-		return moduleId;
+	public ArrayList<String> getModuleList() {
+		return moduleList;
 	}
-	public void setModuleId(String moduleId) {
-		this.moduleId = moduleId;
-	}
-	public String getSubModuleId() {
-		return subModuleId;
-	}
-	public void setSubModuleId(String subModuleId) {
-		this.subModuleId = subModuleId;
-	}
-	public String getModuleName() {
-		return moduleName;
-	}
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
-	public String getSubModuleName() {
-		return subModuleName;
-	}
-	public void setSubModuleName(String subModuleName) {
-		this.subModuleName = subModuleName;
+	public void setModuleList(ArrayList<String> moduleList) {
+		this.moduleList = moduleList;
 	}
 	
 	

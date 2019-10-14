@@ -12,6 +12,7 @@ public class EmployeeDTO {
 	private String designationname;
 	private int availability;
 	private boolean bench;
+	private String profilePicPath;
 
 	public EmployeeDTO() {
 		super();
@@ -93,5 +94,14 @@ public class EmployeeDTO {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
+	public String getProfilePicPath() {
+		return profilePicPath;
+	}
+
+	public void setProfilePicPath(String profilePicPath) {
+		this.profilePicPath = profilePicPath;
+	}
+	
 
 }

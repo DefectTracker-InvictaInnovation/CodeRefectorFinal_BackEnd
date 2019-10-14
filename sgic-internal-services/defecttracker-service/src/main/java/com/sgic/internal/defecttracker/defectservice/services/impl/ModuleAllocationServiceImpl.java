@@ -24,4 +24,9 @@ public class ModuleAllocationServiceImpl implements ModuleAllocationService{
 		return moduleAllocationRepository.findAll();
 	}
 
+	@Override
+	public Iterable<ModuleAllocation> list() {
+		return moduleAllocationRepository.findAll();
+	}
+
 }

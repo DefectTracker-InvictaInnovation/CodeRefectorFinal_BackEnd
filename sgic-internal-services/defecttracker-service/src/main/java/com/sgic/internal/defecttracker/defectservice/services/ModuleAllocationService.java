@@ -9,4 +9,6 @@ public interface ModuleAllocationService {
 	public ModuleAllocation createModuleAllocation(ModuleAllocation moduleAllocation);
 	
 	List<ModuleAllocation> getAllModuleAllocation();
+	
+	public Iterable<ModuleAllocation> list();
 }

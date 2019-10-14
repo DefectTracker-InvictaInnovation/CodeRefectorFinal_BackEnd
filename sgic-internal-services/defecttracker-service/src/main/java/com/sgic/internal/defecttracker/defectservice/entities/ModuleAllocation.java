@@ -1,5 +1,6 @@
 package com.sgic.internal.defecttracker.defectservice.entities;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,11 +22,8 @@ public class ModuleAllocation {
 	private ProjectRoleAllocation projectRoleAllocation;
 	
 	@ManyToOne
-	@JoinColumn(name = "moduleId",nullable = false)
-	private Module module;
-	
-	@ManyToOne
-	@JoinColumn(name = "subModuleId", nullable = false)
+	@JoinColumn(name = "subModuleId")
+	@Embedded
 	private SubModule subModule;
 
 	public Long getModuleallocationId() {
@@ -44,14 +42,6 @@ public class ModuleAllocation {
 		this.projectRoleAllocation = projectRoleAllocation;
 	}
 
-	public Module getModule() {
-		return module;
-	}
-
-	public void setModule(Module module) {
-		this.module = module;
-	}
-
 	public SubModule getSubModule() {
 		return subModule;
 	}
@@ -59,6 +49,5 @@ public class ModuleAllocation {
 	public void setSubModule(SubModule subModule) {
 		this.subModule = subModule;
 	}
-	
 	
 }

@@ -1,10 +1,15 @@
 package com.sgic.internal.employee.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,21 +23,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.ui.Model;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgic.internal.employee.dto.EmployeeDTO;
 import com.sgic.internal.employee.dto.mapper.EmployeeDTOMapper;
+import com.sgic.internal.employee.entities.AppResponse;
 import com.sgic.internal.employee.entities.Designation;
 import com.sgic.internal.employee.entities.Employee;
 import com.sgic.internal.employee.repositories.EmployeeRepository;
 import com.sgic.internal.employee.services.EmployeeService;
+import com.sgic.internal.employee.services.FileStorageService;
 import com.sgic.internal.employee.services.impl.NotificationService;
+import com.sgic.internal.employee.util.AppConstants;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -41,15 +54,18 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeDTOMapper employeeDTOMapper;
 
-	@SuppressWarnings("unused")
 	@Autowired
 	private EmployeeService employeeservice;
+	ObjectMapper objectMapper = new ObjectMapper();
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
 	@Autowired
 	private NotificationService notificationService;
+	
+	@Autowired
+	FileStorageService fileStorageService;
 	
 	private static Logger logger = LogManager.getLogger(EmployeeDTOMapper.class);
 
@@ -287,5 +303,57 @@ public class EmployeeController {
 
 	}
 
+	@RequestMapping(value = "/saveemployee", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public AppResponse createemployee(@RequestParam(value = AppConstants.EMPLOYEE_JSON_PARAM, required = true) String extra,
+			@RequestParam(required=false , value = AppConstants.EMPLOYEE_FILE_PARAM)  MultipartFile file)
+			throws JsonParseException, JsonMappingException, IOException {
+		
+		if(!file.isEmpty()) {
+			System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+			EmployeeDTO employeeDTO = objectMapper.readValue(extra, EmployeeDTO.class);
+			String fileName = fileStorageService.storeFile(file);
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
+					.path(fileName).toUriString();
+			employeeDTO.setProfilePicPath(fileDownloadUri);
+			employeeDTOMapper.saveEmployee(employeeDTO);
 
+		}else {
+			EmployeeDTO employeeDTO = objectMapper.readValue(extra, EmployeeDTO.class);
+			System.out.println("llllllllllllllllllllllllllllllllllllllllllllll");
+//			String fileName = fileStorageService.storeFile(file);
+//			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
+//					.path(fileName).toUriString();
+			employeeDTO.setProfilePicPath("http://localhost:8084/employeeservice/downloadFile/1570768396385_Full-HD-1080p-Wallpaper-HD-Nature.jpg");
+			employeeDTOMapper.saveEmployee(employeeDTO);
+		}
+		
+//		Employee employee = objectMapper.readValue(empJson, Employee.class);
+//		employee.setProfilePicPath(fileDownloadUri);
+//		employeeservice.saveEmployee(employee);
+		
+		
+		
+	
+		return new AppResponse(AppConstants.SUCCESS_CODE, AppConstants.SUCCESS_MSG);
+
+
+}
+	
+	@RequestMapping(value = AppConstants.DOWNLOAD_URI, method = RequestMethod.GET)
+	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+		Resource resource = fileStorageService.loadFileAsResource(fileName);
+		String contentType = null;
+		try {
+			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		if (contentType == null) {
+			contentType = AppConstants.DEFAULT_CONTENT_TYPE;
+		}
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						String.format(AppConstants.FILE_DOWNLOAD_HTTP_HEADER, resource.getFilename()))
+				.body(resource);
+	}
 }

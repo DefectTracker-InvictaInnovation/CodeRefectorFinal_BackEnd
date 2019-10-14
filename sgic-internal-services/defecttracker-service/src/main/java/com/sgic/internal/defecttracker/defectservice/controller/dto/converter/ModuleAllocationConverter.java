@@ -25,10 +25,8 @@ public class ModuleAllocationConverter {
 		if (moduleAllocation != null) {
 			moduleAllocationDto.setModuleallocationId(moduleAllocation.getModuleallocationId());
 			moduleAllocationDto.setProjectroleId(moduleAllocation.getProjectRoleAllocation().getProjectroleId());
-			moduleAllocationDto.setModuleId(moduleAllocation.getModule().getModuleId());
-			moduleAllocationDto.setModuleName(moduleAllocation.getModule().getModuleName());
-			moduleAllocationDto.setSubModuleId(moduleAllocation.getSubModule().getSubModuleId());
-			moduleAllocationDto.setSubModuleName(moduleAllocation.getSubModule().getSubModuleName());
+//		   moduleAllocationDto.setModuleList(moduleAllocation.getModuleList());
+			
 			return moduleAllocationDto;
 		}
 		return moduleAllocationDto;
@@ -46,16 +44,8 @@ public class ModuleAllocationConverter {
 			projectRoleAllocation.setProjectroleId(moduleAllocationDto.getProjectroleId());
 			moduleAllocation.setProjectRoleAllocation(projectRoleAllocation);
 			
+//			moduleAllocation.setModuleList(moduleAllocationDto.getModuleList());
 			
-			Module module = new Module();
-			module.setModuleId(moduleAllocationDto.getModuleId());
-			module.setModuleName(moduleAllocationDto.getModuleName());
-			moduleAllocation.setModule(module);
-			
-			SubModule subModule = new SubModule();
-			subModule.setSubModuleId(moduleAllocationDto.getSubModuleId());
-			subModule.setSubModuleName(moduleAllocationDto.getSubModuleName());
-			moduleAllocation.setSubModule(subModule);
 			
 			return moduleAllocation;
 		}
@@ -73,10 +63,7 @@ public class ModuleAllocationConverter {
 				ModuleAllocationDto moduleAllocationDto = new ModuleAllocationDto();
 				moduleAllocationDto.setModuleallocationId(moduleAllocation.getModuleallocationId());
 				moduleAllocationDto.setProjectroleId(moduleAllocation.getProjectRoleAllocation().getProjectroleId());
-				moduleAllocationDto.setModuleId(moduleAllocation.getModule().getModuleId());
-				moduleAllocationDto.setModuleName(moduleAllocation.getModule().getModuleName());
-				moduleAllocationDto.setSubModuleId(moduleAllocation.getSubModule().getSubModuleId());
-				moduleAllocationDto.setSubModuleName(moduleAllocation.getSubModule().getSubModuleName());
+//				moduleAllocationDto.setModuleList(moduleAllocation.getModuleList());
 				
 				RestTemplate restTemplate = new RestTemplate();
 				ResponseEntity<Employee> response = restTemplate.exchange(

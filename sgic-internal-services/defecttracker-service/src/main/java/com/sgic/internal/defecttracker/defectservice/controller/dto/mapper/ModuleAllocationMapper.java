@@ -9,7 +9,7 @@ import com.sgic.internal.defecttracker.defectservice.entities.ModuleAllocation;
 import com.sgic.internal.defecttracker.defectservice.services.ModuleAllocationService;
 
 @Service
-public class ModuleAllocationMapper {
+public class ModuleAllocationMapper<ResultObject> {
 
 	@Autowired
 	private ModuleAllocationConverter moduleAllocationConverter;
@@ -18,10 +18,10 @@ public class ModuleAllocationMapper {
 	private ModuleAllocationService moduleAllocationService;
 
 
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "unchecked" })
 //	<--- Save Method's Mapped ---Single Object -->
-	public ModuleAllocation saveModuleAllocation(ModuleAllocationDto moduleAllocationDto) {
-		return moduleAllocationService.createModuleAllocation(moduleAllocationConverter.ModuleAllocationDtoToModuleAllocation(moduleAllocationDto));
+	public ResultObject saveModuleAllocation(ModuleAllocationDto moduleAllocationDto) {
+		return (ResultObject) moduleAllocationService.createModuleAllocation(moduleAllocationConverter.ModuleAllocationDtoToModuleAllocation(moduleAllocationDto));
 	}			
 	
 	@SuppressWarnings("static-access")

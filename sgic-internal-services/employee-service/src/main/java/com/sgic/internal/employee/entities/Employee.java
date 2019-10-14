@@ -57,7 +57,18 @@ public class Employee implements Serializable {
 	@Nullable
 	private boolean bench = false;
 
-//	Designation with Designation Entity Relationship
+	@Nullable
+	private String profilePicPath;
+
+	public String getProfilePicPath() {
+		return profilePicPath;
+	}
+
+	public void setProfilePicPath(String profilePicPath) {
+		this.profilePicPath = profilePicPath;
+	}
+
+	// Designation with Designation Entity Relationship
 	@ManyToOne
 	@JoinColumn(name = "designationid", nullable = false)
 	private Designation designation;
