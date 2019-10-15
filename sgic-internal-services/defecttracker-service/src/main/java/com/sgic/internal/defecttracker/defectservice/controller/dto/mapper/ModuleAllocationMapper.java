@@ -28,4 +28,10 @@ public class ModuleAllocationMapper<ResultObject> {
 		Iterable<ModuleAllocation> moduleallocationList = moduleAllocationService.list();
 		return moduleAllocationConverter.ModuleAllocationToModuleAllocationDtoList(moduleallocationList);
 	}
+	
+//	<--- Module Deallocation  Method's Mapped  -->
+	public void deleteResourceByresourceId(Long moduleAllocationMapper) {
+//		logger.info("Resource Allaction Mapper --- Successfully Resource Deleted --- ");
+		moduleAllocationService.deleteResourceById(moduleAllocationMapper);
+	}
 }
