@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.sgic.internal.employee.entities.Employee;
@@ -91,6 +92,53 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return null;
 	}
 
+	@Override
+	@Modifying
+	// UpdateBenchTrue
+	public void updateBenchTrue(Long EmpId, Employee employee) {
+		try {
+			Long empId = employee.getEmpId();
+			boolean bench = employee.isBench();
+			System.out.println("bench" + bench);
+			System.out.println("Emp ID" + empId);
+			boolean isExist = employeeRepository.findEmployeeByEmpId(empId) != null;
+			if (isExist) {
+				logger.info("Employee updates Successfully");
+				employeeRepository.updateBenchTrue(empId);
+				// return employeeRepository.save(employee);
+			} else {
+				logger.info("Employee Id is Not Found");
+			}
+
+		} catch (Exception ex) {
+			logger.error("Employee Service Imp:--> Error" + ex.getMessage());
+		}
+
+	}
+
+	@Override
+	@Modifying
+	// UpdateBenchFalse
+	public void updateBenchFalse(Long EmpId, Employee employee) {
+		try {
+			Long empId = employee.getEmpId();
+			boolean bench = employee.isBench();
+			System.out.println("bench" + bench);
+			System.out.println("Emp ID" + empId);
+			boolean isExist = employeeRepository.findEmployeeByEmpId(empId) != null;
+			if (isExist) {
+				logger.info("Employee updates Successfully");
+				employeeRepository.updateBenchFalse(empId);
+				// return employeeRepository.save(employee);
+			} else {
+				logger.info("Employee Id is Not Found");
+			}
+
+		} catch (Exception ex) {
+			logger.error("Employee Service Imp:--> Error" + ex.getMessage());
+		}
+
+	}
 	@Override
 	// Find By Employee Email
 	public Employee getByEmail(String email) {

@@ -1,18 +1,31 @@
 package com.sgic.internal.defecttracker.defectservice.services.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocation;
 import com.sgic.internal.defecttracker.defectservice.repositories.ResourceAllocationRepository;
 import com.sgic.internal.defecttracker.defectservice.services.ResourceAllocationService;
 
+
 @Service
 public class ResourceAllocationServiceImpl implements ResourceAllocationService {
 
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	@Autowired
 	private ResourceAllocationRepository resourceAllocationRepository;
 
@@ -20,11 +33,29 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 	private static Logger logger = LogManager.getLogger(ResourceAllocationRepository.class);
 
 	@Override
-//	<---Resource Allocation Save method's implementation--->
-	public ResourceAllocation saveresource(ResourceAllocation resourceAllocation) {
+//	<---Resource Allocation Save method's implementation as well as update the bench as true in employee service--->
+	public ResponseEntity<String> saveresource(ResourceAllocation resourceAllocation) {
 		try {
+
+			Long eid = resourceAllocation.getEmpId();
+			System.out.println("Employee id" + eid);
+
+			String url = "http://localhost:8084/employeeservice/getempolyeebyid/" + eid;
+			String resp = restTemplate.getForObject(url, String.class);
+
+			HttpHeaders headers = new HttpHeaders();
+
+			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			HttpEntity<String> respo = new HttpEntity<String>(resp, headers);
+
+			ResponseEntity<String> obj = restTemplate.exchange(
+					"http://localhost:8084/employeeservice/update/benchtrue/" + eid, HttpMethod.PUT, respo,
+					String.class);
+			logger.info("ResourceAllocationServiceImpl-->successfully updates Bench");
+			resourceAllocationRepository.save(resourceAllocation);
 			logger.info("ResourceAllocationServiceImpl-->successfully saved Resource");
-			return resourceAllocationRepository.save(resourceAllocation);
+			return obj;
 		} catch (Exception ex) {
 			logger.error("Resource Allocation Imp Error :-> " + ex.getMessage());
 		}
@@ -98,12 +129,42 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 	}
 
 	@Override
-//	<---Resource Allocation Delete  method's implementation--->
-	public ResourceAllocation deleteResourceById(Long resourceId) {
+//	<---Resource Allocation Delete  method's implementation as well as update the bench as false in employee service--->
+	public ResponseEntity<String> deleteResourceById(Long resourceId) {
 		try {
-			logger.info("ResourceAllocationServiceImpl-->successfully Deleted");
+
+			ResourceAllocation resourceAllocationq = resourceAllocationRepository
+					.findResourceAllocationByresourceId(resourceId);
+
+			Long eid = resourceAllocationq.getEmpId();
+
+			System.out.println("Employee id" + eid);
+
+			String url = "http://localhost:8084/employeeservice/getempolyeebyid/" + eid;
+			String resp = restTemplate.getForObject(url, String.class);
+
+			System.out.println("resp " + resp);
+
+			HttpHeaders headers = new HttpHeaders();
+
+			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			HttpEntity<String> respo = new HttpEntity<String>(resp, headers);
+
+			restTemplate.exchange("http://localhost:8084/employeeservice/update/benchfalse/" + eid, HttpMethod.PUT,
+					respo, String.class);
+
+			logger.info("ResourceAllocationServiceImpl-->successfully Updated Bench");
+
 			resourceAllocationRepository.deleteById(resourceId);
-		} catch (Exception ex) {
+
+			logger.info("ResourceAllocationServiceImpl-->successfully Deleted Resource");
+
+			return null;
+
+		} catch (
+
+		Exception ex) {
 			logger.error("Resource Allocation Imp Error :-> " + ex.getMessage());
 		}
 
