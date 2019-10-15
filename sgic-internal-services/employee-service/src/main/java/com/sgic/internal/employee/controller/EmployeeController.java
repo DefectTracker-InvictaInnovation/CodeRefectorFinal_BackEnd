@@ -145,11 +145,11 @@ public class EmployeeController {
 
 	/* Author:DalistaaA 17-06-2019 */
 	// Get Employee By Employee ID
-	@GetMapping("/getempolyeebyid/{empid}") 
-	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "empid") Long empid) {
+	@GetMapping("/getempolyeebyid/{empId}") 
+	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "empId") Long empId) {
 		try {
 			logger.info("Employee Controller :-> GetEmployeeById");
-			return new ResponseEntity<>(employeeDTOMapper.getById(empid), HttpStatus.OK);
+			return new ResponseEntity<>(employeeDTOMapper.getById(empId), HttpStatus.OK);
 
 		} catch (Exception ex) {
 			logger.error("Employee Controller :->" + ex.getMessage());

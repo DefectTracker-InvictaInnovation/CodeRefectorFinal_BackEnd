@@ -9,17 +9,13 @@ import org.springframework.web.client.RestTemplate;
 import com.sgic.internal.defecttracker.defectservice.property.FileStorageProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties({
-	FileStorageProperties.class
-})
-public class DefectTrackerApplication 
-{
-    public static void main( String[] args )
-    {
-    	SpringApplication.run(DefectTrackerApplication.class, args);
-    }
-    
-    @Bean
+@EnableConfigurationProperties({ FileStorageProperties.class })
+public class DefectTrackerApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(DefectTrackerApplication.class, args);
+	}
+
+	@Bean
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
