@@ -250,7 +250,7 @@ public class AuthRestAPIs {
 	    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
 	    User user = userRepository.findByUsername(username);
 	                
-	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getRoles());
+	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getLastname(),user.getRoles());
 
 	        return userProfile;
 	    }

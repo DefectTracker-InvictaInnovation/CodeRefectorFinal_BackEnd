@@ -11,4 +11,7 @@ public interface ModuleAllocationService {
 	List<ModuleAllocation> getAllModuleAllocation();
 	
 	public Iterable<ModuleAllocation> list();
+	
+//  <--- Module Deallocation Delete  Method--->
+	public ModuleAllocation deleteResourceById(Long resourceId);
 }

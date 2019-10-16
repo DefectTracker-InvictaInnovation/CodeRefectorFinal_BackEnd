@@ -28,5 +28,11 @@ public class ModuleAllocationServiceImpl implements ModuleAllocationService{
 	public Iterable<ModuleAllocation> list() {
 		return moduleAllocationRepository.findAll();
 	}
+	
+	@Override
+	public ModuleAllocation deleteResourceById(Long moduleAllocationMapper) {
+		 moduleAllocationRepository.deleteById(moduleAllocationMapper);;
+		return null;
+	}
 
 }

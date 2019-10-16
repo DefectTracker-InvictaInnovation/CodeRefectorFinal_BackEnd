@@ -1,7 +1,6 @@
 package com.sgic.internal.defecttracker.defectservice.controller.dto.converter;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,8 @@ public class ModuleAllocationConverter {
 		if (moduleAllocation != null) {
 			moduleAllocationDto.setModuleallocationId(moduleAllocation.getModuleallocationId());
 			moduleAllocationDto.setProjectroleId(moduleAllocation.getProjectRoleAllocation().getProjectroleId());
-//		   moduleAllocationDto.setModuleList(moduleAllocation.getModuleList());
+            moduleAllocationDto.setSubModuleId(moduleAllocation.getSubModule().getSubModuleId());
+			moduleAllocationDto.setSubModuleName(moduleAllocation.getSubModule().getSubModuleName());
 			
 			return moduleAllocationDto;
 		}
@@ -44,8 +44,10 @@ public class ModuleAllocationConverter {
 			projectRoleAllocation.setProjectroleId(moduleAllocationDto.getProjectroleId());
 			moduleAllocation.setProjectRoleAllocation(projectRoleAllocation);
 			
-//			moduleAllocation.setModuleList(moduleAllocationDto.getModuleList());
-			
+           SubModule subModule = new SubModule();
+           subModule.setSubModuleId(moduleAllocationDto.getSubModuleId());
+           subModule.setSubModuleName(moduleAllocationDto.getSubModuleName());
+		   moduleAllocation.setSubModule(subModule);
 			
 			return moduleAllocation;
 		}
@@ -55,15 +57,20 @@ public class ModuleAllocationConverter {
 	}
 	
 //	<----Convert Variable DTO To Entity  --- For Get  List  Form  DataBase  ---->
-	public static List<ModuleAllocationDto> ModuleAllocationToModuleAllocationDtoList(
-			List<ModuleAllocation> moduleAllocationList) {
+	public static Iterable<ModuleAllocationDto> ModuleAllocationToModuleAllocationDtoList(
+			Iterable<ModuleAllocation> moduleAllocationList) {
 		if (moduleAllocationList != null) {
-			List<ModuleAllocationDto> ListmoduleAllocationDto = new ArrayList<>();
+			Iterable<ModuleAllocationDto> ListmoduleAllocationDto = new ArrayList<>();
 			for (ModuleAllocation moduleAllocation : moduleAllocationList) {
 				ModuleAllocationDto moduleAllocationDto = new ModuleAllocationDto();
 				moduleAllocationDto.setModuleallocationId(moduleAllocation.getModuleallocationId());
 				moduleAllocationDto.setProjectroleId(moduleAllocation.getProjectRoleAllocation().getProjectroleId());
-//				moduleAllocationDto.setModuleList(moduleAllocation.getModuleList());
+				moduleAllocationDto.setSubModuleId(moduleAllocation.getSubModule().getSubModuleId());
+				moduleAllocationDto.setSubModuleName(moduleAllocation.getSubModule().getSubModuleName());
+ 
+//				Module module = new Module();
+//				module.setModuleId(moduleAllocationDto.getModuleId());
+//				module.setModuleName(moduleAllocationDto.getModuleName());
 				
 				RestTemplate restTemplate = new RestTemplate();
 				ResponseEntity<Employee> response = restTemplate.exchange(
@@ -76,7 +83,16 @@ public class ModuleAllocationConverter {
 				moduleAllocationDto.setName(employee.getName());
 				moduleAllocationDto.setEmail(employee.getEmail());
 				moduleAllocationDto.setFirstname(employee.getFirstname());
-				ListmoduleAllocationDto.add(moduleAllocationDto);
+				
+				ResponseEntity<Module> responseEntity = restTemplate.exchange(
+						"http://localhost:8081/defectservices/GetmoduleById/"+moduleAllocation.getSubModule().getModule().getModuleId(),HttpMethod.GET,null,
+						new ParameterizedTypeReference<Module>() {
+						});
+				Module module = responseEntity.getBody();
+				moduleAllocationDto.setModuleId(module.getModuleId());
+				moduleAllocationDto.setModuleName(module.getModuleName());
+				
+				((ArrayList<ModuleAllocationDto>) ListmoduleAllocationDto).add(moduleAllocationDto);
 
 			}
 

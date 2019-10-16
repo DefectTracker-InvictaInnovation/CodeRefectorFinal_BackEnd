@@ -11,7 +11,7 @@ public class UserProfile {
 	    private Long id;
 	    private String username;
 	    private String name;
-//	    private String lastname;
+	    private String lastname;
 	    private Instant joinedAt;
 	    private Set<Role> role ;
 	    
@@ -26,22 +26,22 @@ public class UserProfile {
 			this.role = role;
 		}
 
-		public UserProfile(Long id, String username, String name,Set<Role> set ) {
+		public UserProfile(Long id, String username, String name,String lastname,Set<Role> set ) {
 	        this.id = id;
 	        this.username = username;
 	        this.name = name;
-//	        this.lastname=lastname;
+	        this.lastname=lastname;
 	        this.role=set;
 	       
 	    }
 
-//		public String getLastname() {
-//			return lastname;
-//		}
-//
-//		public void setLastname(String lastname) {
-//			this.lastname = lastname;
-//		}
+		public String getLastname() {
+			return lastname;
+		}
+
+		public void setLastname(String lastname) {
+			this.lastname = lastname;
+		}
 
 		public Long getId() {
 	        return id;

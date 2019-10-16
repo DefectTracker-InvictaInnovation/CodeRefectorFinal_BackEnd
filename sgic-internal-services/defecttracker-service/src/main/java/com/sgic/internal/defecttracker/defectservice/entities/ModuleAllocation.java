@@ -1,5 +1,6 @@
 package com.sgic.internal.defecttracker.defectservice.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,5 +50,4 @@ public class ModuleAllocation {
 	public void setSubModule(SubModule subModule) {
 		this.subModule = subModule;
 	}
-	
 }

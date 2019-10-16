@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @Entity
 @Table(schema = "defectservices", name = "module")
 public class Module {
-	
 	@Id
 	private String moduleId;
 	private String moduleName;

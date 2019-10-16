@@ -72,6 +72,26 @@ public class EmployeeDTOMapper {
 
 	}
 
+	@SuppressWarnings({ "static-access", "unused" })
+	// Update Employee
+	public Employee UpdateBenchTrue(Long EmpId, EmployeeDTO employeeDTO) {
+		logger.info("Employee is Updated", employeeDTO.getEmpId());
+		Employee employee = EmployeeConverter.EmployeeDTOToEmployee(employeeDTO);
+		employeeService.updateBenchTrue(EmpId, employeeConverter.EmployeeDTOToEmployee(employeeDTO));
+		return employee;
+
+	}
+
+	@SuppressWarnings({ "static-access", "unused" })
+	// Update Employee
+	public Employee UpdateBenchFalse(Long EmpId, EmployeeDTO employeeDTO) {
+		logger.info("Employee is Updated", employeeDTO.getEmpId());
+		Employee employee = EmployeeConverter.EmployeeDTOToEmployee(employeeDTO);
+		employeeService.updateBenchFalse(EmpId, employeeConverter.EmployeeDTOToEmployee(employeeDTO));
+		return employee;
+
+	}
+
 	@SuppressWarnings("static-access")
 	// Find Employee By Designation
 	public List<EmployeeDTO> getEmployeeByDesignation(Long designationid) {
@@ -93,5 +113,5 @@ public class EmployeeDTOMapper {
 	public long getByEmployeeCountforMapper() {
 		return employeeService.count();
 	}
-
+	
 }
