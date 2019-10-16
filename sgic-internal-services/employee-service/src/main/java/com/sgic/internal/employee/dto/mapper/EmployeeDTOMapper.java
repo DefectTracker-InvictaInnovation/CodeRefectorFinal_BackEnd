@@ -74,20 +74,20 @@ public class EmployeeDTOMapper {
 
 	@SuppressWarnings({ "static-access", "unused" })
 	// Update Employee
-	public Employee UpdateBenchTrue(Long EmpId, EmployeeDTO employeeDTO) {
+	public Employee UpdateBenchFalse(Long EmpId, EmployeeDTO employeeDTO) {
 		logger.info("Employee is Updated", employeeDTO.getEmpId());
 		Employee employee = EmployeeConverter.EmployeeDTOToEmployee(employeeDTO);
-		employeeService.updateBenchTrue(EmpId, employeeConverter.EmployeeDTOToEmployee(employeeDTO));
+		employeeService.updateBenchFalse(EmpId, employeeConverter.EmployeeDTOToEmployee(employeeDTO));
 		return employee;
 
 	}
 
 	@SuppressWarnings({ "static-access", "unused" })
 	// Update Employee
-	public Employee UpdateBenchFalse(Long EmpId, EmployeeDTO employeeDTO) {
+	public Employee UpdateBenchTrue(Long EmpId, EmployeeDTO employeeDTO) {
 		logger.info("Employee is Updated", employeeDTO.getEmpId());
 		Employee employee = EmployeeConverter.EmployeeDTOToEmployee(employeeDTO);
-		employeeService.updateBenchFalse(EmpId, employeeConverter.EmployeeDTOToEmployee(employeeDTO));
+		employeeService.updateBenchTrue(EmpId, employeeConverter.EmployeeDTOToEmployee(employeeDTO));
 		return employee;
 
 	}

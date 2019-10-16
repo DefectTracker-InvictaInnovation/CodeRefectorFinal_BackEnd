@@ -36,12 +36,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE Employee e SET e.bench=true where e.empId = :empId")
+	@Query("UPDATE Employee e SET e.bench=false where e.empId = :empId")
 	void updateBenchTrue(@Param("empId") Long empId);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE Employee e SET e.bench=false where e.empId = :empId")
+	@Query("UPDATE Employee e SET e.bench=true where e.empId = :empId")
 	void updateBenchFalse(@Param("empId") Long empId);
 
 		
