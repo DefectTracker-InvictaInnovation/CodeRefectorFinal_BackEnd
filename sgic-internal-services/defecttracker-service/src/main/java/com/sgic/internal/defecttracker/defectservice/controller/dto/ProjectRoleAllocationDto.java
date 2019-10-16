@@ -5,6 +5,7 @@ public class ProjectRoleAllocationDto {
 	private Long projectroleId;
 	private Long resourceId;
 	private Long roleId;
+	private String password;
 	private String name;
 	private String firstname;
 	private String email;
@@ -73,6 +74,12 @@ public class ProjectRoleAllocationDto {
 	}
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String string) {
+		this.password = string;
 	}
 
 	

@@ -1,5 +1,6 @@
 package com.sgic.internal.defecttracker.defectservice.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -19,23 +20,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.ProjectRoleAllocationDto;
+import com.sgic.internal.defecttracker.defectservice.controller.dto.UserDto;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.mapper.ProjectRoleAllocationMapper;
 import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocation;
-
 
 @CrossOrigin
 @RestController
 public class ProjectRoleAllocationController {
-	
+
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Autowired
 	private ProjectRoleAllocationMapper projectRoleAllocationMapper;
-	
+
 	private static Logger logger = LogManager.getLogger(ProjectRoleAllocationMapper.class);
 
 //	<----This APIs Is -- Save Single Object--->
@@ -50,55 +53,38 @@ public class ProjectRoleAllocationController {
 		return null;
 
 	}
-	
+
 	@GetMapping(value = "/getAllRole")
 	public ResponseEntity<List<ProjectRoleAllocationDto>> getAllRole() {
 		logger.info("Project Role Allocation Controller -> GetProjectRole");
 		return new ResponseEntity<>(projectRoleAllocationMapper.getAllRole(), HttpStatus.OK);
 	}
-	
-//	@SuppressWarnings("unused")
+
+//	@SuppressWarnings("rawtypes")
 //	@GetMapping(value = "/saveuser")
-//	public String getAllRoleEmail() {
-//		RestTemplate restTemplate = new RestTemplate();
+//	public ResponseEntity<List> getAllRoleEmail() {
 //		try {
+//			
 //			String url = "http://localhost:8081/defectservices/getAllRole";
 //			String resp = restTemplate.getForObject(url, String.class);
 //
-//			JsonParser springParser = JsonParserFactory.getJsonParser();
-//			// List<Object> map = springParser.parseList(resp);
+//			System.out.println("resp" + resp);
 //
 //			ObjectMapper objectMapper = new ObjectMapper();
 //			List<ProjectRoleAllocationDto> listCar = objectMapper.readValue(resp,
 //					new TypeReference<List<ProjectRoleAllocationDto>>() {
 //					});
+//			System.out.println("list " + listCar);
 //
-//			Map<String, String> signup = null;
-//			for (ProjectRoleAllocationDto entry : listCar) {
-//
-//				signup = new HashMap<>();
-//				signup.put("email", entry.getEmail());
-//				signup.put("username", entry.getFirstname());
-//				signup.put("name", entry.getFirstname());
-//				signup.put("password", "12345");
-//				signup.put("role", "role");
-//
-//				System.out.println("Email :" + entry.getEmail());
-//				System.out.println("First Name :" + entry.getFirstname());
-//				System.out.println("name :" + entry.getName());
-//
-//			}
-//
-//			
 //			HttpHeaders headers = new HttpHeaders();
 //			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//			@SuppressWarnings("rawtypes")
-//			HttpEntity<Map> entity = new HttpEntity<Map>(signup, headers);
+//			HttpEntity<List> entity = new HttpEntity<List>(listCar, headers);
 //			System.out.println("yes");
-//			return restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup", HttpMethod.POST, entity,
-//					String.class).getBody();
+//			ResponseEntity<List> obj = restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup",
+//					HttpMethod.POST, entity, List.class);
 //
-//			// return null;
+//			System.out.println("obj" + obj);
+//			return obj;
 //
 //		} catch (Exception ex) {
 //			logger.error("Check Your Error");
@@ -106,42 +92,10 @@ public class ProjectRoleAllocationController {
 //		}
 //		return null;
 //	}
-	
-	@SuppressWarnings("rawtypes")
-	@GetMapping(value = "/saveuser")
-	public ResponseEntity<List> getAllRoleEmail() {
-		try {
-			
-			String url = "http://localhost:8081/defectservices/getAllRole";
-			String resp = restTemplate.getForObject(url, String.class);
 
-			System.out.println("resp" + resp);
-
-			ObjectMapper objectMapper = new ObjectMapper();
-			List<ProjectRoleAllocationDto> listCar = objectMapper.readValue(resp,
-					new TypeReference<List<ProjectRoleAllocationDto>>() {
-					});
-			System.out.println("list " + listCar);
-
-			HttpHeaders headers = new HttpHeaders();
-			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-			HttpEntity<List> entity = new HttpEntity<List>(listCar, headers);
-			System.out.println("yes");
-			ResponseEntity<List> obj = restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup",
-					HttpMethod.POST, entity, List.class);
-
-			System.out.println("obj" + obj);
-			return obj;
-
-		} catch (Exception ex) {
-			logger.error("Check Your Error");
-			System.out.println("Something went Wrong" + ex.getCause());
-		}
-		return null;
-	}
-	
-	@GetMapping("/getprojectrolebyid/{projectroleId}") 
-	public ResponseEntity<ProjectRoleAllocationDto> getProjectRoleAllocationById(@PathVariable(name = "projectroleId") Long projectroleId) {
+	@GetMapping("/getprojectrolebyid/{projectroleId}")
+	public ResponseEntity<ProjectRoleAllocationDto> getProjectRoleAllocationById(
+			@PathVariable(name = "projectroleId") Long projectroleId) {
 		try {
 			return new ResponseEntity<>(projectRoleAllocationMapper.getByprojectroleId(projectroleId), HttpStatus.OK);
 
@@ -151,4 +105,59 @@ public class ProjectRoleAllocationController {
 		return null;
 
 	}
+	
+	@GetMapping(value = "/saveuser")
+	public ResponseEntity<?> getAllRoleEmail()
+	throws JsonParseException, JsonMappingException, IOException  {
+		try {
+			
+			String url = "http://localhost:8081/defectservices/getAllRole";
+			String resp = restTemplate.getForObject(url, String.class);
+
+			System.out.println("resp" + resp);
+
+			ObjectMapper objectMapper = new ObjectMapper();
+			List<ProjectRoleAllocationDto> list = objectMapper.readValue(resp,
+					new TypeReference<List<ProjectRoleAllocationDto>>() {
+					});
+			System.out.println("list " + list);
+			
+			for (ProjectRoleAllocationDto entry : list) {
+				
+				UserDto user = new UserDto();
+				user.setName(entry.getName());
+				user.setUsername(entry.getFirstname());
+				user.setEmail(entry.getEmail());
+				user.setPassword(entry.getFirstname());
+				user.setRole(entry.getRoleName());
+				
+				UserDto user1 = new UserDto();
+				user1.setUsername(user.getUsername());
+				user1.setName(user.getName());
+				user1.setEmail(user.getEmail());
+				user1.setPassword(user.getPassword());
+				user1.setRole(user.getRole());
+						
+				System.out.println("userList " + user1);
+//				
+			System.out.println("passowrdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+user1.getPassword());
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+			HttpEntity<UserDto> entity = new HttpEntity<UserDto>(user1, headers);
+			System.out.println("yes");
+			ResponseEntity<?> obj = restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup",
+					HttpMethod.POST, entity, UserDto.class);
+
+			System.out.println("obj" + obj);
+			
+		}
+			return null;
+		} catch (Exception ex) {
+			logger.error("Check Your Error");
+			System.out.println("Something went Wrong" + ex.getCause());
+		}
+		return null;
+	}
+
 }
