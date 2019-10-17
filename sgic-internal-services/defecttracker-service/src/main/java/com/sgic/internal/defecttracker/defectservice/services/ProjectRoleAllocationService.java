@@ -8,6 +8,8 @@ public interface ProjectRoleAllocationService {
 	public ProjectRoleAllocation createroleAllocation(ProjectRoleAllocation projectRoleAllocation);
 
 	public List<ProjectRoleAllocation> getAllRoleAllocation();
-	
+
 	public ProjectRoleAllocation getByprojectRoleId(Long projectroleId);
+
+	public ProjectRoleAllocation deleteProjectByprojectId(Long projectroleId);
 }

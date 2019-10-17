@@ -1,5 +1,7 @@
 package com.sgic.internal.login.servicesimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		User user = userRepository.findByUsername(username);
 		return UserPrinciple.build(user);
+		
+	}
+	
+	public List<User> getUserDetails() {
+		return userRepository.findAll();
 		
 	}
 }
