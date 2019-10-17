@@ -41,7 +41,7 @@ import com.sgic.internal.login.servicesimpl.UserSummary;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
-public class LogInController {
+public class LoginController {
 
 	@Autowired
 	AuthenticationManager authenticationManager;
