@@ -41,7 +41,7 @@ import com.sgic.internal.login.servicesimpl.UserSummary;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
-public class AuthRestAPIs {
+public class LoginController {
 
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -170,7 +170,7 @@ public class AuthRestAPIs {
 		}
 
 		// Creating user's account
-		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
+		User user = new User(signUpRequest.getName(),signUpRequest.getLastname(), signUpRequest.getUsername(), signUpRequest.getEmail(),
 				encoder.encode(signUpRequest.getPassword()));
 
 	String strRoles = signUpRequest.getRole();
