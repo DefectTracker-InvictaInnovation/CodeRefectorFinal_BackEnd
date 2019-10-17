@@ -41,7 +41,7 @@ import com.sgic.internal.login.servicesimpl.UserSummary;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
-public class AuthRestAPIs {
+public class LoginController {
 
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -74,90 +74,10 @@ public class AuthRestAPIs {
 				new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), userDetails.isEnabled()));
 	}
 
-//	@PostMapping("/signup")
-//	public ResponseEntity<?> registerUser(@RequestBody List<ProjectRoleAllocationDto> projectRoleAllocationDto)
-//			throws JsonParseException, JsonMappingException, IOException {
-//
-//		for (ProjectRoleAllocationDto entry : projectRoleAllocationDto) {
-//
-//			User user = new User();
-//			user.setEmail(entry.getEmail());
-//			user.setName(entry.getFirstname());
-//			user.setUsername(entry.getFirstname());
-////			user.setPassword(encoder.encode(entry.getPassword()));
-////			userRepository.saveAndFlush(user);
-//			user.setPassword(entry.getPassword());
-//			System.out.println("passowrdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+user.getPassword());
-//
-//			if (userRepository.existsByUsername(user.getName())) {
-//				return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
-//						HttpStatus.BAD_REQUEST);
-//			}
-//
-//			if (userRepository.existsByEmail(user.getEmail())) {
-//				return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
-//						HttpStatus.BAD_REQUEST);
-//			}
-//
-//			// Creating user's account
-//			User user1 = new User();
-//			user1.setUsername(user.getUsername());
-//			user1.setName(user.getName());
-//			user1.setEmail(user.getEmail());
-//			user1.setPassword(encoder.encode(user.getPassword()));
-//
-//			String strRoles = entry.getRoleName();
-//			Set<Role> roles = new HashSet<>();
-//
-//			switch (strRoles) {
-//			case "Admin":
-//				Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-//						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: admin Role not find."));
-//				roles.add(adminRole);
-//
-//				break;
-//			case "PM":
-//				Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-//						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: pm Role not find."));
-//				roles.add(pmRole);
-//
-//				break;
-//			case "QA":
-//				Role qaRole = roleRepository.findByName(RoleName.ROLE_QA)
-//						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: qa Role not find."));
-//				roles.add(qaRole);
-//
-//				break;
-//			case "Developer":
-//				Role devrole = roleRepository.findByName(RoleName.ROLE_DEVELOPER)
-//						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: developer Role not find."));
-//				roles.add(devrole);
-//
-//				break;
-//			case "HR":
-//				Role hrrole = roleRepository.findByName(RoleName.ROLE_HR)
-//						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: hr Role not find."));
-//				roles.add(hrrole);
-//
-//				break;
-//			default:
-//				Role userRole = roleRepository.findByName(RoleName.ROLE_QA)
-//						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-//				roles.add(userRole);
-//			}
-//
-//			user.setRoles(roles);
-//			userRepository.save(user1);
-//		}
-//
-//		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
-//	}
-
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser( @RequestBody SignUpForm signUpRequest) {
 		System.out.println("fffffffffffffffffffffffffffffffffffffff :" + signUpRequest.getEmail());
 		
-
 		
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
@@ -170,9 +90,8 @@ public class AuthRestAPIs {
 		}
 
 		// Creating user's account
-				User user = new User(signUpRequest.getName(),signUpRequest.getLastname(), signUpRequest.getUsername(), signUpRequest.getEmail(),
-						encoder.encode(signUpRequest.getPassword()) );
-
+		User user = new User(signUpRequest.getName(),signUpRequest.getLastname(), signUpRequest.getUsername(), signUpRequest.getEmail(),
+				encoder.encode(signUpRequest.getPassword()));
 
 	String strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
@@ -251,7 +170,7 @@ public class AuthRestAPIs {
 	    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
 	    User user = userRepository.findByUsername(username);
 	                
-	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getLastname(),user.getRoles());
+	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getLastname(),user.getEmail(),user.getRoles());
 
 	        return userProfile;
 	    }

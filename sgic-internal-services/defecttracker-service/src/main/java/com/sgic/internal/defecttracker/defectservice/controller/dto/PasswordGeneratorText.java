@@ -1,27 +1,26 @@
 package com.sgic.internal.defecttracker.defectservice.controller.dto;
 
-import java.util.Arrays;
-import java.util.List;
+import java.security.SecureRandom;
+import java.util.Random;
 
-import org.passay.CharacterRule;
-import org.passay.EnglishCharacterData;
-import org.passay.PasswordGenerator;
-import org.springframework.stereotype.Service;
-
-@Service
 public class PasswordGeneratorText {
 	
-	public String generateRandomPassword() {
+	private static final Random RANDOM = new SecureRandom();
+	  
+	  public static final int PASSWORD_LENGTH = 10;
+	 
+	  public String generateRandomPassword()
+	  {
+	      
+	      String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789+@";
 
-		List<CharacterRule> rules = Arrays.asList(new CharacterRule(EnglishCharacterData.UpperCase, 1),
-				new CharacterRule(EnglishCharacterData.LowerCase, 1), new CharacterRule(EnglishCharacterData.Digit, 1),new CharacterRule(EnglishCharacterData.Special, 1));
+	      String password = "";
+	      for (int i=0; i<PASSWORD_LENGTH; i++)
+	      {
+	          int index = (int)(RANDOM.nextDouble()*letters.length());
+	          password += letters.substring(index, index+1);
+	      }
+	      return password;
+	  }
 
-		PasswordGenerator generator = new PasswordGenerator();
-		String password = generator.generatePassword(10, rules);
-		System.out.println("gvbjklukhdshkbjdbdfbdfbbkdf"+password);
-		return password;
-		
-	}
-
-	
 }

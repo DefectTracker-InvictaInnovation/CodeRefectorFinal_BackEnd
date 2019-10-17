@@ -63,38 +63,6 @@ public class ProjectRoleAllocationController {
 		return new ResponseEntity<>(projectRoleAllocationMapper.getAllRole(), HttpStatus.OK);
 	}
 
-//	@SuppressWarnings("rawtypes")
-//	@GetMapping(value = "/saveuser")
-//	public ResponseEntity<List> getAllRoleEmail() {
-//		try {
-//			
-//			String url = "http://localhost:8081/defectservices/getAllRole";
-//			String resp = restTemplate.getForObject(url, String.class);
-//
-//			System.out.println("resp" + resp);
-//
-//			ObjectMapper objectMapper = new ObjectMapper();
-//			List<ProjectRoleAllocationDto> listCar = objectMapper.readValue(resp,
-//					new TypeReference<List<ProjectRoleAllocationDto>>() {
-//					});
-//			System.out.println("list " + listCar);
-//
-//			HttpHeaders headers = new HttpHeaders();
-//			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//			HttpEntity<List> entity = new HttpEntity<List>(listCar, headers);
-//			System.out.println("yes");
-//			ResponseEntity<List> obj = restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup",
-//					HttpMethod.POST, entity, List.class);
-//
-//			System.out.println("obj" + obj);
-//			return obj;
-//
-//		} catch (Exception ex) {
-//			logger.error("Check Your Error");
-//			System.out.println("Something went Wrong" + ex.getCause());
-//		}
-//		return null;
-//	}
 
 	@GetMapping("/getprojectrolebyid/{projectroleId}")
 	public ResponseEntity<ProjectRoleAllocationDto> getProjectRoleAllocationById(
@@ -130,23 +98,25 @@ public class ProjectRoleAllocationController {
 				user.setName(entry.getName());
 				user.setUsername(entry.getFirstname());
 				user.setEmail(entry.getEmail());
-				user.setPassword(entry.getFirstname());
+				user.setPassword(entry.getPassword());
 				user.setRole(entry.getRoleName());
-
-				UserDto user1 = new UserDto();
-				user1.setUsername(user.getUsername());
-				user1.setName(user.getName());
-				user1.setEmail(user.getEmail());
-				user1.setPassword(user.getPassword());
-				user1.setRole(user.getRole());
-
-				System.out.println("userList " + user1);
+				user.setLastname(entry.getName());
+				
+//				UserDto user1 = new UserDto();
+//				user1.setUsername(user.getUsername());
+//				user1.setName(user.getName());
+//				user1.setEmail(user.getEmail());
+//				user1.setPassword(user.getPassword());
+//				user1.setRole(user.getRole());
+//				user1.setLastname(user.getLastname());
+						
+				System.out.println("userList " + user);
 //				
-			System.out.println("passowrdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+user1.getPassword());
+			System.out.println("passowrdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+user.getPassword());
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-			HttpEntity<UserDto> entity = new HttpEntity<UserDto>(user1, headers);
+			HttpEntity<UserDto> entity = new HttpEntity<UserDto>(user, headers);
 			System.out.println("yes");
 			ResponseEntity<?> obj = restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup",
 					HttpMethod.POST, entity, UserDto.class);

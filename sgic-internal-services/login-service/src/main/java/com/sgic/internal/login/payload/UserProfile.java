@@ -7,17 +7,14 @@ import com.sgic.internal.login.entities.Role;
 
 public class UserProfile {
 	
-	
 	    private Long id;
 	    private String username;
 	    private String name;
 	    private String lastname;
+	    private String email;
 	    private Instant joinedAt;
 	    private Set<Role> role ;
 	    
-
-	
-
 		public Set<Role> getRole() {
 			return role;
 		}
@@ -26,13 +23,13 @@ public class UserProfile {
 			this.role = role;
 		}
 
-		public UserProfile(Long id, String username, String name,String lastname,Set<Role> set ) {
+		public UserProfile(Long id, String username, String name,String lastname,String email, Set<Role> set ) {
 	        this.id = id;
 	        this.username = username;
 	        this.name = name;
 	        this.lastname=lastname;
 	        this.role=set;
-	       
+	        this.email=email;  
 	    }
 
 		public String getLastname() {
@@ -75,7 +72,14 @@ public class UserProfile {
 	        this.joinedAt = joinedAt;
 	    }
 
-	 
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+ 
 
 }
 
