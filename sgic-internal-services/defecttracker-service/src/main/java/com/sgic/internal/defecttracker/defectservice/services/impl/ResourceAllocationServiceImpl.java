@@ -25,7 +25,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Autowired
 	private ResourceAllocationRepository resourceAllocationRepository;
 
@@ -50,7 +50,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 			HttpEntity<String> respo = new HttpEntity<String>(resp, headers);
 
 			ResponseEntity<String> obj = restTemplate.exchange(
-					"http://localhost:8084/employeeservice/update/benchfalse/" + eid, HttpMethod.PUT, respo,
+					"http://localhost:8084/employeeservice/update/benchtrue/" + eid, HttpMethod.PUT, respo,
 					String.class);
 			logger.info("ResourceAllocationServiceImpl-->successfully updates Bench");
 			resourceAllocationRepository.save(resourceAllocation);
@@ -151,7 +151,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity<String> respo = new HttpEntity<String>(resp, headers);
 
-			restTemplate.exchange("http://localhost:8084/employeeservice/update/benchtrue/" + eid, HttpMethod.PUT,
+			restTemplate.exchange("http://localhost:8084/employeeservice/update/benchfalse/" + eid, HttpMethod.PUT,
 					respo, String.class);
 
 			logger.info("ResourceAllocationServiceImpl-->successfully Updated Bench");
@@ -171,7 +171,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 		return null;
 
 	}
-
+	
 	@Override
 	public List<ResourceAllocation> getByEmployee(Long empId) {
 		return resourceAllocationRepository.findResourceAllocationByempId(empId);

@@ -30,8 +30,8 @@ public class ModuleAllocationServiceImpl implements ModuleAllocationService{
 	}
 	
 	@Override
-	public ModuleAllocation deleteResourceById(Long moduleAllocationMapper) {
-		 moduleAllocationRepository.deleteById(moduleAllocationMapper);;
+	public ModuleAllocation deleteResourceById(Long resourceId) {
+		 moduleAllocationRepository.deleteById(resourceId);;
 		return null;
 	}
 
