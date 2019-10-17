@@ -128,8 +128,9 @@ public class ProjectRoleAllocationController {
 				user.setName(entry.getName());
 				user.setUsername(entry.getFirstname());
 				user.setEmail(entry.getEmail());
-				user.setPassword(entry.getFirstname());
+				user.setPassword(entry.getPassword());
 				user.setRole(entry.getRoleName());
+				user.setLastname(entry.getName());
 				
 				UserDto user1 = new UserDto();
 				user1.setUsername(user.getUsername());
@@ -137,6 +138,7 @@ public class ProjectRoleAllocationController {
 				user1.setEmail(user.getEmail());
 				user1.setPassword(user.getPassword());
 				user1.setRole(user.getRole());
+				user1.setLastname(user.getLastname());
 						
 				System.out.println("userList " + user1);
 //				
