@@ -1,6 +1,7 @@
 package com.sgic.internal.login.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -35,6 +36,7 @@ import com.sgic.internal.login.response.JwtResponse;
 import com.sgic.internal.login.response.ResponseMessage;
 import com.sgic.internal.login.securityjwt.JwtProvider;
 import com.sgic.internal.login.services.CurrentUser;
+import com.sgic.internal.login.servicesimpl.UserDetailsServiceImpl;
 import com.sgic.internal.login.servicesimpl.UserPrinciple;
 import com.sgic.internal.login.servicesimpl.UserSummary;
 
@@ -57,6 +59,9 @@ public class LoginController {
 
 	@Autowired
 	JwtProvider jwtProvider;
+	
+	@Autowired
+	UserDetailsServiceImpl userDetailsServiceImpl;
 	
 
 	@PostMapping("/signin")
@@ -174,4 +179,10 @@ public class LoginController {
 
 	        return userProfile;
 	    }
+	 
+	 @GetMapping("/getAllUsers")
+	 public List<User> getAllUserProfiles(){
+		return userDetailsServiceImpl.getUserDetails();
+		 
+	 }
 }
