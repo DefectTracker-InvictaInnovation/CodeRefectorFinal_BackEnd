@@ -145,11 +145,11 @@ public class EmployeeController {
 
 	/* Author:DalistaaA 17-06-2019 */
 	// Get Employee By Employee ID
-	@GetMapping("/getempolyeebyid/{empId}") 
-	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "empId") Long empId) {
+	@GetMapping("/getempolyeebyid/{empid}") 
+	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "empid") Long empid) {
 		try {
 			logger.info("Employee Controller :-> GetEmployeeById");
-			return new ResponseEntity<>(employeeDTOMapper.getById(empId), HttpStatus.OK);
+			return new ResponseEntity<>(employeeDTOMapper.getById(empid), HttpStatus.OK);
 
 		} catch (Exception ex) {
 			logger.error("Employee Controller :->" + ex.getMessage());
@@ -358,13 +358,13 @@ public class EmployeeController {
 	}
 	
 /////////update bench when allocate resource////////////
-@RequestMapping(value = "update/benchtrue/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<String> updateBenchTrue(@RequestBody EmployeeDTO employeeDTO,
+@RequestMapping(value = "update/benchfalse/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<String> updateBenchFalse(@RequestBody EmployeeDTO employeeDTO,
 		@PathVariable("empId") Long empId) {
 	try {
 		logger.info("Employee Controller :-> Update");
 		// employeeDTOMapper.UpdateBenchTrue(empId,employeeDTO);
-		if (employeeDTOMapper.UpdateBenchTrue(empId, employeeDTO) != null) {
+		if (employeeDTOMapper.UpdateBenchFalse(empId, employeeDTO) != null) {
 			return new ResponseEntity<>("Successfully Updated", HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Failed To Update", HttpStatus.OK);
@@ -375,13 +375,13 @@ public ResponseEntity<String> updateBenchTrue(@RequestBody EmployeeDTO employeeD
 	return null;
 }
 /////////update bench when deallocate resource////////////
-@RequestMapping(value = "update/benchfalse/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<String> updateBenchFalse(@RequestBody EmployeeDTO employeeDTO,
+@RequestMapping(value = "update/benchtrue/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<String> updateBenchTrue(@RequestBody EmployeeDTO employeeDTO,
 		@PathVariable("empId") Long empId) {
 	try {
 		logger.info("Employee Controller :-> Update");
 //		employeeDTOMapper.UpdateBenchFalse(empId,employeeDTO);
-		if (employeeDTOMapper.UpdateBenchFalse(empId, employeeDTO) != null) {
+		if (employeeDTOMapper.UpdateBenchTrue(empId, employeeDTO) != null) {
 			return new ResponseEntity<>("Successfully Updated", HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Failed To Update", HttpStatus.OK);

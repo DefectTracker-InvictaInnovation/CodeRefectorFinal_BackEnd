@@ -1,4 +1,4 @@
-package com.sgic.internal.login.controller;
+package com.sgic.internal.defecttracker.defectservice.controller.dto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.passay.PasswordGenerator;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PasswordGeneratorran {
+public class PasswordGeneratorText {
 	
 	public String generateRandomPassword() {
 
@@ -18,7 +18,9 @@ public class PasswordGeneratorran {
 
 		PasswordGenerator generator = new PasswordGenerator();
 		String password = generator.generatePassword(10, rules);
+		System.out.println("gvbjklukhdshkbjdbdfbdfbbkdf"+password);
 		return password;
+		
 	}
 
 	

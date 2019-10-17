@@ -91,9 +91,5 @@ public class ResourceAllocationDto {
 	}
 	public void setDesignationname(String designationname) {
 		this.designationname = designationname;
-	}
-	
-	
-	
-	
+	}	
 }

@@ -1,6 +1,5 @@
 package com.sgic.internal.defecttracker.defectservice.controller.dto.converter;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.sgic.internal.defecttracker.defectservice.controller.dto.PasswordGeneratorText;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.ProjectRoleAllocationDto;
 import com.sgic.internal.defecttracker.defectservice.entities.Employee;
 import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocation;
@@ -21,6 +22,9 @@ import com.sgic.internal.defecttracker.defectservice.entities.Role;
 
 @Service
 public class ProjectRoleAllocationConverter {
+	
+//	@Autowired
+//	private PasswordGeneratorText passwordGeneratorText;
 
 	@Autowired
 	private static Logger logger = LogManager.getLogger(ProjectRoleAllocationDto.class);
@@ -37,6 +41,7 @@ public class ProjectRoleAllocationConverter {
 			projectRoleAllocationDto.setResourceId(projectRoleAllocation.getResourceAllocation().getResourceId());
             projectRoleAllocationDto.setProjectId(projectRoleAllocation.getResourceAllocation().getProject().getProjectId());
 			projectRoleAllocationDto.setProjectName(projectRoleAllocation.getResourceAllocation().getProject().getProjectName());
+//			projectRoleAllocationDto.setPassword("12456345");
             
 			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<Employee> response = restTemplate.exchange(
@@ -49,6 +54,7 @@ public class ProjectRoleAllocationConverter {
 			projectRoleAllocationDto.setName(employee.getName());
 			projectRoleAllocationDto.setEmail(employee.getEmail());
 			projectRoleAllocationDto.setFirstname(employee.getFirstname());
+			
 			
 			return projectRoleAllocationDto;
 		}
@@ -92,6 +98,9 @@ public class ProjectRoleAllocationConverter {
 				projectRoleAllocationDto.setResourceId(projectRoleAllocation.getResourceAllocation().getResourceId());
 				projectRoleAllocationDto.setProjectId(projectRoleAllocation.getResourceAllocation().getProject().getProjectId());
 				projectRoleAllocationDto.setProjectName(projectRoleAllocation.getResourceAllocation().getProject().getProjectName());
+				
+				PasswordGeneratorText passwordGeneratorText = new PasswordGeneratorText();
+				projectRoleAllocationDto.setPassword(passwordGeneratorText.generateRandomPassword());
 				
 				RestTemplate restTemplate = new RestTemplate();
 				ResponseEntity<Employee> response = restTemplate.exchange(
