@@ -155,7 +155,7 @@ public class AuthRestAPIs {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser( @RequestBody SignUpForm signUpRequest) {
-		System.out.println("fffffffffffffffffffffffffffffffffffffff :" + signUpRequest.getEmail());
+		System.out.println("fffffffffffffffffffffffffffffffffffffff :" + signUpRequest.getEmail()+signUpRequest.getLastname()+signUpRequest.getName()+signUpRequest.getPassword()+signUpRequest.getRole()+signUpRequest.getUsername());
 		
 
 		
