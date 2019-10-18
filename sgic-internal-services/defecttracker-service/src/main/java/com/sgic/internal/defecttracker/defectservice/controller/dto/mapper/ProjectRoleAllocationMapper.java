@@ -16,11 +16,10 @@ public class ProjectRoleAllocationMapper {
 
 	@Autowired
 	private ProjectRoleAllocationConverter projectRoleAllocationConverter;
-	
+
 	@Autowired
 	private ProjectRoleAllocationService projectRoleAllocationService;
 
-	
 	@Autowired
 	private static Logger logger = LogManager.getLogger(ProjectRoleAllocationService.class);
 
@@ -44,6 +43,14 @@ public class ProjectRoleAllocationMapper {
 	public ProjectRoleAllocationDto getByprojectroleId(Long projectroleId) {
 		ProjectRoleAllocation projectRoleAllocation = projectRoleAllocationService.getByprojectRoleId(projectroleId);
 		return projectRoleAllocationConverter.ProjectRoleAllocationToProjectRoleAllocationDto(projectRoleAllocation);
+
+	}
+
+	// Delete Method for EmployeeMapper
+	public void deleteByProjectId(Long projectroleId) {
+		logger.info(" successfully deleted ");
+		projectRoleAllocationService.deleteProjectByprojectId(projectroleId);
+		
 
 	}
 }
