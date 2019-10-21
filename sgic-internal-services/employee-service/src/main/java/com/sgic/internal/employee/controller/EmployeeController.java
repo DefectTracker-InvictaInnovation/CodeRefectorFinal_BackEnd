@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.ui.Model;
@@ -77,36 +74,9 @@ public class EmployeeController {
 		
 		try {
 			
-//			String URL="http://localhost:8085/loginservice/api/auth/signup";
-//			RestTemplate restTemplate = new RestTemplate();
-//			HttpHeaders headers = new HttpHeaders();
-//		    headers.setContentType(MediaType.APPLICATION_JSON);
-//
-//		    JSONObject jsonObject = new JSONObject();
-//		    jsonObject .put("name","mathuu");
-//		    jsonObject .put("username","mathuu");
-//		    jsonObject .put("email","mathuu@gmail.com");
-//		    jsonObject .put("role","developer");
-//		    jsonObject .put("password","mathuu");
-//		    
-//		    System.out.println(jsonObject);
-//
-//		    HttpEntity<JSONObject> entity = new HttpEntity<>(jsonObject , headers);
-//		    System.out.println(entity);
-//		     restTemplate.postForObject(URL, entity, JSONObject.class);
-			
-			
-			
-			
 			SimpleMailMessage mail = new SimpleMailMessage();
 			Designation designation = new Designation();
 			designation.setDesignationname(employeeDTO.getDesignationname());
-			
-//			Employee employee = new Employee();
-//			employee.setEmail(employeeDTO.getEmail());
-//			employee.setName(employeeDTO.getName());
-//			employee.setFirstname(employeeDTO.getFirstname());
-//			employee.setDesignation(designation);
 			
 			mail.setTo(employeeDTO.getEmail());
 			mail.setSubject("Hello "+employeeDTO.getFirstname()+" this your password :"+employeeDTO.getName());
@@ -257,19 +227,6 @@ public class EmployeeController {
 		return "File uploaded successfully";
 	}
 	
-//	@GetMapping("/getdevelopercount")
-//	// <----	Employee DataBase Employee Table Row Count Method --->
-//		public long getTotalDeveloperCount() {
-//			try {
-//				logger.info("Employee Controller :-> getCount");
-//				long name=employeeRepository.findByDesignationName("developer");
-//				return employeeservice.countDeveloper(name);
-//			} catch (Exception ex) {
-//				logger.error("Employee Controller :-> Error" + ex.getMessage());
-//			}
-//			return (Long) null;
-//
-//		}
 	
 	@GetMapping("/getdevelopercount")
 	public Long getTotalDeveloperCount() {

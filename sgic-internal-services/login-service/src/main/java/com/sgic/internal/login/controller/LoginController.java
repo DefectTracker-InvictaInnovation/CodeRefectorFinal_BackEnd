@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.sgic.internal.login.entities.Role;
 import com.sgic.internal.login.entities.RoleName;
@@ -59,10 +60,9 @@ public class LoginController {
 
 	@Autowired
 	JwtProvider jwtProvider;
-	
+
 	@Autowired
 	UserDetailsServiceImpl userDetailsServiceImpl;
-	
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -80,28 +80,30 @@ public class LoginController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser( @RequestBody SignUpForm signUpRequest) {
+	public ResponseEntity<?> registerUser(@RequestBody SignUpForm signUpRequest) {
 		System.out.println("fffffffffffffffffffffffffffffffffffffff :" + signUpRequest.getEmail());
-		
-		
-//		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-//			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
-//					HttpStatus.BAD_REQUEST);
-//		}
-//
-//		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
-//					HttpStatus.BAD_REQUEST);
-//		}
 
-		// Creating user's account
-		User user = new User(signUpRequest.getName(),signUpRequest.getLastname(), signUpRequest.getUsername(), signUpRequest.getEmail(),
-				encoder.encode(signUpRequest.getPassword()));
+		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+					HttpStatus.BAD_REQUEST);
+		}
 
-	String strRoles = signUpRequest.getRole();
-		Set<Role> roles = new HashSet<>();
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+					HttpStatus.BAD_REQUEST);
+		}
 
-		
+		User user1 = new User();
+
+		if (signUpRequest.getEmail() != user1.getEmail()) {
+
+			// Creating user's account
+			User user = new User(signUpRequest.getName(), signUpRequest.getLastname(), signUpRequest.getUsername(),
+					signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+
+			String strRoles = signUpRequest.getRole();
+			Set<Role> roles = new HashSet<>();
+
 			switch (strRoles) {
 			case "Admin":
 				Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
@@ -151,38 +153,41 @@ public class LoginController {
 				roles.add(userRole);
 			}
 
-		user.setRoles(roles);
-		userRepository.save(user);
+			user.setRoles(roles);
+			userRepository.save(user);
 
+		}
 		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 	}
 
 	@GetMapping("/user/me")
-    public UserSummary getCurrentUser(@CurrentUser UserPrinciple currentUser) {
-        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
-        return userSummary;
-    }
-	
+	public UserSummary getCurrentUser(@CurrentUser UserPrinciple currentUser) {
+		UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(),
+				currentUser.getName());
+		return userSummary;
+	}
+
 	@GetMapping("/user/admin")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public UserSummary getCurrentAdmin(@CurrentUser UserPrinciple currentUser) {
 		UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(),
 				currentUser.getName());
 		return userSummary;
-	}	
-	
-	 @GetMapping("/users/{username}")
-	    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
-	    User user = userRepository.findByUsername(username);
-	                
-	        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),user.getName(),user.getLastname(),user.getEmail(),user.getRoles());
+	}
 
-	        return userProfile;
-	    }
-	 
-	 @GetMapping("/getAllUsers")
-	 public List<User> getAllUserProfiles(){
+	@GetMapping("/users/{username}")
+	public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
+		User user = userRepository.findByUsername(username);
+
+		UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getLastname(),
+				user.getEmail(), user.getRoles());
+
+		return userProfile;
+	}
+
+	@GetMapping("/getAllUsers")
+	public List<User> getAllUserProfiles() {
 		return userDetailsServiceImpl.getUserDetails();
-		 
-	 }
+
+	}
 }

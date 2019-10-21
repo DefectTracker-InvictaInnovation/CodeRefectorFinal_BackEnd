@@ -29,7 +29,6 @@ import com.sgic.internal.defecttracker.defectservice.controller.dto.ProjectRoleA
 import com.sgic.internal.defecttracker.defectservice.controller.dto.UserDto;
 import com.sgic.internal.defecttracker.defectservice.controller.dto.mapper.ProjectRoleAllocationMapper;
 import com.sgic.internal.defecttracker.defectservice.entities.ProjectRoleAllocation;
-import com.sgic.internal.defecttracker.defectservice.repositories.ProjectRoleAllocationRepository;
 
 @CrossOrigin
 @RestController
