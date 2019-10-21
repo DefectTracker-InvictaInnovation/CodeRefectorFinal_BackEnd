@@ -36,6 +36,9 @@ public interface EmployeeService {
 	// Method for UpdateBenchFalse Employee
 	public void updateBenchFalse(Long empId, Employee employee);
 
+	// Method for UpdateAvailability Employee
+	public void updateAvailability(Employee employee);
+
 	// Count method for counting database Employee
 	public long count();
 

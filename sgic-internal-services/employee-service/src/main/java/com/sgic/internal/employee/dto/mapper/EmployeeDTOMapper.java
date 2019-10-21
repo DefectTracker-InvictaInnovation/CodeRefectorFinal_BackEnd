@@ -91,6 +91,18 @@ public class EmployeeDTOMapper {
 		return employee;
 
 	}
+//	@SuppressWarnings({ "static-access", "unused" })
+//	// Update Employee
+//	public Employee UpdateAvailaibility(Long EmpId, EmployeeDTO employeeDTO) {
+//		logger.info("Employee is Updated Availaibity", employeeDTO.getEmpId());
+//		Employee employee = EmployeeConverter.EmployeeDTOToEmployee(employeeDTO);
+//		employeeService.updateAvailability(EmpId, employeeConverter.EmployeeDTOToEmployee(employeeDTO));
+//		return employee;
+//
+//	}
+	
+	
+	
 
 	@SuppressWarnings("static-access")
 	// Find Employee By Designation

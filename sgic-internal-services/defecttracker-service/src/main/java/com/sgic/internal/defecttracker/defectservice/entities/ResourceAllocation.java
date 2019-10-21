@@ -11,10 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(schema = "defectservices", name = "resource_Allocation")
+@Table(name = "resource_Allocation")
 //@SecondaryTable(name = "Employee")
 public class ResourceAllocation implements Serializable {
 
@@ -22,11 +23,21 @@ public class ResourceAllocation implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	<---Initialize Variable for Attribute of Resource Allocation--->
 	private Long resourceId;
-	
+
 	@NonNull
 	private Long empId;
 
-//	<---Project With Resource Allocation Relationship --->
+	private int availability;
+
+	public int getAvailability() {
+		return availability;
+	}
+
+	public int setAvailability(int availability) {
+		return this.availability = availability;
+	}
+
+	// <---Project With Resource Allocation Relationship --->
 	@ManyToOne
 	@JoinColumn(name = "projectId", nullable = false)
 	private Project project;
@@ -76,6 +87,5 @@ public class ResourceAllocation implements Serializable {
 	public void setEmpId(Long empId) {
 		this.empId = empId;
 	}
-
 
 }

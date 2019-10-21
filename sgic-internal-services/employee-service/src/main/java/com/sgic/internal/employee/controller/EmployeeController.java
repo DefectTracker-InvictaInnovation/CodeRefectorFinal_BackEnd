@@ -57,26 +57,26 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeservice;
 	ObjectMapper objectMapper = new ObjectMapper();
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
 	@Autowired
 	private NotificationService notificationService;
-	
+
 	@Autowired
 	FileStorageService fileStorageService;
-	
+
 	private static Logger logger = LogManager.getLogger(EmployeeDTOMapper.class);
 
 	/* Author:KeerthanaR 17-06-2019 */
 	// Create Employee
-	@PostMapping(value = "/createemployee") 
+	@PostMapping(value = "/createemployee")
 	public Employee createEmployee(@RequestBody EmployeeDTO employeeDTO) {
 		logger.info("Employee Controller -> CreateEmployee");
-		
+
 		try {
-			
+
 //			String URL="http://localhost:8085/loginservice/api/auth/signup";
 //			RestTemplate restTemplate = new RestTemplate();
 //			HttpHeaders headers = new HttpHeaders();
@@ -94,25 +94,22 @@ public class EmployeeController {
 //		    HttpEntity<JSONObject> entity = new HttpEntity<>(jsonObject , headers);
 //		    System.out.println(entity);
 //		     restTemplate.postForObject(URL, entity, JSONObject.class);
-			
-			
-			
-			
+
 			SimpleMailMessage mail = new SimpleMailMessage();
 			Designation designation = new Designation();
 			designation.setDesignationname(employeeDTO.getDesignationname());
-			
+
 //			Employee employee = new Employee();
 //			employee.setEmail(employeeDTO.getEmail());
 //			employee.setName(employeeDTO.getName());
 //			employee.setFirstname(employeeDTO.getFirstname());
 //			employee.setDesignation(designation);
-			
+
 			mail.setTo(employeeDTO.getEmail());
-			mail.setSubject("Hello "+employeeDTO.getFirstname()+" this your password :"+employeeDTO.getName());
+			mail.setSubject("Hello " + employeeDTO.getFirstname() + " this your password :" + employeeDTO.getName());
 			mail.setText("This is a cool email notification");
-			
-			System.out.println("Employee Email Address:"+employeeDTO.getEmail());
+
+			System.out.println("Employee Email Address:" + employeeDTO.getEmail());
 			notificationService.sendNotofication(mail);
 			if (employeeDTOMapper.getById(employeeDTO.getEmpId()) != null) {
 				logger.info("Successfully Saved");
@@ -131,7 +128,7 @@ public class EmployeeController {
 
 	/* Author:KiishanthS 17-06-2019 */
 	// List Employee
-	@GetMapping(value = "/getallemployee") 
+	@GetMapping(value = "/getallemployee")
 	public ResponseEntity<List<EmployeeDTO>> sortListEmployeeInfo(Long empId) {
 		try {
 			logger.info("Employee Controller : --> GetAllEmployeeInfo");
@@ -145,7 +142,7 @@ public class EmployeeController {
 
 	/* Author:DalistaaA 17-06-2019 */
 	// Get Employee By Employee ID
-	@GetMapping("/getempolyeebyid/{empid}") 
+	@GetMapping("/getempolyeebyid/{empid}")
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "empid") Long empid) {
 		try {
 			logger.info("Employee Controller :-> GetEmployeeById");
@@ -161,7 +158,7 @@ public class EmployeeController {
 
 	/* Author:JothiM 17-06-2019 */
 	// Delete Employee Using Employee ID
-	@DeleteMapping("/deletebyid/{empId}") 
+	@DeleteMapping("/deletebyid/{empId}")
 	public ResponseEntity<String> deleteEmployeeByempId(@PathVariable("empId") Long empId) {
 		try {
 			logger.info("Employee Controller :-> DeleteEmployeeById");
@@ -188,7 +185,7 @@ public class EmployeeController {
 
 	/* Author:RammiyaN 19-06-2019 */
 	// update Employee Using Employee ID
-	@PutMapping("update/{empId}") 
+	@PutMapping("update/{empId}")
 	public ResponseEntity<String> updateEmployee(@RequestBody EmployeeDTO employeeDTO) {
 		try {
 			logger.info("Employee Controller :-> Update");
@@ -205,7 +202,7 @@ public class EmployeeController {
 
 	/* Author:DalistaaA 19-06-2019 */
 	// Get Employee By Designation
-	@GetMapping("/getdesignation/{designationid}") 
+	@GetMapping("/getdesignation/{designationid}")
 	public List<EmployeeDTO> getByDesignation(@PathVariable(name = "designationid") Long designationid) {
 		try {
 			logger.info("Employee Controller :-> GetDesignation");
@@ -219,7 +216,7 @@ public class EmployeeController {
 
 	/* Author:KeerthanaR 23-06-2019 */
 	// Get Employee By Name
-	@GetMapping("/getname/{name}") 
+	@GetMapping("/getname/{name}")
 	public List<EmployeeDTO> getByName(@PathVariable(name = "name") String name) {
 		try {
 			logger.info("Employee Controller -> GetName");
@@ -256,7 +253,7 @@ public class EmployeeController {
 		}
 		return "File uploaded successfully";
 	}
-	
+
 //	@GetMapping("/getdevelopercount")
 //	// <----	Employee DataBase Employee Table Row Count Method --->
 //		public long getTotalDeveloperCount() {
@@ -270,7 +267,7 @@ public class EmployeeController {
 //			return (Long) null;
 //
 //		}
-	
+
 	@GetMapping("/getdevelopercount")
 	public Long getTotalDeveloperCount() {
 		try {
@@ -279,8 +276,9 @@ public class EmployeeController {
 		} catch (Exception e) {
 		}
 		return (Long) null;
-		
+
 	}
+
 	@GetMapping("/getTotalQaCount")
 	public long getTotalQaCount() {
 		try {
@@ -291,7 +289,7 @@ public class EmployeeController {
 		return (Long) null;
 
 	}
-	
+
 	@GetMapping("/getTotalPmCount")
 	public long getTotalPmCount() {
 		try {
@@ -304,41 +302,39 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/saveemployee", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public AppResponse createemployee(@RequestParam(value = AppConstants.EMPLOYEE_JSON_PARAM, required = true) String extra,
-			@RequestParam(required=false , value = AppConstants.EMPLOYEE_FILE_PARAM)  MultipartFile file)
+	public AppResponse createemployee(
+			@RequestParam(value = AppConstants.EMPLOYEE_JSON_PARAM, required = true) String extra,
+			@RequestParam(required = false, value = AppConstants.EMPLOYEE_FILE_PARAM) MultipartFile file)
 			throws JsonParseException, JsonMappingException, IOException {
-		
-		if(!file.isEmpty()) {
+
+		if (!file.isEmpty()) {
 			System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 			EmployeeDTO employeeDTO = objectMapper.readValue(extra, EmployeeDTO.class);
 			String fileName = fileStorageService.storeFile(file);
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
-					.path(fileName).toUriString();
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+					.path(AppConstants.DOWNLOAD_PATH).path(fileName).toUriString();
 			employeeDTO.setProfilePicPath(fileDownloadUri);
 			employeeDTOMapper.saveEmployee(employeeDTO);
 
-		}else {
+		} else {
 			EmployeeDTO employeeDTO = objectMapper.readValue(extra, EmployeeDTO.class);
 			System.out.println("llllllllllllllllllllllllllllllllllllllllllllll");
 //			String fileName = fileStorageService.storeFile(file);
 //			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(AppConstants.DOWNLOAD_PATH)
 //					.path(fileName).toUriString();
-			employeeDTO.setProfilePicPath("http://localhost:8084/employeeservice/downloadFile/1570768396385_Full-HD-1080p-Wallpaper-HD-Nature.jpg");
+			employeeDTO.setProfilePicPath(
+					"http://localhost:8084/employeeservice/downloadFile/1570768396385_Full-HD-1080p-Wallpaper-HD-Nature.jpg");
 			employeeDTOMapper.saveEmployee(employeeDTO);
 		}
-		
+
 //		Employee employee = objectMapper.readValue(empJson, Employee.class);
 //		employee.setProfilePicPath(fileDownloadUri);
 //		employeeservice.saveEmployee(employee);
-		
-		
-		
-	
+
 		return new AppResponse(AppConstants.SUCCESS_CODE, AppConstants.SUCCESS_MSG);
 
+	}
 
-}
-	
 	@RequestMapping(value = AppConstants.DOWNLOAD_URI, method = RequestMethod.GET)
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
 		Resource resource = fileStorageService.loadFileAsResource(fileName);
@@ -356,39 +352,63 @@ public class EmployeeController {
 						String.format(AppConstants.FILE_DOWNLOAD_HTTP_HEADER, resource.getFilename()))
 				.body(resource);
 	}
-	
-/////////update bench when allocate resource////////////
-@RequestMapping(value = "update/benchtrue/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<String> updateBenchTrue(@RequestBody EmployeeDTO employeeDTO,
-		@PathVariable("empId") Long empId) {
-	try {
-		logger.info("Employee Controller :-> Update");
-		// employeeDTOMapper.UpdateBenchTrue(empId,employeeDTO);
-		if (employeeDTOMapper.UpdateBenchTrue(empId, employeeDTO) != null) {
-			return new ResponseEntity<>("Successfully Updated", HttpStatus.OK);
+
+// <--------     update bench when allocate resource     ---->
+	@RequestMapping(value = "update/benchtrue/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateBenchTrue(@RequestBody EmployeeDTO employeeDTO,
+			@PathVariable("empId") Long empId) {
+		try {
+			logger.info("Employee Controller :-> Update");
+			// employeeDTOMapper.UpdateBenchTrue(empId,employeeDTO);
+			if (employeeDTOMapper.UpdateBenchTrue(empId, employeeDTO) != null) {
+				return new ResponseEntity<>("Successfully Updated", HttpStatus.OK);
+			}
+			return new ResponseEntity<>("Failed To Update", HttpStatus.OK);
+		} catch (Exception ex) {
+			logger.error("Employee Controller :-> Error" + ex.getMessage());
 		}
-		return new ResponseEntity<>("Failed To Update", HttpStatus.OK);
-	} catch (Exception ex) {
-		logger.error("Employee Controller :-> Error" + ex.getMessage());
+
+		return null;
 	}
 
-	return null;
-}
-/////////update bench when deallocate resource////////////
-@RequestMapping(value = "update/benchfalse/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<String> updateBenchFalse(@RequestBody EmployeeDTO employeeDTO,
-		@PathVariable("empId") Long empId) {
-	try {
-		logger.info("Employee Controller :-> Update");
+// <-------       update bench when deallocate resource      ------>
+	@RequestMapping(value = "update/benchfalse/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateBenchFalse(@RequestBody EmployeeDTO employeeDTO,
+			@PathVariable("empId") Long empId) {
+		try {
+			logger.info("Employee Controller :-> Update");
 //		employeeDTOMapper.UpdateBenchFalse(empId,employeeDTO);
-		if (employeeDTOMapper.UpdateBenchFalse(empId, employeeDTO) != null) {
-			return new ResponseEntity<>("Successfully Updated", HttpStatus.OK);
+			if (employeeDTOMapper.UpdateBenchFalse(empId, employeeDTO) != null) {
+				return new ResponseEntity<>("Successfully Updated", HttpStatus.OK);
+			}
+			return new ResponseEntity<>("Failed To Update", HttpStatus.OK);
+		} catch (Exception ex) {
+			logger.error("Employee Controller :-> Error" + ex.getMessage());
 		}
-		return new ResponseEntity<>("Failed To Update", HttpStatus.OK);
-	} catch (Exception ex) {
-		logger.error("Employee Controller :-> Error" + ex.getMessage());
+
+		return null;
 	}
 
-	return null;
-}
+	
+// <-------       update availability when allocate the resource      ------>
+	@RequestMapping(value = "update/availability/{empId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateAvailability(@RequestBody EmployeeDTO employeeDTO,
+			@PathVariable("empId") Long empId) {
+
+		try {
+			logger.info("Employee Controller :-> Update Availability");
+			int availablenow = employeeDTO.getAvailability();
+			System.out.println("availablenow" +availablenow);
+			employeeRepository.updateAvailability(availablenow,empId);
+
+//			if (employeeDTOMapper.UpdateAvailaibility(empId, employeeDTO) != null) {
+//				return new ResponseEntity<>("Successfully Updated Availability", HttpStatus.OK);
+//			}
+//			return new ResponseEntity<>("Failed To Update", HttpStatus.OK);
+		} catch (Exception ex) {
+			logger.error("Employee Controller :-> Error" + ex.getMessage());
+		}
+
+		return null;
+	}
 }

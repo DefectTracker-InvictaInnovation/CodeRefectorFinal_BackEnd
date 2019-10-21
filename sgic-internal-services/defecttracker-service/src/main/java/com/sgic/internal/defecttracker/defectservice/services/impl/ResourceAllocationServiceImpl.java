@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocation;
 import com.sgic.internal.defecttracker.defectservice.repositories.ResourceAllocationRepository;
 import com.sgic.internal.defecttracker.defectservice.services.ResourceAllocationService;
-
 
 @Service
 public class ResourceAllocationServiceImpl implements ResourceAllocationService {
@@ -38,24 +38,65 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 		try {
 
 			Long eid = resourceAllocation.getEmpId();
+			int availability = resourceAllocation.getAvailability();
 			System.out.println("Employee id" + eid);
+			System.out.println("Availability" + availability);
 
-			String url = "http://localhost:8084/employeeservice/getempolyeebyid/" + eid;
-			String resp = restTemplate.getForObject(url, String.class);
+			boolean isExist = resourceAllocationRepository.findResourceAllocationByempId(eid) != null;
+			System.out.println("isExists------->" + isExist);
 
-			HttpHeaders headers = new HttpHeaders();
+			boolean isNotExceed = resourceAllocationRepository.AvailabileSum(eid) == null
+					|| resourceAllocationRepository.AvailabileSum(eid) < 100;
+			System.out.println("Availability Resource " + resourceAllocationRepository.AvailabileSum(eid));
+			System.out.println("isNotExceed" + isNotExceed);
+			int total = availability + resourceAllocationRepository.AvailabileSum(eid).intValue();
+			if (total < 100) {
+				if (isNotExceed) {
 
-			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			HttpEntity<String> respo = new HttpEntity<String>(resp, headers);
+					resourceAllocationRepository.save(resourceAllocation);
+					logger.error("Successfully Saved ");
 
-			ResponseEntity<String> obj = restTemplate.exchange(
-					"http://localhost:8084/employeeservice/update/benchtrue/" + eid, HttpMethod.PUT, respo,
-					String.class);
-			logger.info("ResourceAllocationServiceImpl-->successfully updates Bench");
-			resourceAllocationRepository.save(resourceAllocation);
-			logger.info("ResourceAllocationServiceImpl-->successfully saved Resource");
-			return obj;
+//				<-----     Update Availablity    ------>
+
+					HttpHeaders headers1 = new HttpHeaders();
+					headers1.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+					if (isExist) {
+						int x = resourceAllocation
+								.setAvailability(100 - resourceAllocationRepository.AvailabileSum(eid).intValue());
+						System.out.println("Availability--> " + resourceAllocation.getAvailability());
+						System.out.println("x-->" + x);
+					}
+					HttpEntity<Object> response = new HttpEntity<Object>(resourceAllocation, headers1);
+
+					restTemplate.exchange("http://localhost:8084/employeeservice/update/availability/" + eid,
+							HttpMethod.PUT, response, String.class);
+					logger.info("ResourceAllocationServiceImpl-->successfully update availability");
+
+					// <----- Update Bench ----->
+					String url = "http://localhost:8084/employeeservice/getempolyeebyid/" + eid;
+					String resp = restTemplate.getForObject(url, String.class);
+
+					HttpHeaders headers = new HttpHeaders();
+
+					headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+					headers.setContentType(MediaType.APPLICATION_JSON);
+					HttpEntity<String> respo = new HttpEntity<String>(resp, headers);
+
+					ResponseEntity<String> obj = restTemplate.exchange(
+							"http://localhost:8084/employeeservice/update/benchtrue/" + eid, HttpMethod.PUT, respo,
+							String.class);
+					logger.info("ResourceAllocationServiceImpl-->successfully updates Bench");
+
+					return new ResponseEntity<>("Successfully Saved", HttpStatus.OK);
+				} else {
+					logger.error("Already Exceeds 100%");
+					return new ResponseEntity<>("Already Exceeds 100%", HttpStatus.OK);
+				}
+
+			} else {
+				logger.error("Caanot allocate more than 100%");
+				return new ResponseEntity<>("Caanot allocate more than 100%", HttpStatus.OK);
+			}
 		} catch (Exception ex) {
 			logger.error("Resource Allocation Imp Error :-> " + ex.getMessage());
 		}
@@ -171,7 +212,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 		return null;
 
 	}
-	
+
 	@Override
 	public List<ResourceAllocation> getByEmployee(Long empId) {
 		return resourceAllocationRepository.findResourceAllocationByempId(empId);

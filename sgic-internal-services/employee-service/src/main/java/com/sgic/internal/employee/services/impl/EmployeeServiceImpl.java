@@ -105,6 +105,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (isExist) {
 				logger.info("Employee updates Successfully");
 				employeeRepository.updateBenchTrue(empId);
+				
 				// return employeeRepository.save(employee);
 			} else {
 				logger.info("Employee Id is Not Found");
@@ -139,6 +140,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 
 	}
+	@Override
+	@Modifying
+	// UpdateBenchFalse
+	public void updateAvailability(Employee employee) {
+		int availability = employee.getAvailability();
+		Long empId = employee.getEmpId();
+		int availabilitynow =100 - availability;
+		
+		employeeRepository.updateAvailability(availabilitynow,empId);
+		System.out.println("ok");
+//		try {
+////			
+////			int Availaibility = employee.getAvailability();
+//			boolean isExist = employeeRepository.findEmployeeByEmpId(empId) != null;
+//			if (isExist) {
+//				logger.info("Employee updates Successfully");
+//				employeeRepository.updateAvailability(availabilitynow,empId);
+////				// return employeeRepository.save(employee);
+//			} else {
+//				logger.info("Employee Id is Not Found");
+//			}
+//
+//		} catch (Exception ex) {
+//			logger.error("Employee Service Imp:--> Error" + ex.getMessage());
+//		}
+
+	}
+	
+	
+	
 	
 	@Override
 	// Find By Employee Email

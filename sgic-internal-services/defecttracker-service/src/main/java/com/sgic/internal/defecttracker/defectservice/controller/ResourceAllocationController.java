@@ -47,7 +47,7 @@ public class ResourceAllocationController {
 		try {
 			logger.info("Resource Controller :--> Successfully Saved");
 			resourceAllocationDtoMapper.saveResource(resourceAllocationDto);
-			return new ResponseEntity<>("Saved Successfully", HttpStatus.OK);
+			
 		} catch (Exception ex) {
 			logger.error("Resource Controller :--> error" + ex.getMessage());
 		}
