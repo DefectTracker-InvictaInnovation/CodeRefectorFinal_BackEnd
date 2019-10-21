@@ -12,8 +12,8 @@
 	<groupId>com.sgic.internal</groupId>
 	<artifactId>sgic-internal-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-service</name>
-	<packaging>jar</packaging>
+	<name>login-service</name>
+	<packaging>war</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -108,6 +108,6 @@
 
 		<!-- for war file deployement -->
 
-		<finalName>login</finalName>
+		<finalName>loginservice</finalName>
 	</build>
 </project>

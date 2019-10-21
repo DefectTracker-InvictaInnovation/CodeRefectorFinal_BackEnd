@@ -12,7 +12,8 @@
 	<groupId>com.sgic.internal</groupId>
 	<artifactId>sgic-internal-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-service</name>
+	<name>product-service</name>
+	<packaging>war</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -79,7 +80,11 @@
 			<scope>test</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -104,6 +109,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>productservice</finalName>
 	</build>
 
 </project>
