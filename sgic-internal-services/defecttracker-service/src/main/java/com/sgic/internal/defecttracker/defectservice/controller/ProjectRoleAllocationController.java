@@ -40,11 +40,10 @@ public class ProjectRoleAllocationController {
 
 	@Autowired
 	private ProjectRoleAllocationMapper projectRoleAllocationMapper;
-	
- 
+
 	private static Logger logger = LogManager.getLogger(ProjectRoleAllocationMapper.class);
 
-//	<----This APIs Is -- Save Single Object--->
+// <----This APIs Is -- Save Single Object--->
 	@PostMapping(value = "/saverole")
 	public ProjectRoleAllocation createRole(@RequestBody ProjectRoleAllocationDto projectRoleAllocationDto) {
 		try {
@@ -62,7 +61,6 @@ public class ProjectRoleAllocationController {
 		logger.info("Project Role Allocation Controller -> GetProjectRole");
 		return new ResponseEntity<>(projectRoleAllocationMapper.getAllRole(), HttpStatus.OK);
 	}
-
 
 	@GetMapping("/getprojectrolebyid/{projectroleId}")
 	public ResponseEntity<ProjectRoleAllocationDto> getProjectRoleAllocationById(
@@ -101,29 +99,29 @@ public class ProjectRoleAllocationController {
 				user.setPassword(entry.getPassword());
 				user.setRole(entry.getRoleName());
 				user.setLastname(entry.getName());
-				
-//				UserDto user1 = new UserDto();
-//				user1.setUsername(user.getUsername());
-//				user1.setName(user.getName());
-//				user1.setEmail(user.getEmail());
-//				user1.setPassword(user.getPassword());
-//				user1.setRole(user.getRole());
-//				user1.setLastname(user.getLastname());
-						
+
+// UserDto user1 = new UserDto();
+// user1.setUsername(user.getUsername());
+// user1.setName(user.getName());
+// user1.setEmail(user.getEmail());
+// user1.setPassword(user.getPassword());
+// user1.setRole(user.getRole());
+// user1.setLastname(user.getLastname());
+
 				System.out.println("userList " + user);
-//				
-			System.out.println("passowrdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+user.getPassword());
+//
+				System.out.println("passowrdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" + user.getPassword());
 
-			HttpHeaders headers = new HttpHeaders();
-			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-			HttpEntity<UserDto> entity = new HttpEntity<UserDto>(user, headers);
-			System.out.println("yes");
-			ResponseEntity<?> obj = restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup",
-					HttpMethod.POST, entity, UserDto.class);
+				HttpHeaders headers = new HttpHeaders();
+				headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+				HttpEntity<UserDto> entity = new HttpEntity<UserDto>(user, headers);
+				System.out.println("yes");
+				ResponseEntity<?> obj = restTemplate.exchange("http://localhost:8085/loginservice/api/auth/signup",
+						HttpMethod.POST, entity, UserDto.class);
 
-			System.out.println("obj" + obj);
-			
-		}
+				System.out.println("obj" + obj);
+
+			}
 			return null;
 		} catch (Exception ex) {
 			logger.error("Check Your Error");
@@ -137,7 +135,7 @@ public class ProjectRoleAllocationController {
 		try {
 			logger.info("Project Allocation Controller :-> DeleteEmployeeById");
 			projectRoleAllocationMapper.deleteByProjectId(projectroleId);
-		//	ProjectRoleAllocationRepository.deleteById(projectroleId);
+// ProjectRoleAllocationRepository.deleteById(projectroleId);
 			return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("Project Allocation Controller :-> Error " + ex.getMessage());
