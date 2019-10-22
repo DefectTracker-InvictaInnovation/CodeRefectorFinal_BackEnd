@@ -10,4 +10,5 @@ public interface CompanyLicenseTypeService {
 		// List all CompanyLicenseType
 		public List<CompanyLicenseType> getAllCompanyLicenseType();
 		public CompanyLicenseType saveCompanyLicenseType(CompanyLicenseType companyLicenseType);
+		public CompanyLicenseType updateCompanyLicenseType(CompanyLicenseType companyLicenseType);
 }

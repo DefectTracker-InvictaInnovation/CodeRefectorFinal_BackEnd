@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,6 +51,17 @@ public class CompanyLicenseTypeController {
 		public List<CompanyLicenseType> getAllCompanyLicenseType() {
 			logger.info("Controller -> Data Retrieved Successfull");
 			return companyLicenseTypeService.getAllCompanyLicenseType();
+		}
+		
+		//Update Company
+		@PutMapping("/License/{licenseId}")
+		public ResponseEntity<String> updateCompany(@Valid @RequestBody CompanyLicenseTypeDto companyLicenseTypeDto){
+			logger.info("CompanyLicenseType Controller -> CompanyLicenseType Updated Successful");
+			if (companyLicenceTypeMapper.updateCompanyLicenseType(companyLicenseTypeDto) != null) {
+				return new ResponseEntity<>("Sucessfully Updated CompanyLicenseType", HttpStatus.OK);
+			}
+			logger.info("CompanyLicenseType Controller -> CompanyLicenseType Updated Failed!!!");
+			return new ResponseEntity<>("Update FAILED!!!", HttpStatus.BAD_REQUEST);
 		}
 
 }

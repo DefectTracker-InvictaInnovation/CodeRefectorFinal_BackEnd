@@ -81,20 +81,30 @@ public class LoginController {
 	public ResponseEntity<?> registerUser( @RequestBody SignUpForm signUpRequest) {
 		System.out.println("fffffffffffffffffffffffffffffffffffffff :" + signUpRequest.getEmail()+signUpRequest.getLastname()+signUpRequest.getName()+signUpRequest.getPassword()+signUpRequest.getRole()+signUpRequest.getUsername());
 		
-		
-		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
-					HttpStatus.BAD_REQUEST);
-		}
-
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
-					HttpStatus.BAD_REQUEST);
-		}
+			System.out.println("Fail -> Email is already taken!");
+			// return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already taken!"),
+			// HttpStatus.BAD_REQUEST);
+			} else if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+			System.out.println("Fail ->  Username is already takenss!");
+			// return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+			// HttpStatus.BAD_REQUEST);
+			} else {
 
-		User user1 = new User();
+		
+//		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+//			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+//					HttpStatus.BAD_REQUEST);
+//		}
+//
+//		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+//			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+//					HttpStatus.BAD_REQUEST);
+//		}
 
-		if (signUpRequest.getEmail() != user1.getEmail()) {
+//		User user1 = new User();
+//
+//		if (signUpRequest.getEmail() != user1.getEmail()) {
 
 			// Creating user's account
 			User user = new User(signUpRequest.getName(), signUpRequest.getLastname(), signUpRequest.getUsername(),
