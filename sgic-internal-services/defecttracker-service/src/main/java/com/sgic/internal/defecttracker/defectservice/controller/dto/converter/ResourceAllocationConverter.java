@@ -79,6 +79,7 @@ public class ResourceAllocationConverter {
 			logger.info("Resource Allocation Converter--- successfully Converte Resource Allocation DTO  To Entity");
 			resourceAllocation.setResourceId(resourceAllocationDto.getResourceId());
 			resourceAllocation.setEmpId(resourceAllocationDto.getEmpId());
+			resourceAllocation.setAvailability(resourceAllocationDto.getAvailability());
 //			<----Set Project Variable to Resource Allocation DTo---->
 			Project project = new Project();
 			project.setProjectId(resourceAllocationDto.getProjectId());

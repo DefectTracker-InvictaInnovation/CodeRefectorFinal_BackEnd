@@ -38,7 +38,7 @@ public class EmployeeConverter {
 	public static Employee EmployeeDTOToEmployee(EmployeeDTO employeeDTO) {
 		Employee employee = new Employee();
 		if (employeeDTO != null) {
-			logger.info("Employee Converter---> Employee DTO To Employee Entity Converte ");
+			logger.info("Employee Converter---> Employee DTO To Employee Entity Converter ");
 			employee.setEmpId(employeeDTO.getEmpId());
 			employee.setEmployeeid(employeeDTO.getEmployeeid().toUpperCase());
 			employee.setEmail(employeeDTO.getEmail());

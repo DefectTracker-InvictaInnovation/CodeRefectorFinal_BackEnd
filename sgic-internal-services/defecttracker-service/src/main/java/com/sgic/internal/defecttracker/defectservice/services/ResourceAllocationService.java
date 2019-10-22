@@ -27,5 +27,6 @@ public interface ResourceAllocationService {
 	public ResponseEntity<String> deleteResourceById(Long resourceId);
 	
 	public List<ResourceAllocation> getByEmployee(Long empId);
+	
 
 }
