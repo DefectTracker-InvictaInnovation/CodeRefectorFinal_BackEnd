@@ -13,8 +13,15 @@ public class ProjectRoleAllocationDto {
 	private String employeeid;
 	private String projectId;
 	private String projectName;
+	private boolean bench;
 	
 
+	public boolean isBench() {
+		return bench;
+	}
+	public boolean setBench(boolean bench) {
+		return this.bench = bench;
+	}
 	public String getEmployeeid() {
 		return employeeid;
 	}

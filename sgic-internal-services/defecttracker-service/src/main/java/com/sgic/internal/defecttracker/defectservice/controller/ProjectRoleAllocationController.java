@@ -90,7 +90,9 @@ public class ProjectRoleAllocationController {
 			System.out.println("list " + list);
 
 			for (ProjectRoleAllocationDto entry : list) {
-
+				
+//				if(entry.isBench()) {
+					
 				UserDto user = new UserDto();
 				user.setName(entry.getName());
 				user.setUsername(entry.getFirstname());
@@ -98,14 +100,7 @@ public class ProjectRoleAllocationController {
 				user.setPassword(entry.getPassword());
 				user.setRole(entry.getRoleName());
 				user.setLastname(entry.getName());
-
-// UserDto user1 = new UserDto();
-// user1.setUsername(user.getUsername());
-// user1.setName(user.getName());
-// user1.setEmail(user.getEmail());
-// user1.setPassword(user.getPassword());
-// user1.setRole(user.getRole());
-// user1.setLastname(user.getLastname());
+				
 
 				System.out.println("userList " + user);
 //
@@ -119,8 +114,9 @@ public class ProjectRoleAllocationController {
 						HttpMethod.POST, entity, UserDto.class);
 
 				System.out.println("obj" + obj);
+				}
 
-			}
+//			}
 			return null;
 		} catch (Exception ex) {
 			logger.error("Check Your Error");

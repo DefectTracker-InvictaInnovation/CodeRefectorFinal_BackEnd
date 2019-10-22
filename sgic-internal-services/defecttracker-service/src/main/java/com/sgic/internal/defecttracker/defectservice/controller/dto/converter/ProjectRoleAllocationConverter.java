@@ -112,6 +112,7 @@ public class ProjectRoleAllocationConverter {
 				projectRoleAllocationDto.setEmployeeid(employee.getEmployeeid());
 				projectRoleAllocationDto.setName(employee.getName());
 				projectRoleAllocationDto.setEmail(employee.getEmail());
+				projectRoleAllocationDto.setBench(employee.isBench());
 				projectRoleAllocationDto.setFirstname(employee.getFirstname());
 				ListroleAllocationDto.add(projectRoleAllocationDto);
 
