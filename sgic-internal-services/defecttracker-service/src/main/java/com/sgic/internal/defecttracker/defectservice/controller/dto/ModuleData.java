@@ -7,14 +7,16 @@ public class ModuleData {
 	private String moduleId;
 	private String moduleName;
 	private String projectid;
+	private String projectName;
 //	private String subModuleId;
 //	private String subModuleName;
 
-	public ModuleData(String moduleId, String moduleName, String projectid) {
+	public ModuleData(String moduleId, String moduleName, String projectid, String projectName ) {
 		super();
 		this.moduleId = moduleId;
 		this.moduleName = moduleName;
 		this.projectid = projectid;
+		this.projectName =  projectName;
 	}
 
 	public ModuleData() {
@@ -62,5 +64,13 @@ public class ModuleData {
 
 	public void setProjectid(String projectid) {
 		this.projectid = projectid;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 }

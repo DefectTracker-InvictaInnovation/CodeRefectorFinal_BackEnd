@@ -19,10 +19,12 @@ import com.sgic.internal.defecttracker.defectservice.services.ModuleAllocationSe
 @RestController
 public class ModuleAllocationController<ResultObject> {
 
+	@SuppressWarnings("rawtypes")
 	@Autowired
 	private ModuleAllocationMapper moduleAllocationMapper;
 	
-    @Autowired
+    @SuppressWarnings("unused")
+	@Autowired
     private ModuleAllocationService moduleAllocationService;
 	
 //	<----This APIs Is -- Save Single Object--->
@@ -38,7 +40,8 @@ public class ModuleAllocationController<ResultObject> {
 	}
 	
 	
-	 @GetMapping("/list")
+	 @SuppressWarnings("unchecked")
+	@GetMapping("/list")
 	 public ResponseEntity<Iterable<ModuleAllocationDto>> getAllModuleAllocation() {
 			return new ResponseEntity<>(moduleAllocationMapper.getAllModuleAllocation(), HttpStatus.OK);
 		}
