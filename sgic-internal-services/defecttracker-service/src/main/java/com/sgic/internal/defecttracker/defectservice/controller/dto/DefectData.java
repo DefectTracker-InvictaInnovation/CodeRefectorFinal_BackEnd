@@ -1,6 +1,8 @@
 package com.sgic.internal.defecttracker.defectservice.controller.dto;
 
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DefectData {
 	
@@ -21,10 +23,13 @@ public class DefectData {
 	private String availableIn;
 	private String foundIn;
 	private String fixedIn;
-	private Date dateAndTime;
 	private String moduleName;
 	private String projectName;
 
+	private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    
+	 Date date = new Date();
+	 private String dateAndTime=sdf.format(date);
 	
 	public String getDefectId() {
 		return defectId;
@@ -105,12 +110,6 @@ public class DefectData {
 	public void setFixedIn(String fixedIn) {
 		this.fixedIn = fixedIn;
 	}
-	public Date getDateAndTime() {
-		return dateAndTime;
-	}
-	public void setDateAndTime(Date dateAndTime) {
-		this.dateAndTime = dateAndTime;
-	}
 	public String getModuleName() {
 		return moduleName;
 	}
@@ -118,6 +117,12 @@ public class DefectData {
 		this.moduleName = moduleName;
 	}
 	
+	public String getDateAndTime() {
+		return dateAndTime;
+	}
+	public void setDateAndTime(String dateAndTime) {
+		this.dateAndTime = dateAndTime;
+	}
 	public String getProjectName() {
 		return projectName;
 	}

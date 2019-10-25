@@ -26,6 +26,7 @@ public class UserSummary {
 		this.name = name;
 	}
 
+
 		private Long id;
 	    private String username;
 	    private String name;
