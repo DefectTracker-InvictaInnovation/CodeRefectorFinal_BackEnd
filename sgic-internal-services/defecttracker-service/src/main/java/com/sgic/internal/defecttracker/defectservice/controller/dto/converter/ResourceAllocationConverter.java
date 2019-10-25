@@ -16,7 +16,6 @@ import com.sgic.internal.defecttracker.defectservice.controller.dto.ResourceAllo
 import com.sgic.internal.defecttracker.defectservice.entities.Employee;
 import com.sgic.internal.defecttracker.defectservice.entities.Project;
 import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocation;
-import com.sgic.internal.defecttracker.defectservice.entities.ResourceAllocationList;
 
 @Service
 public class ResourceAllocationConverter {
