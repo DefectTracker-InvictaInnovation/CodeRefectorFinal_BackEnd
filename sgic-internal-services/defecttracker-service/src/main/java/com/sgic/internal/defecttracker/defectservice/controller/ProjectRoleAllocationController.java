@@ -125,6 +125,7 @@ public class ProjectRoleAllocationController {
 		return null;
 	}
 
+	//Role Deallocation
 	@DeleteMapping("/deletebyid/{projectroleId}")
 	public ResponseEntity<String> deleteEmployeeByprojectId(@PathVariable("projectroleId") Long projectroleId) {
 		try {
