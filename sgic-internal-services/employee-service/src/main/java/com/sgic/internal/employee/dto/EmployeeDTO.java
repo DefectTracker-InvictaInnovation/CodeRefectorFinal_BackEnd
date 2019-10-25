@@ -10,7 +10,7 @@ public class EmployeeDTO {
 	private String email;
 	private Long designationid;
 	private String designationname;
-	private int availability;
+	private int availability =100;
 	private boolean bench;
 	private String profilePicPath;
 
