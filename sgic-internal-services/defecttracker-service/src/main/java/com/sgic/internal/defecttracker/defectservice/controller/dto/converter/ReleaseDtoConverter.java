@@ -3,9 +3,12 @@ package com.sgic.internal.defecttracker.defectservice.controller.dto.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.sgic.internal.defecttracker.defectservice.controller.dto.ReleaseDto;
 import com.sgic.internal.defecttracker.defectservice.entities.Release;
 
+@Service
 public class ReleaseDtoConverter {
 	
 	//Create release

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,13 +23,14 @@ import com.sgic.internal.defecttracker.defectservice.entities.Release;
 import com.sgic.internal.defecttracker.defectservice.repositories.ProjectRepository;
 import com.sgic.internal.defecttracker.defectservice.services.ReleaseService;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*") // <-- Integration With FrondEnd (React)-->
 @RestController
 public class ReleaseControler {
 	
 	private static Logger logger = LogManager.getLogger(ProjectRepository.class);
 
 	@Autowired
-	public ReleaseDtoMapper releaseDtoMapper;
+	private ReleaseDtoMapper releaseDtoMapper;
 	
 	@Autowired 
 	private ReleaseService releaseService;
@@ -48,12 +50,5 @@ public class ReleaseControler {
 		return releases;
 	}
 
-	
-	@GetMapping("/Releases")
-	public List<Release> getAllRelease(){
-		List<Release> release  = (List<Release>) releaseService.getAllRelease();
-		return release;
-		
-	}
 
 }

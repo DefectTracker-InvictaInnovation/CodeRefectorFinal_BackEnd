@@ -14,17 +14,21 @@ import com.sgic.internal.defecttracker.defectservice.services.ReleaseService;
 public class ReleaseDtoMapper {
 	
 	@Autowired
-	public ReleaseService releaseService;
+	private ReleaseDtoConverter releaseDtoConverter;
+	
+	@Autowired
+	private ReleaseService releaseService;
 
+	@SuppressWarnings("static-access")
 	public List<ReleaseDto> getAllReleases() { // List Method for ReleaseMapper
 		List<Release> releaseList = releaseService.getAllRelease();
-		return ReleaseDtoConverter.releaseToReleaseDto(releaseList);
+		return releaseDtoConverter.releaseToReleaseDto(releaseList);
 
 	}
 
+	@SuppressWarnings("static-access")
 	public Release saveRelease(ReleaseDto releaseDto) {
-		Release release = ReleaseDtoConverter.relaseDtoToRelease(releaseDto);
-		return releaseService.createRelease(release);
+		return releaseService.createRelease(releaseDtoConverter.relaseDtoToRelease(releaseDto));
 	}
 
 }
