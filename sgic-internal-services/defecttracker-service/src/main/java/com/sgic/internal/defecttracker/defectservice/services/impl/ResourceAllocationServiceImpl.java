@@ -48,8 +48,21 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 			boolean isNotExceed = resourceAllocationRepository.AvailabileSum(eid) == null
 					|| resourceAllocationRepository.AvailabileSum(eid) < 100;
 			System.out.println("Availability Resource " + resourceAllocationRepository.AvailabileSum(eid));
+			int total = 0;
 			System.out.println("isNotExceed" + isNotExceed);
-			int total = availability + resourceAllocationRepository.AvailabileSum(eid).intValue();
+			if (resourceAllocationRepository.AvailabileSum(eid) == null) {
+				int availablenow = 0;
+				total = availability + availablenow;
+				System.out.println("total " + total);
+
+			} else {
+				total = availability + resourceAllocationRepository.AvailabileSum(eid).intValue();
+				System.out.println("total " + total);
+
+			}
+			// System.out.println("resourceAllocationRepository.AvailabileSum(eid).intValue()
+			// " +resourceAllocationRepository.AvailabileSum(eid));
+
 			if (total < 100) {
 				if (isNotExceed) {
 
