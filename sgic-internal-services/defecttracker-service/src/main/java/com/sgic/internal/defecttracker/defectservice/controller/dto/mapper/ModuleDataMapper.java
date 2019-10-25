@@ -18,7 +18,7 @@ public class ModuleDataMapper {
 	
 	public List<ModuleData>getAllModuleForMapper(String projectid){
 		List<Module>moduleList =moduleService.getallModuleDetails(projectid);
-		return ModuleConverter.moduleToModuleData(moduleList);
+		return ModuleConverter.moduleToModuleDataList(moduleList);
 	}
 	
 	public Module saveModuleforMapper(ModuleData moduleData) {
@@ -37,7 +37,7 @@ public class ModuleDataMapper {
 	
 	public List<ModuleData> getBymoduleNameForMapper (String moduleName){
 		List<Module> module = moduleService.getBymoduleName(moduleName);
-		return ModuleConverter.moduleToModuleData(module);
+		return ModuleConverter.moduleToModuleDataList(module);
 	}
 	
 	public Module UpdateModule(String moduleId, ModuleData moduleData) {

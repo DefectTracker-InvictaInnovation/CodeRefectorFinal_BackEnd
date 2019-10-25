@@ -7,8 +7,6 @@ public class ModuleData {
 	private String moduleId;
 	private String moduleName;
 	private String projectid;
-//	private String subModuleId;
-//	private String subModuleName;
 
 	public ModuleData(String moduleId, String moduleName, String projectid) {
 		super();
@@ -54,7 +52,7 @@ public class ModuleData {
 //	public void setSubModuleName(String subModuleName) {
 //		this.subModuleName = subModuleName;
 //	}
-//
+
 //	// getters setters for project id
 	public String getProjectid() {
 		return projectid;

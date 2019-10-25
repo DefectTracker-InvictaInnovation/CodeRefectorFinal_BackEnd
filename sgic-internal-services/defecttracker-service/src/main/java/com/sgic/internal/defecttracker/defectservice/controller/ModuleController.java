@@ -75,6 +75,19 @@ public class ModuleController {
 		return submodule;
 	}
 	
+	@GetMapping("/findallmoduleinfo/{moduleId}")
+	public Module allmoduleInfo(@PathVariable String moduleId) {
+		Module submodule  = moduleService.getByallModuleId(moduleId);
+		return submodule;
+	}
+	
+	@PutMapping("/updatemodule/{moduleId}")
+	public ResponseEntity<String> updatemodules(@RequestBody Module module){
+		moduleService.moduleUpdate(module);
+		return null;
+	}
+	
+	
 //	@GetMapping("/findProject")
 //	public  List<Project> findallmain(Project project) {
 //		 List<Project> moduless = (List<Project>) projectservice.findAll();

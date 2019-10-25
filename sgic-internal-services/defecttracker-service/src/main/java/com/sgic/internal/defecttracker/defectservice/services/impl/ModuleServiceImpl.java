@@ -75,4 +75,21 @@ public class ModuleServiceImpl implements ModuleService {
 		return moduleRepository.findAll();
 	}
 
+	@Override
+	public Module getByallModuleId(String moduleId) {
+		return moduleRepository.findAllmoduleByModuleId(moduleId);
+	}
+
+	@Override
+	public Module moduleUpdate(Module module) {
+		String moduleId = module.getModuleId();
+		boolean isExist = moduleRepository.findAllmoduleByModuleId(moduleId) != null;
+		if (isExist) {
+			return moduleRepository.save(module);
+		} else {
+		}
+
+		return null;
+	}
+
 }

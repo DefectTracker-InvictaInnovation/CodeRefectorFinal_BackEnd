@@ -263,6 +263,28 @@ public class EmployeeController {
 		return (Long) null;
 
 	}
+	
+	@GetMapping("/getTotalHRCount")
+	public long getTotalHRCount() {
+		try {
+			Long name = employeeRepository.findByDesignationName("HR");
+			return employeeservice.countDeveloper(name);
+		} catch (Exception e) {
+		}
+		return (Long) null;
+
+	}
+	
+	@GetMapping("/getTotalTecLeadCount")
+	public long getTotalTecLeadCount() {
+		try {
+			Long name = employeeRepository.findByDesignationName("TecLead");
+			return employeeservice.countDeveloper(name);
+		} catch (Exception e) {
+		}
+		return (Long) null;
+
+	}
 
 	@RequestMapping(value = "/saveemployee", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public AppResponse createemployee(

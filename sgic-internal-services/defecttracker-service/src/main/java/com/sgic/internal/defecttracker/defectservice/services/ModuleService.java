@@ -13,10 +13,6 @@ public interface ModuleService {
 
 	public List<Module> getallModuleDetails(String projectid);
 
-//	public List<Object> getSubmodule(String projectid);
-	
-	
-
 	public void deleteById(String moduleId);
 
 	public Module updateModule(String moduleId, Module module);
@@ -29,10 +25,10 @@ public interface ModuleService {
 	public List<Module> getByprojectId(String projectid);
 
 	List<Module> getallDetails();
+	
+	Module getByallModuleId(String moduleId);
+	
+	public Module moduleUpdate(Module module);
 
-//	List<Object> getSubmodule(String subModuleId);
-
-	// service for submodule id
-//	public List<Module> getBySubModuleId(String subModuleId);
 	
 }
