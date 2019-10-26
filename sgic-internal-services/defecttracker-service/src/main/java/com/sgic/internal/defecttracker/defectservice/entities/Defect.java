@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.lang.Nullable;
 
 import com.sgic.internal.defecttracker.defectservice.entities.Module;
 import com.sgic.internal.defecttracker.defectservice.entities.Project;
@@ -77,6 +78,7 @@ public class Defect {
 	@Size(min=2, max=50)
 	private String fixedIn;
 	
+	@Nullable
 	private String dateAndTime;
 	
 	//Generate getters and Setters
@@ -147,7 +149,6 @@ public class Defect {
 	public void setFixedIn(String fixedIn) {
 		this.fixedIn = fixedIn;
 	}
-	
 	public String getDateAndTime() {
 		return dateAndTime;
 	}
