@@ -81,6 +81,10 @@ public class Defect {
 	@Nullable
 	private String dateAndTime;
 	
+	@Nullable
+	private String fixDate;
+	
+	
 	//Generate getters and Setters
 	public String getDefectId() {
 		return defectId;
@@ -190,6 +194,12 @@ public class Defect {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getFixDate() {
+		return fixDate;
+	}
+	public void setFixDate(String fixDate) {
+		this.fixDate = fixDate;
 	}
 	
 }

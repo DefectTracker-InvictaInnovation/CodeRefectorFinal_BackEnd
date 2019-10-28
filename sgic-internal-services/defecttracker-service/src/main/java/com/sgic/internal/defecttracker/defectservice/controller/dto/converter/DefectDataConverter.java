@@ -47,6 +47,7 @@ public class DefectDataConverter {
 				 defectData.setPriority(defect.getPriority());
 				 defectData.setType(defect.getType());
 				 defectData.setStatus(defect.getStatus());
+				 defectData.setFixDate(defect.getFixDate());
 				listDefectData.add(defectData);
 
 			}
@@ -83,6 +84,7 @@ public class DefectDataConverter {
 			 defectData.setSeverity(defect.getSeverity());
 			 defectData.setPriority(defect.getPriority());
 			 defectData.setType(defect.getType());
+			 defectData.setFixDate(defect.getFixDate());
 			 defectData.setStatus(defect.getStatus());
 			return defectData;
 		}
@@ -116,6 +118,7 @@ public class DefectDataConverter {
 			defect.setFoundIn(defectData.getFoundIn());
 			defect.setFixedIn(defectData.getFixedIn());
 			 defect.setAbbre(defectData.getAbbre());
+			 defect.setFixDate(defectData.getFixDate());
 			 defect.setSeverity(defectData.getSeverity());
 			 defect.setPriority(defectData.getPriority());
 			 defect.setType(defectData.getType());

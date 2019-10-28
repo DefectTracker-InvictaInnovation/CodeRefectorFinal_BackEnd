@@ -1,7 +1,10 @@
 package com.sgic.internal.defecttracker.defectservice.controller.dto;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class DefectData {
 	
@@ -28,6 +31,11 @@ public class DefectData {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	LocalDate date = LocalDate.now();
 	private String dateAndTime=date.format(formatter);
+	
+	private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    
+	 Date date1 = new Date();
+	 private String fixDate=sdf.format(date1);
 	
 	public String getDefectId() {
 		return defectId;
@@ -150,7 +158,11 @@ public class DefectData {
 	public void setDateAndTime(String dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
-	
-	
-	
+	public String getFixDate() {
+		return fixDate;
+	}
+	public void setFixDate(String fixDate) {
+		this.fixDate = fixDate;
+	}
+		
 }
