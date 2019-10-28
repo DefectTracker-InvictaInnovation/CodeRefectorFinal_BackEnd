@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(schema = "defectservices", name = "project")
@@ -33,6 +34,12 @@ public class Project implements Serializable {
 	@Pattern(regexp = "[a-z-A-Z]*", message = "Project Name can not contain invalid characters")
 	@Column(name = "project_name")
 	private String projectName;
+	
+	@Nullable
+	@Size(min = 2, max = 50)
+	@Column(name = "project_abbr")
+	private String projectAbbr;
+
 
 	@NotEmpty
 	@Size(min = 2, max = 20)
@@ -112,6 +119,14 @@ public class Project implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public String getProjectAbbr() {
+		return projectAbbr;
+	}
+
+	public void setProjectAbbr(String projectAbbr) {
+		this.projectAbbr = projectAbbr;
 	}
 
 }

@@ -36,7 +36,7 @@ public class ReleaseControler {
 	private ReleaseService releaseService;
 	
 	// Post Mapping For Create a Project
-	@PostMapping(value = "/release")
+	@PostMapping("/release")
 	public ResponseEntity<Object> createRelease(@Valid @RequestBody ReleaseDto releaseDto) {
 		releaseDtoMapper.saveRelease(releaseDto);
 		logger.info("Release created");

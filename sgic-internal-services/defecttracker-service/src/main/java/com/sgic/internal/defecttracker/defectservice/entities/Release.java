@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "release")
+@Table(schema = "defectservices",name = "release")
 public class Release {
 
 	@Id
@@ -26,8 +26,6 @@ public class Release {
 	}
 	public void setReleaseName(String releaseName) {
 		this.releaseName = releaseName;
-	}
-	
-	
+	}	
 
 }

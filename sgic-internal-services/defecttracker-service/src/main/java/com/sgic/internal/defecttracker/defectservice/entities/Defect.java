@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.lang.Nullable;
 
 import com.sgic.internal.defecttracker.defectservice.entities.Module;
 import com.sgic.internal.defecttracker.defectservice.entities.Project;
@@ -24,7 +25,7 @@ public class Defect {
 	@Size(min=2, max=50)
 	private String defectId;
 	
-	@NotNull
+	@Nullable
 	@Size(min=2, max=20)
 	private String abbre;
 	
