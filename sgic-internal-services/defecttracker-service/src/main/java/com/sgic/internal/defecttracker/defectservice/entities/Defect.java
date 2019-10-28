@@ -78,9 +78,8 @@ public class Defect {
 	@Size(min=2, max=50)
 	private String fixedIn;
 	
-	@NotNull
-	@DateTimeFormat(iso=ISO.DATE)
-	private Date dateAndTime;
+	@Nullable
+	private String dateAndTime;
 	
 	//Generate getters and Setters
 	public String getDefectId() {
@@ -150,13 +149,12 @@ public class Defect {
 	public void setFixedIn(String fixedIn) {
 		this.fixedIn = fixedIn;
 	}
-	public Date getDateAndTime() {
+	public String getDateAndTime() {
 		return dateAndTime;
 	}
-	public void setDateAndTime(Date dateAndTime) {
+	public void setDateAndTime(String dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
-	
 	public Project getProject() {
 		return project;
 	}
