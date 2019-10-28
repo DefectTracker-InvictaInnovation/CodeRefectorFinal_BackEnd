@@ -25,7 +25,7 @@ public class Defect {
 	@Size(min=2, max=50)
 	private String defectId;
 	
-	@NotNull
+	@Nullable
 	@Size(min=2, max=20)
 	private String abbre;
 	

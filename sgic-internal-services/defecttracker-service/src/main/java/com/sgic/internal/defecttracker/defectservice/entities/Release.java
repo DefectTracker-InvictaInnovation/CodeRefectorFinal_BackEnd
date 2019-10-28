@@ -30,7 +30,5 @@ public class Release {
 
 	public void setReleaseName(String releaseName) {
 		this.releaseName = releaseName;
-	}
-	
-	
+	}	
 }

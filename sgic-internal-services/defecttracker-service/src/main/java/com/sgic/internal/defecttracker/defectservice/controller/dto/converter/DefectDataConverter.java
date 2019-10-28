@@ -26,10 +26,10 @@ public class DefectDataConverter {
 				
 				DefectData defectData = new DefectData();
 
-				defectData.setDefectId(defect.getDefectId());
-							
+				defectData.setDefectId(defect.getProject().getProjectAbbr()+'/'+defect.getDefectId());
 				defectData.setProjectId(defect.getProject().getProjectId());
 				defectData.setProjectName(defect.getProject().getProjectName());
+				defectData.setAbbre(defect.getProject().getProjectAbbr());
 				defectData.setModuleId(defect.getModule().getModuleId());
 				defectData.setModuleName(defect.getModule().getModuleName());
 				defectData.setDefectDescription(defect.getDefectDescription());
@@ -80,7 +80,7 @@ public class DefectDataConverter {
 			defectData.setAvailableIn(defect.getAvailableIn());
 			defectData.setFoundIn(defect.getFoundIn());
 			defectData.setFixedIn(defect.getFixedIn());
-			 defectData.setAbbre(defect.getAbbre());
+			 defectData.setAbbre(defect.getProject().getProjectAbbr());
 			 defectData.setSeverity(defect.getSeverity());
 			 defectData.setPriority(defect.getPriority());
 			 defectData.setType(defect.getType());
@@ -117,8 +117,8 @@ public class DefectDataConverter {
 			defect.setAvailableIn(defectData.getAvailableIn());
 			defect.setFoundIn(defectData.getFoundIn());
 			defect.setFixedIn(defectData.getFixedIn());
-			 defect.setAbbre(defectData.getAbbre());
-			 defect.setFixDate(defectData.getFixDate());
+			defect.setFixDate(defectData.getFixDate());
+			 defect.setAbbre(project.getProjectAbbr());
 			 defect.setSeverity(defectData.getSeverity());
 			 defect.setPriority(defectData.getPriority());
 			 defect.setType(defectData.getType());

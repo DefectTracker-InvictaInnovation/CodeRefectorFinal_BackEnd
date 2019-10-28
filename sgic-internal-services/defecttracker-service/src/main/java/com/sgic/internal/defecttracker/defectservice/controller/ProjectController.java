@@ -46,7 +46,7 @@ public class ProjectController {
 		return new ResponseEntity<>(new ApiResponse(RestApiResponseStatus.OK), HttpStatus.OK);
 	}
 
-	// Post Mapping For Create a Project
+	// Get Mapping For Get all Project
 	@GetMapping(value = "/GetAllproject")
 	public ResponseEntity<List<ProjectDto>> listprojectInfo() {
 		logger.info("Project are listed ");
