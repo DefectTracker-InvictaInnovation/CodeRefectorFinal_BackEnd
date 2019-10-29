@@ -22,8 +22,10 @@ import com.sgic.internal.defecttracker.defectservice.entities.Project;
 public class Defect {
 	
 	@Id
-	@Size(min=2, max=50)
-	private String defectId;
+	private Long defectId;
+	
+	@Nullable
+	private String defectAbbr;
 	
 	@Nullable
 	@Size(min=2, max=20)
@@ -81,16 +83,32 @@ public class Defect {
 	@Nullable
 	private String dateAndTime;
 	
+	@Nullable
+	private String fixDate;
+	
+	
 	//Generate getters and Setters
-	public String getDefectId() {
-		return defectId;
-	}
-	public void setDefectId(String defectId) {
-		this.defectId = defectId;
-	}
+	
 	public String getAbbre() {
 		return abbre;
 	}
+	
+	public Long getDefectId() {
+		return defectId;
+	}
+
+	public void setDefectId(Long defectId) {
+		this.defectId = defectId;
+	}
+
+	public String getDefectAbbr() {
+		return defectAbbr;
+	}
+
+	public void setDefectAbbr(String defectAbbr) {
+		this.defectAbbr = defectAbbr;
+	}
+
 	public void setAbbre(String abbre) {
 		this.abbre = abbre;
 	}
@@ -190,6 +208,12 @@ public class Defect {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getFixDate() {
+		return fixDate;
+	}
+	public void setFixDate(String fixDate) {
+		this.fixDate = fixDate;
 	}
 	
 }

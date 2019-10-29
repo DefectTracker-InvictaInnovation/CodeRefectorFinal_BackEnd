@@ -43,9 +43,16 @@ public class DefectController {
 	}
 
 	@GetMapping(value = "/getDefectById/{defectId}")
-	public DefectData getByDefectId(@PathVariable(name = "defectId") String defectId) {
+	public DefectData getByDefectId(@PathVariable(name = "defectId") Long defectId) {
 		logger.info("Controller -> getByDefectId Successfull");
 		return defectDataMapper.getByDefectId(defectId);
+
+	}
+	
+	@GetMapping(value = "/getDefectByAbbr/{defectAbbr}")
+	public List<DefectData> getByDefectAbbr(@PathVariable(name = "defectAbbr") String defectAbbr) {
+		logger.info("Controller -> getByDefectId Successfull");
+		return defectDataMapper.getByDefectAbbrevation(defectAbbr);
 
 	}
 
@@ -74,7 +81,7 @@ public class DefectController {
 
 	// delete defects
 	@DeleteMapping("/deleteDefect/{defectId}")
-	public ResponseEntity<String> deleteCompany(@PathVariable(name = "defectId") String defectId) {
+	public ResponseEntity<String> deleteCompany(@PathVariable(name = "defectId") Long defectId) {
 		System.out.print(defectId);
 		if (defectDataMapper.getByDefectId(defectId) != null) {
 			if (defectDataMapper.deleteDefect(defectId) == null) {
