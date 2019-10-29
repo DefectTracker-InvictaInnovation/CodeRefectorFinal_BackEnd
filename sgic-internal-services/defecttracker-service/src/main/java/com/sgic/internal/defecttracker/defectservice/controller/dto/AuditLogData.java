@@ -8,7 +8,7 @@ public class AuditLogData {
 	
 	private Long auditId;
 	private String user;
-	private String defectId;
+	private Long defectId;
 	private String status;
 	private String type;
 	private String severity;
@@ -32,10 +32,10 @@ public class AuditLogData {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	public String getDefectId() {
+	public Long getDefectId() {
 		return defectId;
 	}
-	public void setDefectId(String defectId) {
+	public void setDefectId(Long defectId) {
 		this.defectId = defectId;
 	}
 	public String getStatus() {

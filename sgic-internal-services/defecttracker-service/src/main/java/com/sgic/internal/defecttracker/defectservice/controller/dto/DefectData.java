@@ -8,8 +8,9 @@ import java.util.Date;
 
 public class DefectData {
 	
-	private String defectId;
-	private String abbre;
+	private Long defectId;
+	private String defectAbbr;
+	private String abbre = "private String projectAbbr";
 	private String projectId;
 	private String moduleId;
 	private String priority;
@@ -27,6 +28,7 @@ public class DefectData {
 	private String fixedIn;
 	private String moduleName;
 	private String projectName;
+	private String projectAbbr;
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	LocalDate date = LocalDate.now();
@@ -37,10 +39,10 @@ public class DefectData {
 	 Date date1 = new Date();
 	 private String fixDate=sdf.format(date1);
 	
-	public String getDefectId() {
+	public Long getDefectId() {
 		return defectId;
 	}
-	public void setDefectId(String defectId) {
+	public void setDefectId(Long defectId) {
 		this.defectId = defectId;
 	}
 	public String getAbbre() {
@@ -164,5 +166,18 @@ public class DefectData {
 	public void setFixDate(String fixDate) {
 		this.fixDate = fixDate;
 	}
+	public String getDefectAbbr() {
+		return defectAbbr;
+	}
+	public void setDefectAbbr(String defectAbbr) {
+		this.defectAbbr = defectAbbr;
+	}
+	public String getProjectAbbr() {
+		return projectAbbr;
+	}
+	public void setProjectAbbr(String projectAbbr) {
+		this.projectAbbr = projectAbbr;
+	}
+	
 		
 }
