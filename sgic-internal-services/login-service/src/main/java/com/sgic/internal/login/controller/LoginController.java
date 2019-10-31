@@ -1,5 +1,6 @@
 package com.sgic.internal.login.controller;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,7 +8,10 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,11 +26,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.sgic.internal.login.entities.ConfirmationToken;
+import com.sgic.internal.login.entities.Email;
 import com.sgic.internal.login.entities.Role;
 import com.sgic.internal.login.entities.RoleName;
 import com.sgic.internal.login.entities.User;
 import com.sgic.internal.login.payload.UserProfile;
+import com.sgic.internal.login.repositories.ConfirmationTokenRepository;
 import com.sgic.internal.login.repositories.RoleRepository;
 import com.sgic.internal.login.repositories.UserRepository;
 import com.sgic.internal.login.request.LoginForm;
@@ -61,6 +71,9 @@ public class LoginController {
 
 	@Autowired
 	UserDetailsServiceImpl userDetailsServiceImpl;
+	
+	@Autowired
+	ConfirmationTokenRepository confirmationTokenRepository;
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -198,5 +211,100 @@ public class LoginController {
 	public List<User> getAllUserProfiles() {
 		return userDetailsServiceImpl.getUserDetails();
 
+	}
+	
+	@GetMapping("/getemail/{email}")
+	public User getByEmail(@PathVariable(name = "email") String email) {
+		return userDetailsServiceImpl.getByEmail(email);
+	}
+
+	@RequestMapping(value = "/forgotpassword/{email}", method = RequestMethod.GET)
+	public ConfirmationToken forgotUserPassword(@PathVariable(name = "email") String email) {
+
+		System.out.println(email);
+		User existingUser = userDetailsServiceImpl.getByEmail(email);
+		System.out.println(existingUser.getLastname());
+		if (existingUser != null) {
+
+			ConfirmationToken confirmationToken = new ConfirmationToken(existingUser);
+			// save it
+			confirmationTokenRepository.save(confirmationToken);
+
+			Email email1 = new Email();
+			email1.setEmail(email);
+			email1.setSubject("Reset password");
+			email1.setText(
+					"To complete the password reset process, please click here: " + "http://localhost:3000/Reset");
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+			HttpEntity<Email> entity = new HttpEntity<Email>(email1, headers);
+			System.out.println("yes");
+
+			RestTemplate restTemplate = new RestTemplate();
+			Email result = restTemplate.postForObject("http://localhost:8084/employeeservice/sendmail", email1, Email.class);
+
+			System.out.println(result);
+
+//			Email obj = restTemplate.postForObject("http://localhost:8084/employeeservice/sendmail", email1, Email.class);
+
+			return confirmationToken;
+
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/confirmreset/{token}", method = RequestMethod.GET)
+	public User validateResetToken(@PathVariable(name = "token") String confirmationToken) {
+
+		System.out.println(confirmationToken);
+		ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+
+		if (token != null) {
+			User user = userRepository.findUserByEmail(token.getUser().getEmail());
+			System.out.println(user.getLastname());
+
+			User tokenUser = userRepository.findUserByEmail(user.getEmail());
+			User password = userRepository.findUserById(tokenUser.getId());
+			password.setName(user.getName());
+			password.setPassword(encoder.encode(user.getPassword()));
+//			
+
+//			 RestTemplate restTemplate = new RestTemplate();
+//			    User result = restTemplate.postForObject( "http://localhost:8085/resetpassword", password, User.class);
+//			 
+//			    System.out.println(result);
+
+			return user;
+//			userRepository.save(user);
+//				modelAndView.addObject("user");
+//				modelAndView.addObject("emailId", user.getEmail());
+//				modelAndView.setViewName("resetPassword");
+		}
+
+		return null;
+	}
+
+	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
+	public User resetUserPassword(@RequestBody User user) {
+		// ConfirmationToken token =
+		// confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+
+		System.out.println(user.getRoles());
+
+		User password = new User();
+		password.setId(user.getId());
+		password.setName(user.getName());
+		password.setLastname(user.getLastname());
+		password.setEmail(user.getEmail());
+		password.setUsername(user.getUsername());
+		password.setRoles(user.getRoles());
+		password.setPassword(encoder.encode(user.getPassword()));
+		userDetailsServiceImpl.updateUser(password);
+//				modelAndView.addObject("message", "Password successfully reset. You can now log in with the new credentials.");
+//				modelAndView.setViewName("successResetPassword");
+//				return userDetailsServiceImpl.updateUser(user);
+
+		return null;
 	}
 }

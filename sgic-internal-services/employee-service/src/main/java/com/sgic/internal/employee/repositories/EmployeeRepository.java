@@ -28,12 +28,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	@Query(value = "from Employee where name = :name")
 	List<Employee> findByName(String name);
 	
+	// Find Employee By DesignationId
 	@Query("SELECT COUNT(designationid) FROM Employee WHERE designationid=:designationid")
 	Long getDeveloperCount(Long designationid);
 	
+	// Find Employee By Designation Name
 	@Query("SELECT designationid FROM Designation WHERE designationname=:designationName")
 	Long findByDesignationName(String designationName);
 
+	// Find Employee By Bench
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Employee e SET e.bench=true where e.empId = :empId")
@@ -44,8 +47,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	@Query("UPDATE Employee e SET e.bench=false where e.empId = :empId")
 	void updateBenchFalse(@Param("empId") Long empId);
 
-	
-
+	// Find Employee By Availability
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Employee e SET e.availability=:availablenow where e.empId = :empId")

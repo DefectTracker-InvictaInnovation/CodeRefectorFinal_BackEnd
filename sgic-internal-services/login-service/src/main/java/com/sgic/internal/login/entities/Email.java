@@ -1,13 +1,11 @@
-package com.sgic.internal.employee.entities;
+package com.sgic.internal.login.entities;
 
 public class Email {
-	
-	// Initialize Variable for Attribute of Email
+
 	private String email;
 	private String subject;
 	private String text;
 	
-	//Email Entity's Getter and Setter
 	public String getEmail() {
 		return email;
 	}
@@ -26,6 +24,4 @@ public class Email {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
-	
 }
