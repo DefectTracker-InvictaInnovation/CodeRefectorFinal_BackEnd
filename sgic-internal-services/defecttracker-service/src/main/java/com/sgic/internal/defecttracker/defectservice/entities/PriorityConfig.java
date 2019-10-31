@@ -22,7 +22,7 @@ public class PriorityConfig {
 
 	// create relationship with project //
 	@OneToOne
-	@JoinColumn(name = "projectid", nullable = false)
+	@JoinColumn(name = "projectId", nullable = false)
 	private Project project;
 	
 	// create the priority type in array list
@@ -45,11 +45,13 @@ public class PriorityConfig {
 		this.project = project;
 	}
 
-	public ArrayList<String> getDashboardList() {
+	public ArrayList<String> getPriorityList() {
 		return priorityList;
 	}
 
-	public void setDashboardList(ArrayList<String> dashboardList) {
-		this.priorityList = dashboardList;
+	public void setPriorityList(ArrayList<String> priorityList) {
+		this.priorityList = priorityList;
 	}
+
+	
 }
