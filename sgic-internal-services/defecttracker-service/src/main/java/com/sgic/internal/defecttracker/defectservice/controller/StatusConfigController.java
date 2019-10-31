@@ -38,11 +38,12 @@ public class StatusConfigController {
 	// Post Mapping For Create a StatusConfig
 	@PostMapping(value = "/statusConfig")
     public StatusConfig createStatusConfig(@RequestBody StatusConfigDto statusConfigDto) {
+		logger.info("StatusConfig are Created ");
 		return statusConfigDtoMapper.createStatusConfig(statusConfigDto);
 	}
 	
 	// Get Mapping for StatusConfigAll
-	@GetMapping(value = "/statusConfig")
+	@GetMapping(value = "/statusConfigs")
 	public ResponseEntity<List<StatusConfigDto>> listStatusConfigInfo() {
 		logger.info("StatusConfig are listed ");
 		return new ResponseEntity<>(statusConfigDtoMapper.getAllStatusConfig(), HttpStatus.OK);

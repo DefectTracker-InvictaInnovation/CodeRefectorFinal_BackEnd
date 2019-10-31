@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sgic.internal.defecttracker.defectservice.controller.dto.PriorityConfigDto;
 import com.sgic.internal.defecttracker.defectservice.entities.PriorityConfig;
+import com.sgic.internal.defecttracker.defectservice.entities.Project;
 
 @Service
 public class PriorityConfigDtoConverter {
@@ -17,7 +18,7 @@ public class PriorityConfigDtoConverter {
 		if (priorityConfig != null) {
 
 			priorityConfigDto.setPriorityId(priorityConfig.getPriorityId());
-			priorityConfigDto.setProject(priorityConfig.getProject());
+			priorityConfigDto.setProjectId(priorityConfig.getProject().getProjectId());
 			priorityConfigDto.setPriorityList(priorityConfig.getPriorityList());
 
 			return priorityConfigDto;
@@ -29,7 +30,9 @@ public class PriorityConfigDtoConverter {
 		PriorityConfig priorityConfig = new PriorityConfig();
 
 		priorityConfig.setPriorityId(priorityConfigDto.getPriorityId());
-		priorityConfig.setProject(priorityConfigDto.getProject());
+		Project obj=new Project();
+		obj.setProjectId(priorityConfigDto.getProjectId());
+		priorityConfig.setProject(obj);
 		priorityConfig.setPriorityList(priorityConfigDto.getPriorityList());
 	
 		return priorityConfig;
@@ -43,7 +46,7 @@ public class PriorityConfigDtoConverter {
 				PriorityConfigDto priorityConfigDto = new PriorityConfigDto();
 
 				priorityConfigDto.setPriorityId(priorityConfig.getPriorityId());
-				priorityConfigDto.setProject(priorityConfig.getProject());
+				priorityConfigDto.setProjectId(priorityConfig.getProject().getProjectId());;
 				priorityConfigDto.setPriorityList(priorityConfig.getPriorityList());
 				lPriorityConfigDto.add(priorityConfigDto);
 

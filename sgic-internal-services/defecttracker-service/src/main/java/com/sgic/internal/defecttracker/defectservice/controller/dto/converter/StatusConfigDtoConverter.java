@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sgic.internal.defecttracker.defectservice.controller.dto.StatusConfigDto;
+import com.sgic.internal.defecttracker.defectservice.entities.Project;
 import com.sgic.internal.defecttracker.defectservice.entities.StatusConfig;
 
 @Service
@@ -17,9 +18,9 @@ public class StatusConfigDtoConverter {
 		if (statusConfig != null) {
 
 			statusConfigDto.setStatusId(statusConfig.getStatusId());
-			statusConfigDto.setProject(statusConfig.getProject());
+			statusConfigDto.setProjectId(statusConfig.getProject().getProjectId());
 			statusConfigDto.setStatusList(statusConfig.getStatusList());
-
+			
 			return statusConfigDto;
 		}
 		return null;
@@ -29,9 +30,10 @@ public class StatusConfigDtoConverter {
 		StatusConfig statusConfig = new StatusConfig();
 
 		statusConfig.setStatusId(statusConfigDto.getStatusId());
-		statusConfig.setProject(statusConfigDto.getProject());
+		Project obj=new Project();
+		obj.setProjectId(statusConfigDto.getProjectId());
+		statusConfig.setProject(obj);
 		statusConfig.setStatusList(statusConfigDto.getStatusList());
-	
 		return statusConfig;
 	}
 
@@ -43,7 +45,7 @@ public class StatusConfigDtoConverter {
 				StatusConfigDto statusConfigDto = new StatusConfigDto();
 
 				statusConfigDto.setStatusId(statusConfig.getStatusId());
-				statusConfigDto.setProject(statusConfig.getProject());
+				statusConfigDto.setProjectId(statusConfig.getProject().getProjectId());
 				statusConfigDto.setStatusList(statusConfig.getStatusList());
 				lStatusConfigDto.add(statusConfigDto);
 

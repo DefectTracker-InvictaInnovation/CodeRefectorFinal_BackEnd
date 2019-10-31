@@ -42,7 +42,7 @@ public class SeverityConfigController {
 	}
 	
 	// Get Mapping for SeverityConfigAll
-	@GetMapping(value = "/severityConfig")
+	@GetMapping(value = "/severityConfigs")
 	public ResponseEntity<List<SeverityConfigDto>> listSeverityConfigInfo() {
 		logger.info("SeverityConfig are listed ");
 		return new ResponseEntity<>(severityConfigDtoMapper.getAllSeverityConfig(), HttpStatus.OK);
