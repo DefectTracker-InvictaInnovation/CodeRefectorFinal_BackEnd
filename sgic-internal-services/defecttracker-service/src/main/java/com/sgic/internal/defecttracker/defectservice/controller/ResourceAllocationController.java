@@ -199,5 +199,14 @@ public class ResourceAllocationController {
 		return null;
 
 	}
+	
+	@GetMapping("/getprojectbyresource/{projectId}") 
+	public List<ResourceAllocationDto> getByprojectId(@PathVariable(name = "projectId") String projectId) {
+		try {
+			return resourceAllocationDtoMapper.getResourceAllocationByprojectId(projectId);
+		} catch (Exception ex) {
+		}
+		return null;
+	}
 
 }

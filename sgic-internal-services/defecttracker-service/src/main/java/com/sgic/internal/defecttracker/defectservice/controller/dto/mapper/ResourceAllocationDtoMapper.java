@@ -78,6 +78,12 @@ public class ResourceAllocationDtoMapper {
 	public List<ResourceAllocationDto> getResourceAllocationByEmployee(Long empId) {
 		List<ResourceAllocation> resourceAllocation = resourceAllocationService.getByEmployee(empId);
 		return resourceAllocationConverter.ResourceAllocationToResourceAllocationDtoList(resourceAllocation);
+	}
+	
+	@SuppressWarnings("static-access")
+	public List<ResourceAllocationDto> getResourceAllocationByprojectId(String projectId) {
+		List<ResourceAllocation> resourceAllocation =resourceAllocationService.getByprojectId(projectId);
+		return resourceAllocationConverter.ResourceAllocationToResourceAllocationDtoList(resourceAllocation);
 
 	}
 

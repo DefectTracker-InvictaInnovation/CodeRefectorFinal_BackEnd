@@ -231,4 +231,9 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 		return resourceAllocationRepository.findResourceAllocationByempId(empId);
 	}
 
+	@Override
+	public List<ResourceAllocation> getByprojectId(String projectId) {
+		return resourceAllocationRepository.findResourceAllocationByprojectId(projectId);
+	}
+
 }

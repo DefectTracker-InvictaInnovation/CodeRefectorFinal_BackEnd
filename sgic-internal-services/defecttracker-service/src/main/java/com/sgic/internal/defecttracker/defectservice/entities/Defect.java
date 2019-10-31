@@ -3,6 +3,8 @@ package com.sgic.internal.defecttracker.defectservice.entities;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,7 @@ import com.sgic.internal.defecttracker.defectservice.entities.Project;
 public class Defect {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long defectId;
 	
 	@Nullable

@@ -26,5 +26,8 @@ public interface ResourceAllocationRepository extends JpaRepository<ResourceAllo
 
 	@Query("SELECT SUM(availability) FROM ResourceAllocation WHERE empId=:empId")
 	Long AvailabileSum(Long empId);
+	
+	@Query(value = "from ResourceAllocation where project_id=:projectId")
+	List<ResourceAllocation> findResourceAllocationByprojectId(String projectId);
 
 }
