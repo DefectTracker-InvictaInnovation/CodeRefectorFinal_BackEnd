@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sgic.internal.defecttracker.defectservice.controller.dto.TypeConfigDto;
+import com.sgic.internal.defecttracker.defectservice.entities.Project;
 import com.sgic.internal.defecttracker.defectservice.entities.TypeConfig;
 
 @Service
@@ -17,7 +18,7 @@ public class TypeConfigDtoConverter {
 		if (typeConfig != null) {
 
 		typeConfigDto.setTypeId(typeConfig.getTypeId());
-		typeConfigDto.setProject(typeConfig.getProject());
+		typeConfigDto.setProjectId(typeConfig.getProject().getProjectId());
 		typeConfigDto.setTypeList(typeConfig.getTypeList());
 
 			return typeConfigDto;
@@ -29,7 +30,9 @@ public class TypeConfigDtoConverter {
 		TypeConfig typeConfig = new TypeConfig();
 
 		typeConfig.setTypeId(typeConfigDto.getTypeId());
-		typeConfig.setProject(typeConfigDto.getProject());
+		Project obj=new Project();
+		obj.setProjectId(typeConfigDto.getProjectId());
+		typeConfig.setProject(obj);
 		typeConfig.setTypeList(typeConfigDto.getTypeList());
 	
 		return typeConfig;
@@ -43,7 +46,7 @@ public class TypeConfigDtoConverter {
 				TypeConfigDto typeConfigDto = new TypeConfigDto();
 
 				typeConfigDto.setTypeId(typeConfig.getTypeId());
-				typeConfigDto.setProject(typeConfig.getProject());
+				typeConfigDto.setProjectId(typeConfig.getProject().getProjectId());
 				typeConfigDto.setTypeList(typeConfig.getTypeList());
 				lTypeConfigDto.add(typeConfigDto);
 

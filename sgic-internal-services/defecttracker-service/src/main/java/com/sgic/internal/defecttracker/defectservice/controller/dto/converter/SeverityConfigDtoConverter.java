@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sgic.internal.defecttracker.defectservice.controller.dto.SeverityConfigDto;
+import com.sgic.internal.defecttracker.defectservice.entities.Project;
 import com.sgic.internal.defecttracker.defectservice.entities.SeverityConfig;
 
 @Service
@@ -17,7 +18,7 @@ public class SeverityConfigDtoConverter {
 		if (severityConfig != null) {
 
 			severityConfigDto.setSeverityId(severityConfig.getSeverityId());
-			severityConfigDto.setProject(severityConfig.getProject());
+			severityConfigDto.setProjectId(severityConfig.getProject().getProjectId());
 			severityConfigDto.setSeverityList(severityConfig.getSeverityList());
 
 			return severityConfigDto;
@@ -29,7 +30,9 @@ public class SeverityConfigDtoConverter {
 		SeverityConfig severityConfig = new SeverityConfig();
 
 		severityConfig.setSeverityId(severityConfigDto.getSeverityId());
-		severityConfig.setProject(severityConfigDto.getProject());
+		Project obj=new Project();
+		obj.setProjectId(severityConfigDto.getProjectId());
+		severityConfig.setProject(obj);
 		severityConfig.setSeverityList(severityConfigDto.getSeverityList());
 	
 		return severityConfig;
@@ -43,7 +46,7 @@ public class SeverityConfigDtoConverter {
 				SeverityConfigDto severityConfigDto = new SeverityConfigDto();
 
 				severityConfigDto.setSeverityId(severityConfig.getSeverityId());
-				severityConfigDto.setProject(severityConfig.getProject());
+				severityConfigDto.setProjectId(severityConfig.getProject().getProjectId());
 				severityConfigDto.setSeverityList(severityConfig.getSeverityList());
 				lSeverityConfigDto.add(severityConfigDto);
 

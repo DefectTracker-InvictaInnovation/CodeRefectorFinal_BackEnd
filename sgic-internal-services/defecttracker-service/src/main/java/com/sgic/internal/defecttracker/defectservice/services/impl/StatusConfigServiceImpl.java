@@ -2,6 +2,7 @@ package com.sgic.internal.defecttracker.defectservice.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sgic.internal.defecttracker.defectservice.entities.StatusConfig;
@@ -11,13 +12,14 @@ import com.sgic.internal.defecttracker.defectservice.services.StatusConfigServic
 @Service
 public class StatusConfigServiceImpl implements StatusConfigService {
 	
+	@Autowired
 	private StatusConfigRepository statusConfigRepository;
-
 
 	@Override
 	public StatusConfig saveStatus(StatusConfig statusConfig) {
 		// TODO Auto-generated method stub
 		return statusConfigRepository.save(statusConfig);
+		
 	}
 
 	@Override
