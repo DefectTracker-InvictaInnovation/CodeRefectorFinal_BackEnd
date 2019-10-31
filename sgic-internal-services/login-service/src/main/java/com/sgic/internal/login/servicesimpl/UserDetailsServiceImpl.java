@@ -30,4 +30,28 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return userRepository.findAll();
 		
 	}
+	
+	public User updateUser(User user) {
+		try {
+			Long id = user.getId();
+			boolean isExist = userRepository.findById(id) != null;
+			if (isExist) {
+				return userRepository.save(user);
+			} else {
+				
+			}
+		} catch (Exception ex) {
+		}
+		return null;
+	}
+	public User getByEmail(String email) {
+		try {
+			
+			return userRepository.findUserByEmail(email);
+		} catch (Exception ex) {
+			
+		}
+		return null;
+
+	}
 }

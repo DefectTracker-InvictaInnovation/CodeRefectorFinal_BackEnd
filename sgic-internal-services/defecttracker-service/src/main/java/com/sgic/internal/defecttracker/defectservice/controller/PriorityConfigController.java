@@ -38,6 +38,7 @@ public class PriorityConfigController {
 	// Post Mapping For Create a PriorityConfig
 	@PostMapping(value = "/priorityConfig")
     public PriorityConfig createPriorityConfig(@RequestBody PriorityConfigDto priorityConfigDto) {
+//		System.out.println(priorityConfigDto.getPriorityList()+priorityConfigDto.getPriorityId()+priorityConfigDto.);
 		return priorityConfigDtoMapper.createPriorityConfig(priorityConfigDto);
 	}
 	
