@@ -3,6 +3,7 @@ package com.sgic.internal.defecttracker.defectservice.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.sgic.internal.defecttracker.defectservice.entities.Module;
@@ -66,8 +67,8 @@ public class ModuleServiceImpl implements ModuleService {
 	
 
 	@Override
-	public List<Module> getallDetails() {
-		return moduleRepository.findAll();
+	public List<Module> getallDetails(String moduleId) {
+		return moduleRepository.findAll(Sort.by(Sort.Direction.DESC, "moduleId"));
 	}
 
 	@Override
@@ -90,6 +91,11 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public List<Module> findByModuleOrderByModuleIdDesc(String moduleId) {
+		return moduleRepository.findAll(Sort.by(Sort.Direction.DESC, "moduleId"));
 	}
 
 }

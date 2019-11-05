@@ -24,11 +24,12 @@ public interface ModuleService {
 	// service for get project id
 	public List<Module> getByprojectId(String projectid);
 
-	List<Module> getallDetails();
+	List<Module> getallDetails(String moduleId);
 	
 	Module getByallModuleId(String moduleId);
 	
 	public Module moduleUpdate(Module module);
 
-	
+	// List Module Info
+	public List<Module> findByModuleOrderByModuleIdDesc(String moduleId);
 }
