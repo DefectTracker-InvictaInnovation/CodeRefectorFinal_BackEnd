@@ -70,8 +70,8 @@ public class ModuleController {
 	}
 	// Get All Details in module Table
 	@GetMapping("/FindallMain")
-	public List<Module> FindallMain(Module module) {
-		List<Module> submodule  = (List<Module>) moduleService.getallDetails();
+	public List<Module> FindallMain(Module module,String moduleId) {
+		List<Module> submodule  = (List<Module>) moduleService.getallDetails(moduleId);
 		return submodule;
 	}
 	
@@ -150,5 +150,15 @@ public class ModuleController {
 
 		return moduleRepository.save(module);
 
+	}
+	
+	@GetMapping(value = "/getallmodule")
+	public ResponseEntity<List<ModuleData>> sortListModuleInfo(String moduleId) {
+		try {
+			return new ResponseEntity<>(moduleDataMapper.getAllSortModuleInfo(moduleId), HttpStatus.OK);
+		} catch (Exception ex) {
+		}
+
+		return null;
 	}
 }

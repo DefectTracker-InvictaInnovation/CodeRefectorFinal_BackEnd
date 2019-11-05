@@ -74,6 +74,6 @@ public class AuditLogData {
 	public void setReassignTo(String reassignTo) {
 		this.reassignTo = reassignTo;
 	}
-
+	
 
 }

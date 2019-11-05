@@ -16,6 +16,7 @@ public class ModuleDataMapper {
 	@Autowired
 	public  ModuleService moduleService;
 	
+	
 	public List<ModuleData>getAllModuleForMapper(String projectid){
 		List<Module>moduleList =moduleService.getallModuleDetails(projectid);
 		return ModuleConverter.moduleToModuleDataList(moduleList);
@@ -51,5 +52,12 @@ public class ModuleDataMapper {
 	}
 
 
+	@SuppressWarnings("static-access")
+	// List Method for ModuleMapper
+	public List<ModuleData> getAllSortModuleInfo(String moduleId) {
+		List<Module> sortModuleList = moduleService.findByModuleOrderByModuleIdDesc(moduleId);
+		return ModuleConverter.moduleToModuleDataList(sortModuleList);
+
+	}
 
 }

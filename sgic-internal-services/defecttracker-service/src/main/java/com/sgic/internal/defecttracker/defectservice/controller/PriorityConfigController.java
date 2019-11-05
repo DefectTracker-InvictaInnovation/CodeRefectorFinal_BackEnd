@@ -70,8 +70,7 @@ public class PriorityConfigController {
 	public ResponseEntity<String> updatePriorityConfig(@PathVariable(name = "priorityId") Long priorityId,
 			@RequestBody PriorityConfigDto priorityConfigDto) {
 		logger.info("PriorityConfigcontroller -> updatedPriorityConfig");
-		if (priorityConfigDtoMapper.updatePriorityConfig(priorityId, priorityConfigDto) != null)
-			;
+		if (priorityConfigDtoMapper.updatePriorityConfig(priorityId, priorityConfigDto) != null);
 		{
 			return new ResponseEntity<>("ok", HttpStatus.OK);
 		}
