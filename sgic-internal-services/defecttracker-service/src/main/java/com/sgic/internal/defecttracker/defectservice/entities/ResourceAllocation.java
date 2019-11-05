@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 @SuppressWarnings("serial")
 @Entity
