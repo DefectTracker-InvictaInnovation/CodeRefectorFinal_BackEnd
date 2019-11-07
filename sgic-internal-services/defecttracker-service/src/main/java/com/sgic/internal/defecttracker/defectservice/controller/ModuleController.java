@@ -51,7 +51,14 @@ public class ModuleController {
 
 	@PostMapping(value = "/createmodule")
 	public ResponseEntity<Object> createModule(@Valid @RequestBody ModuleData moduleData) {
-		moduleDataMapper.saveModuleforMapper(moduleData);
+		
+		if (moduleDataMapper.getByModuleId(moduleData.getModuleId()) != null) {
+			logger.info("Successfully Saved");
+			System.out.println("Successfully Saved");
+		} else {
+			moduleDataMapper.saveModuleforMapper(moduleData);
+		}
+		
 		return new ResponseEntity<Object>(new ApiResponse(RestApiResponseStatus.OK), HttpStatus.OK);
 
 	}

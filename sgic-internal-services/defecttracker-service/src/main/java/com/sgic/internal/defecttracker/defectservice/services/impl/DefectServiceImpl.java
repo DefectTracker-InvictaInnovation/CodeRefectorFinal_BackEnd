@@ -147,7 +147,7 @@ public class DefectServiceImpl implements DefectService {
 	public Long countDefect() {
 		Long totCount = defectRepository.count();
 		System.out.println("total count " +totCount);
-		Long totRejCount = defectRepository.countByStatus("rejected");
+		Long totRejCount = defectRepository.countByStatus("rejected", null);
 		System.out.println("rejected count " +totRejCount);
 		Long ratio =(( totCount-totRejCount)*100)/totCount;
 		System.out.println("ratio " +ratio);
@@ -168,44 +168,44 @@ public class DefectServiceImpl implements DefectService {
 
 	//Hari matrix
 	@Override
-	public Long getStatusNew() {
-		Long totNew = defectRepository.countByStatus("New");
+	public Long getStatusNew( String status,String projectId) {
+		Long totNew = defectRepository.countByStatus(status,  projectId);
 		return totNew;
 	}
 
 	@Override
-	public Long getStatusOpen() {
-		Long totOpen = defectRepository.countByStatus("Open");
+	public Long getStatusOpen(String status,String projectId) {
+		Long totOpen = defectRepository.countByStatus(status,  projectId);
 		return totOpen;
 	}
 
 	@Override
-	public Long getStatusClose() {
-		Long totClose= defectRepository.countByStatus("Close");
+	public Long getStatusClose(String status,String projectId) {
+		Long totClose= defectRepository.countByStatus(status,  projectId);
 		return totClose;
 	}
 
 	@Override
-	public Long getStatusRejected() {
-		Long totRej= defectRepository.countByStatus("Rejected");
+	public Long getStatusRejected(String status,String projectId) {
+		Long totRej= defectRepository.countByStatus(status,  projectId);
 		return totRej;
 	}
 
 	@Override
-	public Long getStatusDefered() {
-		Long totDefered= defectRepository.countByStatus("Defered");
+	public Long getStatusDefered(String status,String projectId) {
+		Long totDefered= defectRepository.countByStatus(status,  projectId);
 		return totDefered;
 	}
 
 	@Override
-	public Long getStatusReOpen() {
-		Long totReOpen= defectRepository.countByStatus("ReOpen");
+	public Long getStatusReOpen(String status,String projectId) {
+		Long totReOpen= defectRepository.countByStatus(status,  projectId);
 		return totReOpen;
 	}
 
 	@Override
-	public Long getStatusFixed() {
-		Long totFixed= defectRepository.countByStatus("Fixed");
+	public Long getStatusFixed(String status,String projectId) {
+		Long totFixed= defectRepository.countByStatus(status,  projectId);
 		return totFixed;
 	}
 
@@ -213,7 +213,7 @@ public class DefectServiceImpl implements DefectService {
 	public long countTotalDefect() {
 		Long totCount = defectRepository.count();
 		System.out.println("total count " + totCount);
-		Long totRejCount = defectRepository.countByStatus("rejected");
+		Long totRejCount = defectRepository.countByStatus("rejected", null);
 		System.out.println("rejected count " + totRejCount);
 		Long TotalCount = (totCount - totRejCount);
 

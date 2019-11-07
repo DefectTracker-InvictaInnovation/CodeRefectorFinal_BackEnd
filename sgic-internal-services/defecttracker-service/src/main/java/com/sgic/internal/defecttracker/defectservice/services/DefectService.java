@@ -36,12 +36,12 @@ public interface DefectService {
 	public long countTotalDefect();
 	
 	 //Hari
-	public Long getStatusNew(); 
-	public Long getStatusOpen();
-	public Long getStatusClose();
-	public Long getStatusRejected();
-	public Long getStatusDefered();
-	public Long getStatusReOpen();
-	public Long getStatusFixed();
+	public Long getStatusNew( String projectId,String status); 
+	public Long getStatusOpen(String projectId,String status);
+	public Long getStatusClose(String projectId,String status);
+	public Long getStatusRejected(String projectId,String status);
+	public Long getStatusDefered(String projectId,String status);
+	public Long getStatusReOpen(String projectId,String status);
+	public Long getStatusFixed(String projectId,String status);
 	     	
 }

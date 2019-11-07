@@ -57,8 +57,8 @@ List<Defect> getBySeverity(@Param("severity")String severity);
 List<Defect> getByType(@Param("type")String type);
 
 
-
-Long countByStatus(String status);
+@Query(value = "SELECT COUNT(status) FROM Defect WHERE project_id=:projectId AND status =:status")
+Long countByStatus(String status, String projectId );
 
 //@Query("SELECT COUNT(*) FROM Defect d WHERE d.status=:rejected")
 //Long countRejectedDefect(@Param("rejected") String defectId);
@@ -98,4 +98,5 @@ int countByStatusRejectedHigh();
 @Query("SELECT COUNT(severity) FROM Defect WHERE status='Rejected' AND severity = 'medium'")
 int countByStatusRejectedmedium();
 }
+
 

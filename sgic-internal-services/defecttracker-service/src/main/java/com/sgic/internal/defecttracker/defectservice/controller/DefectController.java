@@ -60,7 +60,7 @@ public class DefectController {
 	@PostMapping("/saveDefect")
 	public Defect saveDefect(@Valid @RequestBody DefectData defectData) {
 //		return defectDataMapper.createDefect(defectData);
-		if (defectDataMapper.createDefect(defectData) != null) {
+		if (defectData != null) {
 			logger.info("Defect Controller -> Defects Created Successful");
 			return defectDataMapper.createDefect(defectData);
 		}
@@ -195,39 +195,39 @@ public class DefectController {
 
 	// Hari matrix
 
-	@GetMapping(value = "/getStatusNew")
-	public Long getStatusNew() {
-		return defectService.getStatusNew();
+	@GetMapping(value = "/getStatusNew/{projectId}")
+	public Long getStatusNew(@PathVariable(name = "projectId") String projectId ) {
+		return defectService.getStatusNew("New", projectId);
 	}
 
-	@GetMapping(value = "/getStatusOpen")
-	public Long getStatusOpen() {
-		return defectService.getStatusOpen();
+	@GetMapping(value = "/getStatusOpen/{projectId}")
+	public Long getStatusOpen(@PathVariable(name = "projectId") String projectId) {
+		return defectService.getStatusOpen("Open", projectId);
 	}
 
-	@GetMapping(value = "/getStatusClose")
-	public Long getStatusClose() {
-		return defectService.getStatusClose();
+	@GetMapping(value = "/getStatusClose/{projectId}")
+	public Long getStatusClose(@PathVariable(name = "projectId") String projectId) {
+		return defectService.getStatusClose("Close", projectId);
 	}
 
-	@GetMapping(value = "/getStatusRejected")
-	public Long getStatusRejected() {
-		return defectService.getStatusRejected();
+	@GetMapping(value = "/getStatusRejected/{projectId}")
+	public Long getStatusRejected(@PathVariable(name = "projectId") String projectId) {
+		return defectService.getStatusRejected("Rejected", projectId);
 	}
 
-	@GetMapping(value = "/getStatusReOpen")
-	public Long getStatusReOpen() {
-		return defectService.getStatusReOpen();
+	@GetMapping(value = "/getStatusReOpen/{projectId}")
+	public Long getStatusReOpen(@PathVariable(name = "projectId") String projectId) {
+		return defectService.getStatusReOpen("ReOpen", projectId);
 	}
 
-	@GetMapping(value = "/getStatusFixed")
-	public Long getStatusFixed() {
-		return defectService.getStatusFixed();
+	@GetMapping(value = "/getStatusFixed/{projectId}")
+	public Long getStatusFixed(@PathVariable(name = "projectId") String projectId) {
+		return defectService.getStatusFixed("Fixed", projectId);
 	}
 
-	@GetMapping(value = "/getStatusDefered")
-	public Long getStatusDefered() {
-		return defectService.getStatusDefered();
+	@GetMapping(value = "/getStatusDefered/{projectId}")
+	public Long getStatusDefered(@PathVariable(name = "projectId") String projectId) {
+		return defectService.getStatusDefered("Defered", projectId);
 	}
 
 }
