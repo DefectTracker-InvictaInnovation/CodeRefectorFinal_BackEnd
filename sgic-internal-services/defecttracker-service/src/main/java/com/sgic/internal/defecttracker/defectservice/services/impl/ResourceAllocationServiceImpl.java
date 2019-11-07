@@ -3,8 +3,6 @@ package com.sgic.internal.defecttracker.defectservice.services.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 	@Autowired
 	private static Logger logger = LogManager.getLogger(ResourceAllocationRepository.class);
 
+	@SuppressWarnings("unused")
 	@Override
 //	<---Resource Allocation Save method's implementation as well as update the bench as true in employee service--->
 	public ResponseEntity<String> saveresource(ResourceAllocation resourceAllocation) {
@@ -63,7 +62,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 			// System.out.println("resourceAllocationRepository.AvailabileSum(eid).intValue()
 			// " +resourceAllocationRepository.AvailabileSum(eid));
 
-			if (total < 100) {
+			if (total < 100 || total == 100) {
 				if (isNotExceed) {
 
 					resourceAllocationRepository.save(resourceAllocation);
