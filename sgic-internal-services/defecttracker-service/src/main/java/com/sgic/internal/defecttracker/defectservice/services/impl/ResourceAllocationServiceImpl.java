@@ -36,6 +36,8 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 	public ResponseEntity<String> saveresource(ResourceAllocation resourceAllocation) {
 		try {
 
+			
+			System.out.println("ccccccccccccccccccccccc"+resourceAllocation.getAvailability());
 			Long eid = resourceAllocation.getEmpId();
 			int availability = resourceAllocation.getAvailability();
 			System.out.println("Employee id" + eid);
@@ -62,7 +64,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 			// System.out.println("resourceAllocationRepository.AvailabileSum(eid).intValue()
 			// " +resourceAllocationRepository.AvailabileSum(eid));
 
-			if (total < 100 || total == 100) {
+			if (total < 100|| total ==100) {
 				if (isNotExceed) {
 
 					resourceAllocationRepository.save(resourceAllocation);
@@ -74,7 +76,7 @@ public class ResourceAllocationServiceImpl implements ResourceAllocationService 
 					headers1.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 					if (isExist) {
 						int x = resourceAllocation
-								.setAvailability(100 - resourceAllocationRepository.AvailabileSum(eid).intValue());
+								.setAvailability( resourceAllocationRepository.AvailabileSum(eid).intValue());
 						System.out.println("Availability--> " + resourceAllocation.getAvailability());
 						System.out.println("x-->" + x);
 					}
